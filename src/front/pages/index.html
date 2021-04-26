@@ -45,21 +45,26 @@
         <section class="section-header pb-7 pb-lg-11 bg-soft">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
-                    <div class="col-12 col-md-6 order-2 order-lg-1">
-                    <img src="../assets/img/illustrations/hero-illustration.svg" alt="">
-                    </div>
-                    <div class="col-12 col-md-5 order-1 order-lg-2">
-                          <h1 class="display-2 mb-3">Tools to grow your traffic</h1>
-                          <p class="lead">Impact helps you learn why your competitors rank so high and what you need to do to outrank them.</p>
+                    
+                    <div class="col-12 col-md-12">
+                          <h1 class="display-2 mb-3">Are you finding tough to find teaching job</h1>
+                          <p class="lead">Edby teacher job portal helps you find teaching job in your preferred location and subject.
+                            We have international and national job posting for teachers.
+                            Jobs postings are credible and freely available.</p>
                           <div class="mt-4">
-                            <form action="#" class="d-flex flex-column mb-5 mb-lg-0">
-                                <input class="form-control" type="text" name="full-name" placeholder="Full name" required>
-                                <input class="form-control my-3" type="email" name="email" placeholder="Your email" required>
-                                <button class="btn btn-primary" type="submit">Create your account</button>
-                                <div class="form-group form-check mt-3">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label form-check-sign-white" for="exampleCheck1">I agree to the <a href="#">Terms & Conditions</a></label>
+                            <form class="d-flex flex-column mb-5 mb-lg-0">
+                                <div class="row" style="margin-bottom: 30px;">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <input class="form-control my-3" type="text" name="position" placeholder="Teacher or Principal">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <input class="form-control my-3" type="text" name="location" placeholder="City or Country" required>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <input class="form-control my-3" type="text" name="subject" placeholder="Subject(Optional)">
+                                    </div>
                                 </div>
+                                <button style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary" type="submit">Search</button>
                             </form>
                           </div>
                       </div>
@@ -359,10 +364,6 @@
             </div>
         </section>
         
-        @@include('./cta/_trial.html', {
-            "path": ".."
-        })
-    
         @@include('./_footer.html', {
             "path": "..",
             "path_common": "../..",
