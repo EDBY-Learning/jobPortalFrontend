@@ -7,29 +7,6 @@
         "path_common": "../..",
         "title": "Impact - Landing Page"
     })
-    <script>
-        window.onload = function(){
-            const urlParams = new URLSearchParams(window.location.search);
-            let id = urlParams.get("id");
-            let location = urlParams.get("location")
-            let position = urlParams.get("position")
-            let subject = urlParams.get("subject")
-            document.getElementById("location").value = location;
-            document.getElementById("position").value = position;
-            document.getElementById("subject").value = subject;
-            if(id){
-                getJob();
-            }else if(location){
-                getJob()
-            }else{
-                getJob()
-            }
-        }
-
-        function getJob(){
-
-        }
-    </script>
 </head>
 
 <body>
@@ -129,7 +106,30 @@
         "path": "..",
         "path_common": "../.."
     })
-    
+    <script src="../../assets/js/config.js"></script>
+    <script>
+        window.onload = function(){
+            const urlParams = new URLSearchParams(window.location.search);
+            let id = urlParams.get("id");
+            let location = urlParams.get("location")
+            let position = urlParams.get("position")
+            let subject = urlParams.get("subject")
+            document.getElementById("location").value = location;
+            document.getElementById("position").value = position;
+            document.getElementById("subject").value = subject;
+            if(id){
+                getJob();
+            }else if(location){
+                getJob()
+            }else{
+                getJob()
+            }
+        }
+
+        function getJob(){
+            
+        }
+    </script>
 </body>
 
 </html>
