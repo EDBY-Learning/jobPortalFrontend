@@ -39,12 +39,7 @@
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
-              <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                <div class="sidenav-toggler-inner">
-                  <p style="color:white; font-weight: bolder; font-size: 25px; ">EDBY</p>
-                </div>
-              </div>
+              
             </li>
             
           </ul>
@@ -60,24 +55,11 @@
                   </div>
                 </div>
               </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Welcome!</h6>
-                </div>
-                <a href="../examples/profile.html" class="dropdown-item">
-                  <i class="ni ni-single-02"></i>
-                  <span>My profile</span>
-                </a>
-                <a href="../examples/settings.html" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
-                </a>
-              </div>
+              @@include('./_profile_dropdown.html', {
+                "path": "..",
+                "path_common": "../..",
+                "classes": "bg-primary text-white"
+              })
             </li>
           </ul>
         </div>
@@ -245,22 +227,7 @@
         </div>
       </div>
       <!-- Footer -->
-      <footer class="footer pt-0">
-        <div class="container">
-          <div class="row align-items-center justify-content-xl-between">
-            <div class="col-xl-6">
-                <p class="font-weight-normal mb-0">© <a href="https;//www.edbylearning.com" target="_blank">EDBY 2021</a> <span class="current-year"></span>. All rights reserved.</p>
-            </div>
-            <div class="col-xl-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.edbylearning.com" class="nav-link" target="_blank">EDBY</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </div>
   </div>
   <!-- Argon Scripts -->
@@ -276,7 +243,9 @@
   <!-- Argon JS -->
   <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
   <!-- Demo JS - remove this in your project -->
-  <script src="../../assets/js/demo.min.js"></script>
+  
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/havenotAccess.js"></script>
 </body>
 
 </html>

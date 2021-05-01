@@ -19,7 +19,7 @@
 <html>
 
 @@include('./_head.html', {
-  "title": "Impact Dashboard - Register",
+  "title": "Dashboard - Register",
   "path": "../..",
   "path_common": "../../.."
 })
@@ -105,7 +105,26 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Name" type="text">
+                    <input class="form-control" id="first_name" placeholder="Name" type="text">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    @@include('./_country_code.html', {
+                      "path": "..",
+                      "path_common": "../..",
+                      "classes": "bg-primary text-white"
+                    })
+                  </div>
+                  <div class="col-8">
+                    <div class="form-group">
+                      <div class="input-group input-group-merge input-group-alternative mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                        </div>
+                        <input class="form-control" id="mobile" placeholder="10 Digit Mobile Number" maxlength="10" type="tel" pattern="[1-9]{1}[0-9]{9}">
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -113,7 +132,20 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control" id="email" placeholder="Email" type="email">
+                  </div>
+                </div>
+                @@include('./_country.html', {
+                  "path": "..",
+                  "path_common": "../..",
+                  "classes": "bg-primary text-white"
+                })
+                <div class="form-group">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" id="password" minlength="8" placeholder="Password" autocomplete="off" type="password">
                   </div>
                 </div>
                 <div class="form-group">
@@ -121,24 +153,23 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <input class="form-control" id="confirm_password" minlength="8" placeholder="Confirm Password" autocomplete="off" type="password">
                   </div>
                 </div>
-                <div class="text-muted font-italic"><small>Error Comes Here</small></div>
-                <!--<div class="row my-4">
-                  <div class="col-12">
-                    <div class="custom-control custom-control-alternative custom-checkbox">
-                      <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                      <label class="custom-control-label" for="customCheckRegister">
-                        <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>-->
+                <div class="text-muted font-italic"><small id="error-text" style="color: red;"></small></div>
+                <div class="text-muted font-italic"><small id="success-text" style="color: green; font-weight: bolder;"></small></div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                  <button id="registerUser" type="button" class="btn btn-primary mt-4">Create account</button>
                 </div>
               </form>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <a href="./forgotpassword.html" class="text-gray"><small style="color: red;font-weight: bolder;">Forgot password?</small></a>
+            </div>
+            <div class="col-6 text-right">
+              <a href="./login.html" class="text-gray"><small style="color: green;font-weight: bolder;">Login</small></a>
             </div>
           </div>
         </div>
@@ -146,22 +177,7 @@
     </div>
   </div>
   <!-- Footer -->
-  <footer class="py-5" id="footer-main">
-    <div class="container">
-      <div class="row align-items-center justify-content-xl-between">
-        <div class="col-xl-6">
-            <p class="font-weight-normal mb-0">© <a href="https;//www.edbylearning.com" target="_blank">EDBY 2021</a> <span class="current-year"></span>. All rights reserved.</p>
-        </div>
-        <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-            <li class="nav-item">
-              <a href="https://www.edbylearning.com" class="nav-link" target="_blank">EDBY</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  ]
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -172,7 +188,51 @@
   <!-- Argon JS -->
   <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
   <!-- Demo JS - remove this in your project -->
-  <script src="../../assets/js/demo.min.js"></script>
+  
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/haveAccess.js"></script>
+  <script>
+    $("#registerUser").click(function(){
+      document.getElementById("error-text").innerHTML = ""
+      document.getElementById("success-text").innerHTML = ""
+      req_data = {
+          "user.first_name": document.getElementById("first_name").value,
+          "user.password": document.getElementById("password").value,
+          "user.confirm_password": document.getElementById("confirm_password").value,
+          "country_code": document.getElementById("country_code").value,
+          "mobile": document.getElementById("mobile").value,
+          "country": document.getElementById("country").value,
+          "email": document.getElementById("email").value
+      }
+      $.post(BASE_URL+'teacher/register/',req_data,function(data,status){
+        document.getElementById("success-text").innerHTML = "Registered! Please log in Now!"
+        window.location.href = "./login.html"
+      }).fail(function(data){
+        obj = data.responseJSON
+        if ('user' in obj){
+          if('first_name' in obj.user){
+            document.getElementById("error-text").innerHTML = obj.user.first_name
+          }else if (('password' in obj.user)){
+            document.getElementById("error-text").innerHTML = "Password " + obj.user.password 
+          }else if (('confirm_password' in obj.user)){
+            document.getElementById("error-text").innerHTML = "Confirm Password " + obj.user.confirm_password 
+          }else if ('non_field_errors' in obj.user){
+            document.getElementById("error-text").innerHTML = obj.user.non_field_errors
+          }
+        }else if ('mobile' in obj){
+          document.getElementById("error-text").innerHTML = "Mobile " + obj.mobile
+        }else if ('email' in obj){
+          document.getElementById("error-text").innerHTML = "Email " + obj.mobile
+        }else if ('country' in obj){
+          document.getElementById("error-text").innerHTML = "Country " + obj.country
+        }else if ('country_code' in obj){
+          document.getElementById("error-text").innerHTML = "Code " + obj.country_code
+        }else{
+          document.getElementById("error-text").innerHTML = data.responseText
+        }
+      })
+    })
+  </script>
 </body>
 
 </html>
