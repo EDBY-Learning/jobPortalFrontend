@@ -7,6 +7,19 @@
         "path_common": "../..",
         "title": "Impact - Landing Page"
     })
+    <style>
+    .what-button{
+      width:40px;
+      height:40px;
+      background-color:#25c7d3;
+      color:#FFF;
+      border-radius:25px;
+      text-align:center;
+      font-size:30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index:100;
+    }
+    </style>
 </head>
 
 <body>
@@ -59,11 +72,11 @@
             <div class="container">
                 <div class="row justify-content-center mb-5 mb-md-7">
                     <div class="col-12 col-md-8 text-center">
-                        <h2 class="h1 font-weight-bolder mb-4">SEO solutions for every need</h2>
-                        <p class="lead">We build best-in-class SEO software for every situation, from our all-in-one SEO platform to tools for local SEO, enterprise SERP analytics, and a powerful API.</p>
+                        <h2 id="heading" class="h1 font-weight-bolder mb-4"></h2>
+                        <p id="info" class="lead"></p>
                     </div>
                 </div>
-                <div class="row">
+                <div id="jobPostArea" class="row">
                     <div class="col-12 col-md-6 col-lg-4 mb-5">
                         <div class="card shadow-soft border-light">
                             <!--<div class="card-header p-0">
@@ -106,30 +119,8 @@
         "path": "..",
         "path_common": "../.."
     })
-    <script src="../../assets/js/config.js"></script>
-    <script>
-        window.onload = function(){
-            const urlParams = new URLSearchParams(window.location.search);
-            let id = urlParams.get("id");
-            let location = urlParams.get("location")
-            let position = urlParams.get("position")
-            let subject = urlParams.get("subject")
-            document.getElementById("location").value = location;
-            document.getElementById("position").value = position;
-            document.getElementById("subject").value = subject;
-            if(id){
-                getJob();
-            }else if(location){
-                getJob()
-            }else{
-                getJob()
-            }
-        }
-
-        function getJob(){
-            
-        }
-    </script>
+    <script src="../../dashboard/assets/js/config.js"></script>
+    <script src="../assets/js/jobSearch.js"></script>
 </body>
 
 </html>

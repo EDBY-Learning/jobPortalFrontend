@@ -1,5 +1,5 @@
 var BASE_URL = "http://127.0.0.1:8000/";
-
+var JOB_URL = "http://127.0.0.1:8000/job/v2/"
 $("#logoutUser").click(function(){
     console.log("here")
     if(localStorage.getItem("access")){
