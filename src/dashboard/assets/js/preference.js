@@ -1,0 +1,89 @@
+window.onload = function(){
+    getPrefernce()
+}
+
+function getPrefernce(){
+    
+    $.ajax({
+        url:TEACHER_URL+'preference/1/',
+        type:'GET',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        success: function (result) {
+            setData(result)
+        },
+        error: function (error) {
+     
+        }
+    })
+}
+
+function setData(data){
+    if(data['country']){
+        document.getElementById("country").value = data['country']
+    }
+    if(data['location']){
+        document.getElementById("location").value = data['location']
+    }
+    if(data['position']){
+        document.getElementById("position").value = data['position']
+    }
+    if(data['subject']){
+        document.getElementById("subject").value = data['subject']
+    }
+    
+}
+
+$("#savePrefernece").click(function(){
+    let country  = document.getElementById("country").value
+    let position = document.getElementById("position").value
+    let location = document.getElementById("location").value
+    let subject = document.getElementById("subject").value
+    if(country==""){
+        document.getElementById("country-error-text").innerHTML = "Country is required field!!"
+        return;
+    }
+    if(location==""){
+        document.getElementById("location-error-text").innerHTML = "By default City is set as country"
+        location = country;
+    }else{
+        document.getElementById("location-error-text").innerHTML = ""
+    }
+    if(position==""){
+        document.getElementById("teacher-error-text").innerHTML = "By default Teacher is be selected"
+        position = "Teacher"
+    }else{
+        document.getElementById("teacher-error-text").innerHTML = ""
+    }
+    if(subject==""){
+        document.getElementById("subject-error-text").innerHTML = "Subject is required field!!"
+        return;
+    }
+
+    buttonLockUnlock('savePrefernece',true)
+    $.ajax({
+        url:TEACHER_URL+'preference/1/',
+        type:'PUT',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        data:{
+            'location': location,
+            'country' : country,
+            'position' : position,
+            'subject' : subject
+        },
+        success: function (result) {
+            setData(result)
+            document.getElementById("country-error-text").innerHTML = ''
+            document.getElementById("subject-error-text").innerHTML = ''
+        },
+        error: function (error) {
+            console.log(error)
+        },
+        complete: function(){
+            buttonLockUnlock('savePrefernece',false)
+        }
+    })
+})

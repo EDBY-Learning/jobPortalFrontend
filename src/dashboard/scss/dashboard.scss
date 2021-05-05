@@ -66,3 +66,14 @@
 @import 'custom/components';
 @import 'custom/utilities';
 @import 'custom/vendors';
+.what-button{
+    width:40px;
+    height:40px;
+    background-color:#25c7d3;
+    color:#FFF;
+    border-radius:25px;
+    text-align:center;
+    font-size:30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index:100;
+}
