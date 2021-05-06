@@ -25,14 +25,27 @@ function setData(data){
     }
     if(data['location']){
         document.getElementById("location").value = data['location']
+        set_tags(data['location'].split(","),"location_tag")
     }
     if(data['position']){
         document.getElementById("position").value = data['position']
+        set_tags(data['position'].split(","),"position_tag")
     }
     if(data['subject']){
         document.getElementById("subject").value = data['subject']
+        set_tags(data['subject'].split(","),"subject_tag")
     }
     
+}
+
+function set_tags(array,id){
+    let container = document.getElementById(id)
+    container.innerHTML = ``
+    array.forEach(element => {
+        container.innerHTML+=`
+        <a class="post-tag" title="${id} tagged as '${element}'" rel="tag">${element}</a>
+        `
+    });
 }
 
 $("#savePrefernece").click(function(){
