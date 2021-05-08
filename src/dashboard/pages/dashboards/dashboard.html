@@ -29,42 +29,11 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <p style="color:white; font-weight: bolder; font-size: 25px; ">EDBY</p>
-          </form>
-          <!-- Navbar links -->
-          <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item d-xl-none">
-              
-            </li>
-            
-          </ul>
-          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../../assets/img/theme/profile.jpg">
-                  </span>
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
-                  </div>
-                </div>
-              </a>
-              @@include('./_profile_dropdown.html', {
-                "path": "..",
-                "path_common": "../..",
-                "classes": "bg-primary text-white"
-              })
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    @@include('./_nav_bar_profile_dropdown.html', {
+      "path": "..",
+      "path_common": "../..",
+      "classes": "bg-primary text-white"
+    })
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
