@@ -25,22 +25,6 @@
         "path_common": ".",
         "title": "Impact - Design System"
     })
-    <script type = "text/JavaScript">
-        function searchJob(){
-            let location = document.getElementById("location").value.trim()
-            if(location){
-                let position = document.getElementById("position").value.trim()
-                let subject  = document.getElementById("subject").value.trim()
-                let temp = 'location='+location+'&subject='+subject+'&position='+position
-                console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "/front/pages/index.html?"+temp;
-            }else{
-                console.log("here")
-                document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or India"
-            }
-            
-        }
-    </script>
 </head>
 
 <body>
@@ -84,7 +68,7 @@
                                     </div>
                                 </div>
                                 <p><em style="color: red;" id="error"></em></p>
-                                <a onclick="searchJob();" 
+                                <a onclick="routeJob()" 
                                 style="color: whitesmoke;font-weight: bolder;width: 60%; 
                                 display: block;margin-left: auto;margin-right: auto;" 
                                 class="button btn btn-primary" type="submit">Search</a>
@@ -404,6 +388,22 @@
         "path": "./front",
         "path_common": "."
     })
+    <script>
+        function routeJob(){
+            let location = document.getElementById("location").value.trim()
+            if(location){
+                let position = document.getElementById("position").value.trim()
+                let subject  = document.getElementById("subject").value.trim()
+                let temp = 'location='+location+'&subject='+subject+'&position='+position
+                //console.log("/front/pages/index.html/?"+temp)
+                window.location.href = "/front/pages/index.html?"+temp;
+            }else{
+                console.log("here")
+                document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
+            }
+            
+        }
+    </script>
     
 </body>
 

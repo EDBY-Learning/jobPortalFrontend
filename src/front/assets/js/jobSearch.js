@@ -12,13 +12,17 @@ window.onload = function(){
     
     if(id){
         getJobByIds(id);
+        document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }else if(location){
-        document.getElementById("location").value = location;
-        document.getElementById("position").value = position;
-        document.getElementById("subject").value = subject;
-        searchJobs()
+        document.getElementById("locationSearch").value = location;
+        document.getElementById("positionSearch").value = position;
+        document.getElementById("subjectSearch").value = subject;
+        console.log("here")
+        searchForJobs()
+        
     }else{
         getRecentJob()
+        document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }
 }
 
@@ -66,9 +70,48 @@ function getJobByIds(id){
     })
 }
 
-function searchJobs(){
+function searchForJobs(){
+    loc = document.getElementById("locationSearch").value.trim()
+    
+    if(!loc){
+        document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
+        return;
+    }
 
+    pos = document.getElementById("positionSearch").value.trim();
+    sub = document.getElementById("subjectSearch").value.trim();
+    // console.log(location)
+    url = JOB_URL+'search/?location='+loc+"&position="+pos+"&subject="+sub
+    console.log(url)
+    $.ajax({
+        url:url,
+        type:'GET',
+        success: function (result) {
+            heading.innerHTML = "Here are jobs you searched for"
+            info.innerHTML = "You can now bookmark and save job post!!"
+            jobPostArea.innerHTML = ""
+            jobData = result
+            if(jobData.length ==0){
+                heading.innerHTML = "Search for Jobs"
+            }
+            jobData.forEach((element,idx) => {
+                const card = getJobResultContent(element,"block")
+                jobPostArea.innerHTML+=card 
+            });
+        },
+        error: function (error) {
+            console.log(error)
+        },
+        complete:function(){
+            
+        }
+    })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
+
+$("#searchJobButton").click(function(){
+    searchForJobs()
+})
 
 function openSwal(id){
     data = jobData.find(x => x.id === id)

@@ -99,7 +99,7 @@ function getJobResultContent(result,saveButton){
                     "whatsapp://send?text=A job opening for teaching in ${result.city} for post of ${result.positions},
                     To view more jobs for teachers visit our site https://jobportal.edbylearning.com?ids=${result.id} and Join our WhatsApp community for live job updates  https://chat.whatsapp.com/EZzx9EFTqA4Ft6uAyWq4ef"
                             data-action="share/whatsapp/share"
-                            target="_blank"><i class="ni ni-world"></i></a>
+                            target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
