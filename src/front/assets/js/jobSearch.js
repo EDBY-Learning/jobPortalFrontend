@@ -58,6 +58,7 @@ function getJobByIds(id){
             jobData = result
             if(jobData.length ==0){
                 heading.innerHTML = "Search for Jobs"
+                info.innerHTML = "Wrong IDs"
             }
             jobData.forEach((element,idx) => {
                 const card = getJobResultContent(element,"block")
@@ -92,7 +93,8 @@ function searchForJobs(){
             jobPostArea.innerHTML = ""
             jobData = result
             if(jobData.length ==0){
-                heading.innerHTML = "Search for Jobs"
+                heading.innerHTML = `No Result was found for Location ${loc}, Designation ${pos}, Subject ${sub}`
+                info.innerHTML = `To increase the range search based on state or country`
             }
             jobData.forEach((element,idx) => {
                 const card = getJobResultContent(element,"block")
@@ -115,15 +117,17 @@ $("#searchJobButton").click(function(){
 
 function openSwal(id){
     data = jobData.find(x => x.id === id)
+    console.log(data)
     if(data){
-
+        let m1 = $(makeJobPostModal(data))
+        m1.modal("show")
     }else{
         
     }
 }
 
 function saveJob(id){
-    data = jobData.find(x => x.id === id)
+    data = jobData.find(x => x.id == id)
     if(data){
 
     }else{

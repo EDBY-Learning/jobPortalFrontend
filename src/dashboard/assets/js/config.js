@@ -74,17 +74,17 @@ function getJobResultContent(result,saveButton){
                     ${result.message}
                 </p>
                 <ul class="list-group d-flex justify-content-center mb-4">
-                    <li class="list-group-item d-flex pl-0 pb-1">
+                    <li class=" d-flex pl-0 pb-1">
                         
-                        <div>${result.city}</div>    
+                        <div><strong>Location : </strong>${result.city}</div>    
                     </li>
-                    <li class="list-group-item d-flex pl-0 pb-1">
+                    <li class="d-flex pl-0 pb-1">
                         
-                        <div>${result.positions}</div>    
+                        <div><strong> Designation : </strong>${result.positions}</div>    
                     </li>
-                    <li class="list-group-item d-flex pl-0 pb-1">
+                    <li class="d-flex pl-0 pb-1">
                         
-                        <div>${result.subjects}</div> 
+                        <div><strong> Subjects: </strong>${result.subjects}</div> 
                     </li>
                 </ul>
                 <div class="row">
@@ -106,4 +106,42 @@ function getJobResultContent(result,saveButton){
         </div>
     </div>
     `
+}
+
+function makeJobPostModal(result){
+    return `
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="col-12 d-flex">
+            <div class="card profile-card-5 flex-fill">
+                <div class="card-img-block">
+                    <img class="card-img-top" src="${result.image}" alt="Card image cap" onerror="this.style.opacity='0'">
+                    <img class="card-img-top" src="${result.image_url}" alt="Card image cap" onerror="this.style.opacity='0'">
+                </div>
+                <div class="card-body pt-0">
+                    <h5 class="card-title" style="color: #ff8400;"><strong>School: </strong>${result.school}</h5>
+                    <p class="card-text"><strong>City: </strong>${result.city}</p>
+                    <p class="card-text"><strong>Hiring for Positions: </strong> ${result.positions}</p>
+                    <p class="card-text"><strong>Hiring for Subjects: </strong> ${result.subjects}</p>
+                    <p class="card-text"><strong>Mobile Number: </strong> ${result.contact}</p>
+                    <p class="card-text"><strong>Email: </strong> ${result.email}</p>
+                    <p class="card-text"><strong>Message: </strong> ${result.message}</p>
+                </div>
+                    
+            </div>
+        </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            </div>
+        </div>
+        </div>
+    </div>`
 }
