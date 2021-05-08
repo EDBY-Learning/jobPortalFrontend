@@ -122,7 +122,7 @@
           </div> -->
           
         </div>
-        <div class="col-xl-8 order-xl-1">
+        <div class="col-xl-12 order-xl-1">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
@@ -132,87 +132,338 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4">User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
-                      </div>
+            
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button style="margin:3px;" class="btn btn-success" data-toggle="collapse" data-target="#basicInfoCollapse" aria-expanded="true" aria-controls="basicInfoCollapse">
+                        Personal Info
+                      </button>
+                      <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#educationCollapse" aria-expanded="false" aria-controls="educationCollapse">
+                        Education Detail
+                      </button>
+                      <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#experienceCollapse" aria-expanded="false" aria-controls="experienceCollapse">
+                        Working Experience
+                      </button>
+                      <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#languagecollapse" aria-expanded="false" aria-controls="languagecollapse">
+                        Language Proficiency
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="basicInfoCollapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <form>
+                          <div class="pl-lg-4">
+                              <div class="row">
+                              <div style="display: none;"  class="col-lg-6">
+                                  <div hidden class="form-group">
+                                  <label class="form-control-label" for="basic_info_id">ID</label>
+                                  <input type="text" id="basic_info_id" class="form-control" disabled>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                  <label class="form-control-label" for="first_name">Name</label>
+                                  <input type="text" id="first_name" class="form-control" placeholder="Name" disabled>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                  <label class="form-control-label" for="email">Email address</label>
+                                  <input type="email" id="email" class="form-control" placeholder="Email" disabled>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                  <label class="form-control-label" for="mobile">Mobile</label>
+                                  <input type="text" id="mobile" class="form-control" placeholder="Mobile" disabled>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                  <label class="form-control-label" for="dob">Date of birth</label>
+                                  <input type="date" id="dob" class="form-control">
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                  <label class="form-control-label" for="description">About you</label>
+                                  <textarea type="text" id="description" rows="8" class="form-control" placeholder="Something about you"></textarea>
+                                  </div>
+                              </div>
+                              </div>
+                              <button id="saveBasicInfo" class="btn btn-neutral">Save Basic Info</button>
+                          </div>
+                      </form>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
-                      </div>
+                </div>
+                <div class="card">
+                  <div id="educationCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button onclick="openModal('educationModal',null)" class="btn btn-dark" >
+                          Add Education Info
+                        </button>
+                      </h5>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="Jesse">
+                    <div class="card-body">
+                      <div id="educationInfoArea" class="row"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div id="experienceCollapse" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <button onclick="openModal('experienceModal',null)" class="btn btn-dark" >
+                          Add Teaching Experience
+                        </button>
+                      </h5>
+                    </div>
+                    <div class="card-body">
+                      <div id="experienceArea" class="row"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div id="languagecollapse" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-header" id="headingFour">
+                      <h5 class="mb-0">
+                        <button onclick="openModal('languageModal',null)" class="btn btn-dark" >
+                          Add Language
+                        </button>
+                      </h5>
+                    </div>
+                    <div class="card-body">
+                      <div id="languageArea" class="row">
+                        
                       </div>
                     </div>
                   </div>
                 </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control" placeholder="Country" value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control" placeholder="A few words about you ...">A beautiful premium dashboard for Bootstrap 4.</textarea>
-                  </div>
-                </div>
-              </form>
+              </div>
+            
             </div>
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      
+      <!-- Modals -->
+      <div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="educationModalTitle">Add/Edit Education Detail</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div style="display: none;" class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="educationID">ID</label>
+                    <input type="text" id="educationID" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="educationInstitute">Institute</label>
+                      <input type="text" id="educationInstitute" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="educationDegree">Degree</label>
+                      <input type="text" id="educationDegree" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="educationStartYear">Start Year(e.g. 2012)</label>
+                      <input type="text" id="educationStartYear" minlength="4" maxlength="4" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="educationEndYear">End Year(e.g. 2016)</label>
+                    <input type="text" id="educationEndYear" minlength="4" maxlength="4" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="educationScore">Score(% or CGPA)</label>
+                    <input type="text" id="educationScore" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="text-muted font-italic"><small id="education-error-text" style="color: red;"></small></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button onclick="createEducationInfo('delete')" type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="makeEducationRequest" onclick="createEducationInfo('create')" type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="experienceModal" tabindex="-1" role="dialog" aria-labelledby="experienceModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="experienceModalTitle">Add/Edit Experience Detail</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div style="display: none;" class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="experienceID">ID</label>
+                    <input type="text" id="experienceID" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="experienceInstitute">Institute</label>
+                      <input type="text" id="experienceInstitute" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="experienceStartYear">Start Year(e.g. 2012)</label>
+                      <input type="text" id="experienceStartYear" minlength="4" maxlength="4" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="experienceEndYear">End Year(e.g. 2016)</label>
+                    <input type="text" id="experienceEndYear" minlength="4" maxlength="4" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="experienceOngoing">Still Working</label>
+                    <input type="checkbox" id="experienceOngoing" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="experienceSubjects">Subjects</label>
+                    <input type="text" id="experienceSubjects" class="form-control">
+                    </div>
+                </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="experienceClasses">Classes</label>
+                    <input type="text" id="experienceClasses" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="text-muted font-italic"><small id="experience-error-text" style="color: red;"></small></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button onclick="createExperienceInfo('delete')" type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="makeExperienceRequest" onclick="createExperienceInfo('create')" type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="languageModalTitle">Add/Edit Language Detail</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div style="display: none;" class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="languageID">ID</label>
+                    <input type="text" id="languageID" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="languageName">Language</label>
+                    <input type="text" id="languageName" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="language_can_read">Can Read</label>
+                      @@include('./_language_code.html', {
+                        "path": "..",
+                        "path_common": "../..",
+                        "id":"language_can_read",
+                        "classes": "bg-primary text-white"
+                      })
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="language_can_speak">Can Speak</label>
+                      @@include('./_language_code.html', {
+                        "path": "..",
+                        "path_common": "../..",
+                        "id":"language_can_speak",
+                        "classes": "bg-primary text-white"
+                      })
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="language_can_write">Can Write</label>
+                      @@include('./_language_code.html', {
+                        "path": "..",
+                        "path_common": "../..",
+                        "id":"language_can_write",
+                        "classes": "bg-primary text-white"
+                      })
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="language_can_teach">Can Teach</label>
+                      @@include('./_language_code.html', {
+                        "path": "..",
+                        "path_common": "../..",
+                        "id":"language_can_teach",
+                        "classes": "bg-primary text-white"
+                      })
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="text-muted font-italic"><small id="language-error-text" style="color: red;"></small></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button onclick="createLanguageInfo('delete')" type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="makeLanguageRequest" onclick="createLanguageInfo('create')" type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Argon Scripts -->

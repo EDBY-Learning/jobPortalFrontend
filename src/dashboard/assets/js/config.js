@@ -1,6 +1,36 @@
 var BASE_URL = "http://127.0.0.1:8000/";
 var JOB_URL = "http://127.0.0.1:8000/job/v2/"
 var TEACHER_URL = "http://127.0.0.1:8000/teacher/"
+
+var LANG_CODE = {
+    "1":`
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    `,
+    "2":`
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    `,
+    "3":`
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>`,
+    "4":`
+    <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>`
+}
+
 $("#logoutUser").click(function(){
     console.log("here")
     if(localStorage.getItem("access")){
