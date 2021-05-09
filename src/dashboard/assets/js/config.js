@@ -145,3 +145,22 @@ function makeJobPostModal(result){
         </div>
     </div>`
 }
+
+function bookmarkConfirmation(){
+    return `
+    <div class="modal fade" id="bookmarkConfirmation" tabindex="-1" role="dialog" aria-labelledby="bookmarkConfirmationLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bookmarked Successfully</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button style="width: 40%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            </div>
+        </div>
+        </div>
+    </div>`
+}

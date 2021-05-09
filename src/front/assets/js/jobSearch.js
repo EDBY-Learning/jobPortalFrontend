@@ -191,10 +191,68 @@ function openSwal(id){
 }
 
 function saveJob(id){
-    data = jobData.find(x => x.id == id)
-    if(data){
-
+    if(localStorage.getItem("access")){
+        data = jobData.find(x => x.id == id)
+        if(data){
+            $.ajax({
+                url:TEACHER_URL+"bookmark/?jobID="+id,
+                type:'GET',
+                headers:{
+                    'Authorization': 'Bearer '+localStorage.getItem("access"),
+                },
+                success: function (result) {
+                    let m1 = $(bookmarkConfirmation())
+                    m1.modal("show")
+                    //setTimeout(function() {$('#bookmarkConfirmation').modal('hide');}, 1000);
+                },
+                error: function (error) {
+                    if(error.status==401){
+                        let m1 = $(makeLoginPopup())
+                        m1.modal("show")
+                    }
+                },
+                complete:function(){
+                    
+                }
+            })
+        }else{
+            
+        }
     }else{
-        
+        let m1 = $(makeLoginPopup())
+        m1.modal("show")
     }
 }
+
+function makeLoginPopup(){
+    return `
+    <div class="modal fade" id="makeLoginPopup" tabindex="-1" role="dialog" aria-labelledby="makeLoginPopupLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to bookmark</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p>You need to create an account so we can bookmark your preferred jobs!!</p>
+                </div>
+                <div class="row">
+                    <div class="col-6 d-flex">
+                        <a class="btn btn-primary" type="button" href="../../dashboard/pages/examples/login.html">Login</a>
+                    </div>
+                    <div class="col-6 d-flex">
+                        <a class="btn btn-primary" type="button" href="../../dashboard/pages/examples/register.html">Register</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button style="width: 40%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            </div>
+        </div>
+        </div>
+    </div>`
+}
+

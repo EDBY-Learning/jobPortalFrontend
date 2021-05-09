@@ -1,5 +1,7 @@
 const dashboardArea = document.getElementById("dashboardArea")
 var jobData = null;
+var preferredJob = null;
+var bookMarkedJob = null;
 
 var current_page = 1;
 var records_per_page = 12;
@@ -38,7 +40,11 @@ function changePage(page)
     dashboardArea.innerHTML = "";
 
     for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < jobData.length; i++) {
-        const card = getJobResultContent(jobData[i],"none")
+        if(document.getElementById("preferredButton").disabled){
+            card = getJobResultContent(jobData[i],"block")
+        }else{
+            card = getJobResultContent(jobData[i],"none")
+        }
         dashboardArea.innerHTML+=card
     }
     page_span.innerHTML = page + "/" + numPages();
@@ -65,6 +71,23 @@ function toTop(){
     document.getElementById("JobsForYou").scrollIntoView({behavior: 'smooth'});
 }
 
+// preferredButton
+// bookmarkedButton
+function changeJobType(type){
+    if(type=='preferred'){
+        jobData = preferredJob
+        document.getElementById("preferredButton").disabled = true
+        document.getElementById("bookmarkedButton").disabled = false
+        changePage(1);
+    }else{
+        jobData = bookMarkedJob
+        document.getElementById("preferredButton").disabled = false
+        document.getElementById("bookmarkedButton").disabled = true 
+        changePage(1);
+    }
+    
+}
+
 function getDashboardData(){
     
     $.ajax({
@@ -74,10 +97,9 @@ function getDashboardData(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
-            jobData = result
-            // console.log(result)
-            //document.getElementById("headingAreaDashboard").innerHTML = `Results: ${jobData.length}`
-            changePage(1);
+            preferredJob = result['all_jobs']
+            bookMarkedJob = result['bookmarked_jobs']
+            changeJobType("preferred");
         },
         error: function (error) {
             console.log(error)
@@ -91,6 +113,39 @@ function openSwal(id){
     if(data){
         let m1 = $(makeJobPostModal(data))
         m1.modal("show")
+    }else{
+        
+    }
+}
+
+function saveJob(id){
+    data = jobData.find(x => x.id == id)
+    if(data){
+        $.ajax({
+            url:TEACHER_URL+"bookmark/?jobID="+id,
+            type:'GET',
+            headers:{
+                'Authorization': 'Bearer '+localStorage.getItem("access"),
+            },
+            success: function (result) {
+                data = bookMarkedJob.find(x => x.id == result.id)
+                if(data){
+                    
+                }else{
+                    bookMarkedJob.unshift(result)
+                }
+                let m1 = $(bookmarkConfirmation())
+                m1.modal("show")
+            },
+            error: function (error) {
+                if(error.status==401){
+                    alert("Login please!!")
+                }
+            },
+            complete:function(){
+                
+            }
+        })
     }else{
         
     }
