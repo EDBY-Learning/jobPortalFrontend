@@ -14,7 +14,9 @@ function getPrefernce(){
             setData(result)
         },
         error: function (error) {
-     
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
         }
     })
 }
@@ -93,7 +95,9 @@ $("#savePrefernece").click(function(){
             document.getElementById("subject-error-text").innerHTML = ''
         },
         error: function (error) {
-            console.log(error)
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
         },
         complete: function(){
             buttonLockUnlock('savePrefernece',false)

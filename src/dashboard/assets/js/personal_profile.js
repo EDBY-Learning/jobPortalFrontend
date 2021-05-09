@@ -98,7 +98,9 @@ function getPersonalData(){
             setLangauge(result['language'])
         },
         error: function (error) {
-     
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
         }
     })
 }
@@ -192,6 +194,9 @@ function createEducationInfo(type){
             setEducationInfo(educationData)
         },
         error: function (error) {
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
             document.getElementById("education-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
         complete: function(){
@@ -331,6 +336,9 @@ function createExperienceInfo(type){
             setExperience(experienceData)
         },
         error: function (error) {
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
             document.getElementById("experience-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
         complete: function(){
@@ -432,6 +440,9 @@ function createLanguageInfo(type){
             setLangauge(languageData)
         },
         error: function (error) {
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
             document.getElementById("language-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
         complete: function(){
@@ -477,6 +488,9 @@ function saveBasicInfo(){
         },
         error: function (error) {
             console.log(error)
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
         },
         complete: function(){
             buttonLockUnlock('saveBasicInfo',false)

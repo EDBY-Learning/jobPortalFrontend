@@ -34,28 +34,36 @@ var LANG_CODE = {
 $("#logoutUser").click(function(){
     console.log("here")
     if(localStorage.getItem("access")){
-        $.ajax({
-            url:BASE_URL+'auth/logout/',
-            type:'POST',
-            data:{
-                'refresh':localStorage.getItem("refresh")
-            },
-            headers:{
-                'Authorization': 'Bearer '+localStorage.getItem("access"),
-            },
-            success: function (result) {
-                localStorage.clear()
-                window.location.href = "../examples/login.html"
-            },
-            error: function (error) {
-         
-            }
-        })
+        LogoutUserAsFailedAuth()
     }else{
         localStorage.clear()
             window.location.href = "../examples/login.html"
     }
 })
+
+function LogoutUserAsFailedAuth(){
+    $.ajax({
+        url:BASE_URL+'auth/logout/',
+        type:'POST',
+        data:{
+            'refresh':localStorage.getItem("refresh")
+        },
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        success: function (result) {
+            localStorage.clear()
+            window.location.href = "../examples/login.html"
+        },
+        error: function (error) {
+     
+        },
+        complete:function(){
+            localStorage.clear()
+            window.location.href = "../examples/login.html"
+        }
+    })
+}
 
 function buttonLockUnlock(id,val){
     document.getElementById(id).disabled = val;

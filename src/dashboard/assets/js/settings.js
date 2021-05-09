@@ -92,6 +92,9 @@ $("#recoveryLink").click(function(){
             "please have patience we will respond soon"
         },
         error: function (error) {
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
             document.getElementById("error-text").innerHTML =  error.responseText
         },
         complete: function(){

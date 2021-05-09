@@ -103,6 +103,9 @@ function getDashboardData(){
         },
         error: function (error) {
             console.log(error)
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
         }
     })
 }
@@ -139,7 +142,7 @@ function saveJob(id){
             },
             error: function (error) {
                 if(error.status==401){
-                    alert("Login please!!")
+                    LogoutUserAsFailedAuth()
                 }
             },
             complete:function(){
