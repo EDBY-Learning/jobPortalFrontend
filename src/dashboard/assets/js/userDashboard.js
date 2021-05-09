@@ -73,17 +73,17 @@ function toTop(){
 
 // preferredButton
 // bookmarkedButton
-function changeJobType(type){
+function changeJobType(type,page){
     if(type=='preferred'){
         jobData = preferredJob
         document.getElementById("preferredButton").disabled = true
         document.getElementById("bookmarkedButton").disabled = false
-        changePage(1);
+        changePage(page);
     }else{
         jobData = bookMarkedJob
         document.getElementById("preferredButton").disabled = false
         document.getElementById("bookmarkedButton").disabled = true 
-        changePage(1);
+        changePage(page);
     }
     
 }
@@ -99,7 +99,7 @@ function getDashboardData(){
         success: function (result) {
             preferredJob = result['all_jobs']
             bookMarkedJob = result['bookmarked_jobs']
-            changeJobType("preferred");
+            changeJobType("preferred",1);
         },
         error: function (error) {
             console.log(error)
@@ -121,19 +121,27 @@ function openSwal(id){
     }
 }
 
-function saveJob(id){
+function saveJob(id,method){
     data = jobData.find(x => x.id == id)
+    url = TEACHER_URL+"bookmark/?jobID="+id
+    if(method=='DELETE'){
+        url = TEACHER_URL+"bookmark/"+id+"/"
+    }
     if(data){
         $.ajax({
-            url:TEACHER_URL+"bookmark/?jobID="+id,
-            type:'GET',
+            url:url,
+            type:method,
             headers:{
                 'Authorization': 'Bearer '+localStorage.getItem("access"),
             },
             success: function (result) {
-                data = bookMarkedJob.find(x => x.id == result.id)
-                if(data){
-                    
+                //data = bookMarkedJob.find(x => x.id == result.id)
+                index = bookMarkedJob.findIndex(item => item.id === result.id)
+                if(index!=-1){
+                    if(method=='DELETE'){
+                        bookMarkedJob.splice(index, 1)
+                        changeJobType("bookmarked",document.getElementById('page').innerHTML.split("/")[0])
+                    }
                 }else{
                     bookMarkedJob.unshift(result)
                 }

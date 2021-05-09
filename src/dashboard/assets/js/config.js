@@ -70,8 +70,10 @@ function buttonLockUnlock(id,val){
 }
 
 function getJobResultContent(result,saveButton){
-    // let temp = JSON.stringify(result);
-    // console.log(temp)
+    deleteButton = 'none'
+    if(saveButton=='none'){
+        deleteButton = 'block'
+    }
     return `
     <div class="col-12 col-md-6 col-lg-4 mb-5">
         <div class="card shadow-soft border-light">
@@ -100,7 +102,10 @@ function getJobResultContent(result,saveButton){
                         <button onclick="openSwal(${result.id})" class="btn btn-primary">Apply</button>
                     </div>
                     <div class="col">
-                        <button style="display:${saveButton}" onclick="saveJob(${result.id})" class="btn btn-secondary">Save</button>
+                        <button style="display:${saveButton}" onclick="saveJob(${result.id},'GET')" class="btn btn-secondary">Save</button>
+                    </div>
+                    <div class="col">
+                        <button style="display:${deleteButton}" onclick="saveJob(${result.id},'DELETE')" class="btn btn-danger">Delete</button>
                     </div>
                     <div class="col">
                     <a class="what-button" type="button" class="btn custom-btn custom-btn-bg custom-btn-link" href=
@@ -160,10 +165,13 @@ function bookmarkConfirmation(){
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Bookmarked Successfully</h3>
+                <h3>Success!!</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            </div>
+            <div class="modal-body">
+                Go to dashboard to view your bookmarks 
             </div>
             <div class="modal-footer">
                 <button style="width: 40%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
