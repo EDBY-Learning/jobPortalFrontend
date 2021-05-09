@@ -9,7 +9,7 @@ var languageData = null;
 function updateLocalData(dataType,operation,id,result){
     if(dataType=="education"){
         if(id){
-            var index = educationData.findIndex(item => item.id === id)
+            var index = educationData.findIndex(item => item.id == id)
             if(operation=="create"){
                 educationData.splice(index, 1, result)
             }else if(operation=='delete'){
@@ -20,7 +20,7 @@ function updateLocalData(dataType,operation,id,result){
         }
     }else if(dataType=="experience"){
         if(id){
-            var index = experienceData.findIndex(item => item.id === id)
+            var index = experienceData.findIndex(item => item.id == id)
             if(operation=="create"){
                 experienceData.splice(index, 1, result)
             }else if(operation=='delete'){
@@ -31,7 +31,7 @@ function updateLocalData(dataType,operation,id,result){
         }
     }else if(dataType=="language"){
         if(id){
-            var index = languageData.findIndex(item => item.id === id)
+            var index = languageData.findIndex(item => item.id == id)
             if(operation=="create"){
                 languageData.splice(index, 1, result)
             }else if(operation=='delete'){
