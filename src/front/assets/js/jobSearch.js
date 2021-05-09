@@ -180,8 +180,7 @@ $("#searchJobButton").click(function(){
 })
 
 function openSwal(id){
-    data = jobData.find(x => x.id === id)
-    console.log(data)
+    data = jobData.find(x => x.id == id)
     if(data){
         let m1 = $(makeJobPostModal(data))
         m1.modal("show")
