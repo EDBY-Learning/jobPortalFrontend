@@ -1,9 +1,9 @@
 {
-    "name": "impact-design-system",
+    "name": "edby-job-portal",
     "version": "1.0.0",
-    "description": "The ultimate design system for your online business",
+    "description": "Job Portal for Teachers",
     "main": "gulpfile.js",
-    "author": "Themesberg & Creative Tim",
+    "author": "EDBY",
     "keywords": [
         "css",
         "sass",
@@ -12,11 +12,11 @@
         "uikit",
         "bootstrap4"
     ],
-    "homepage": "https://creative-tim.com",
+    "homepage": "https://edbylearning.com",
     "bugs": {
-        "email": "hello@creative-tim.com"
+        "email": "demo@edbylearning.com"
     },
-    "license": "Creative Tim",
+    "license": "EDBY",
     "devDependencies": {
         "browser-sync": "^2.26.14",
         "del": "4.1.1",
