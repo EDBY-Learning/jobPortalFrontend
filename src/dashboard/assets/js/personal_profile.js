@@ -497,3 +497,30 @@ function saveBasicInfo(){
         }
     })
 }
+
+function viewResume(){
+    let m1 = $(resumePopup())
+    m1.modal("show")
+}
+
+function resumePopup(){
+    return `
+    <div class="modal fade" id="resumePopup" tabindex="-1" role="dialog" aria-labelledby="resumePopupLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Still in progress!!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                It is still in development!! It will up 16th May! We appreciate for your patience!! Thank you 
+            </div>
+            <div class="modal-footer">
+                <button style="width: 40%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            </div>
+        </div>
+        </div>
+    </div>`
+}
