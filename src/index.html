@@ -22,7 +22,7 @@
     @@include('./_head.html', {
         "path": "./front",
         "path_common": ".",
-        "title": "Impact - Design System"
+        "title": "Edby- Job Portal Home Page"
     })
 </head>
 
@@ -245,7 +245,7 @@
                 let subject  = document.getElementById("subject").value.trim()
                 let temp = 'location='+location+'&subject='+subject+'&position='+position
                 //console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "/front/pages/index.html?"+temp;
+                window.location.href = "./front/pages/index.html?"+temp;
             }else{
                 console.log("here")
                 document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
