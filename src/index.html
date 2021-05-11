@@ -39,9 +39,9 @@
 
     <main>
 
-        @@include('./_preloader.html', {
+        <!-- @@include('./_preloader.html', {
             "path": "./front"
-        })
+        }) -->
 
         <!-- Hero -->
         <section class="section-header pb-7 pb-lg-11 bg-soft">
@@ -57,7 +57,8 @@
                             <form class="d-flex flex-column mb-5 mb-lg-0">
                                 <div class="row" style="margin-bottom: 30px;">
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-8">
-                                        <input class="form-control my-3" type="text" id="position" name="position" placeholder="Teacher or Principal">
+                                        @@include('./_position_dropdown.html')
+                                        <!-- <input class="form-control my-3" type="text" id="position" name="position" placeholder="Teacher or Principal"> -->
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-8">
                                         <input class="form-control my-3" type="text" id="location" name="location" placeholder="City or Country" required>
@@ -244,7 +245,7 @@
             let ids = urlParams.get("ids");
             let id = urlParams.get("id");
             let location = urlParams.get("location")
-            let position = urlParams.get("position")
+            let position = urlParams.get("positionSearch")
             let subject = urlParams.get("subject")
             
             if(id){
@@ -256,7 +257,7 @@
                 //console.log("/front/pages/index.html/?"+temp)
                 window.location.href = "./front/pages/index.html?"+temp;
             }else if(location){
-                let position = document.getElementById("position").value.trim()
+                let position = document.getElementById("positionSearch").value.trim()
                 let subject  = document.getElementById("subject").value.trim()
                 let temp = 'location='+location+'&subject='+subject+'&position='+position
                 //console.log("/front/pages/index.html/?"+temp)
@@ -267,7 +268,7 @@
         function routeJob(){
             let location = document.getElementById("location").value.trim()
             if(location){
-                let position = document.getElementById("position").value.trim()
+                let position = document.getElementById("positionSearch").value.trim()
                 let subject  = document.getElementById("subject").value.trim()
                 let temp = 'location='+location+'&subject='+subject+'&position='+position
                 //console.log("/front/pages/index.html/?"+temp)

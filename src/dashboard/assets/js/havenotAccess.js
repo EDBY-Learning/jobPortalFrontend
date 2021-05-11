@@ -1,4 +1,4 @@
-var BASE_URL = "http://127.0.0.1:8000/";
+var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
 
 window.onload = function(){
     if(localStorage.getItem("access")){
