@@ -1,6 +1,6 @@
-var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
-var JOB_URL = "https://ppritish5153.pythonanywhere.com/job/v2/"
-var TEACHER_URL = "https://ppritish5153.pythonanywhere.com/teacher/"
+var BASE_URL = "http://127.0.0.1:8000/";
+var JOB_URL = "http://127.0.0.1:8000/job/v2/"
+var TEACHER_URL = "http://127.0.0.1:8000/teacher/"
 
 var LANG_CODE = {
     "1":`
