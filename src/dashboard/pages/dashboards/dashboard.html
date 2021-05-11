@@ -19,9 +19,9 @@
 <html>
 
 @@include('./_head.html', {
-  "title": "EDBY- Dashboard",
-  "path": "../..",
-  "path_common": "../../.."
+"title": "EDBY- Dashboard",
+"path": "../..",
+"path_common": "../../.."
 })
 
 <body>
@@ -30,46 +30,37 @@
   <div class="main-content" id="panel">
     <!-- Topnav -->
     @@include('./_nav_bar_profile_dropdown.html', {
-      "path": "..",
-      "path_common": "../..",
-      "classes": "bg-primary text-white"
+    "path": "..",
+    "path_common": "../..",
+    "classes": "bg-primary text-white"
     })
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
+    <div class="header  pb-6">
       <div class="container-fluid">
         <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Home</h6>
-            </div>
-          </div>
+          
           <!-- Card stats -->
-          <div class="row">
+          <div style="color: white !important;font-weight: bolder; margin-top: 10px;" class="row">
             <div class="col-xl-3 col-md-6 col-6">
-              <div class="card card-stats">
+              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
                 <!-- Card body -->
-                <a  href="../examples/profile.html">
+                <a href="../examples/profile.html">
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                          <h5 class="card-title text-uppercase text-muted mb-0">Create/Edit</h5>
-                          <span class="h2 font-weight-bold mb-0">Resume</span>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Create/Edit</h5>
+                        <span class="h2 font-weight-bold mb-0">Resume</span>
                       </div>
                     </div>
+                  </div>
                 </a>
-                
-                  <!--<p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>-->
-                </div>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 col-6">
-              <div class="card card-stats">
+              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
                 <!-- Card body -->
-                <a  target="_blank" href="../../../front/pages/index.html">
+                <a target="_blank" href="../../../front/pages/index.html">
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
@@ -77,66 +68,64 @@
                         <span class="h2 font-weight-bold mb-0">Jobs</span>
                       </div>
                     </div>
+                  </div>
                 </a>
-                
-                  <!--<p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>-->
-                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-6">
+              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
+                <!-- Card body -->
+                <a  href="../examples/preference.html">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Job Notifications</h5>
+                        <span class="h2 font-weight-bold mb-0">Preference</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-    <!-- Page content -->
-    <div class="container-fluid mt--6">
-      <!-- Dark table -->
-      <div class="row">
-        <div class="col">
-          <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-              <div class="row">
-                
-                <div class="col-12">
-                  <a style="width: 100%; display: block;margin-left: auto;margin-right: auto;" type="button"  class="btn btn-secondary" href="../examples/preference.html">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Click for Job Notifications</h5>
-                    <span class="h2 font-weight-bold mb-0">Perference</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <!-- Dark table -->
+    
+    <div id="toTheTop" class="row" style="margin-bottom: 10px;">
+      <div class="col">
+        <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="preferredButton"
+          class="btn btn-success" type="button" onclick="changeJobType('preferred',1)">Preferred Jobs</button>
       </div>
-      <div class="row" style="margin-bottom: 10px;">
-        <div class="col">
-          <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="preferredButton" class="btn btn-success" type="button" onclick="changeJobType('preferred',1)">Preferred Jobs</button>
-        </div>
-        <div class="col">
-          <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="bookmarkedButton" class="btn btn-warning" type="button" onclick="changeJobType('bookmarked',1)">View Saved Jobs</button>
-        </div>
+      <div class="col">
+        <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="bookmarkedButton"
+          class="btn btn-warning" type="button" onclick="changeJobType('bookmarked',1)">View Saved Jobs</button>
       </div>
-      <div  class="row align-items-center" style="margin-bottom: 25px;">
-        <div class="row">
-          <div class="col-4">
-              <a class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
-          </div>
-          <div class="col-4">
-              <h2 id="headingAreaDashboard">Page: <span id="page"></span></h2>
-          </div>
-          <div class="col-4">
-              <a class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
-          </div>   
+    </div>
+    <div class="row align-items-center" style="margin-bottom: 25px;">
+        <div class="col-4">
+          <a class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
         </div>
-      <div id="dashboardArea" class="row">
-        
-      </div>
+        <div class="col-4">
+          <h2 id="headingAreaDashboard">Page: <span id="page"></span></h2>
+        </div>
+        <div class="col-4">
+          <a class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
+        </div>
+    </div>
+    <div id="dashboardArea" class="row">
+
     </div>
     <div class="row" style="margin-bottom: 50px;">
       <div class="col">
-        <a style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary" type="button" href="javascript:toTop()" id="btn_top">To Top</a>
+        <a style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+          type="button" href="javascript:toTop()" id="btn_top">To Top</a>
       </div>
     </div>
   </div>
@@ -153,7 +142,7 @@
   <!-- Argon JS -->
   <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
   <!-- Demo JS - remove this in your project -->
-  
+
   <script src="../../assets/js/config.js"></script>
   <script src="../../assets/js/havenotAccess.js"></script>
   <script src="../../assets/js/userDashboard.js"></script>

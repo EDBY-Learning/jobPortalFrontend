@@ -68,7 +68,7 @@ function numPages()
 }
 
 function toTop(){
-    document.getElementById("JobsForYou").scrollIntoView({behavior: 'smooth'});
+    document.getElementById("toTheTop").scrollIntoView({behavior: 'smooth'});
 }
 
 // preferredButton
