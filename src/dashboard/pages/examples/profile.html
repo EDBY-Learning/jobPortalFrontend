@@ -116,6 +116,9 @@
                       <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#experienceCollapse" aria-expanded="false" aria-controls="experienceCollapse">
                         Working Experience
                       </button>
+                      <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#qualificationCollapse" aria-expanded="false" aria-controls="qualificationCollapse">
+                        Qualifications(Extra Courses and Diploma)
+                      </button>
                       <button style="margin:3px;" class="btn btn-success collapsed" data-toggle="collapse" data-target="#languagecollapse" aria-expanded="false" aria-controls="languagecollapse">
                         Language Proficiency
                       </button>
@@ -196,6 +199,20 @@
                     </div>
                     <div class="card-body">
                       <div id="experienceArea" class="row"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div id="qualificationCollapse" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <button onclick="openModal('qualificationModal',null)" class="btn btn-dark" >
+                          Add Qualification
+                        </button>
+                      </h5>
+                    </div>
+                    <div class="card-body">
+                      <div id="qualificationArea" class="row"></div>
                     </div>
                   </div>
                 </div>
@@ -348,6 +365,69 @@
               <button onclick="createExperienceInfo('delete')" type="button" class="btn btn-danger">Delete</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button id="makeExperienceRequest" onclick="createExperienceInfo('create')" type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="qualificationModal" tabindex="-1" role="dialog" aria-labelledby="qualificationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="qualificationModalTitle">Add/Edit Qualification</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div style="display: none;" class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="qualificationID">ID</label>
+                    <input type="text" id="qualificationID" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="qualificationDegree">Degree</label>
+                      <input type="text" id="qualificationDegree" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="form-group">
+                      <label class="form-control-label" for="qualification_subject">Major subject/area of focus</label>
+                      <input type="text" id="qualification_subject" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="qualification_start_date">Start Year(e.g. 2012)</label>
+                    <input type="text" id="qualification_start_date" minlength="4" maxlength="4" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="qualification_end_date">End Year(e.g. 2016)</label>
+                    <input type="text" id="qualification_end_date" minlength="4" maxlength="4" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="form-control-label" for="qualification_score">Score</label>
+                    <input type="text" id="qualification_score" class="form-control">
+                    </div>
+                </div>
+                  
+                  <div class="col-lg-6">
+                    <div class="text-muted font-italic"><small id="qualification-error-text" style="color: red;"></small></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button onclick="createQualificationInfo('delete')" type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="makeQualificationeRequest" onclick="createQualificationInfo('create')" type="button" class="btn btn-primary">Save</button>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-var BASE_URL = "http://127.0.0.1:8000/";
+var BASE_URL = " https://b0cf420b56f7.ngrok.io/";
 
 window.onload = function(){
     if(localStorage.getItem("access")){

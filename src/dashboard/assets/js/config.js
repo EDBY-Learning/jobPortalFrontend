@@ -1,6 +1,6 @@
-var BASE_URL = "http://127.0.0.1:8000/";
-var JOB_URL = "http://127.0.0.1:8000/job/v2/"
-var TEACHER_URL = "http://127.0.0.1:8000/teacher/"
+var BASE_URL = " https://b0cf420b56f7.ngrok.io/";
+var JOB_URL = " https://b0cf420b56f7.ngrok.io/job/v2/"
+var TEACHER_URL = " https://b0cf420b56f7.ngrok.io/teacher/"
 
 var LANG_CODE = {
     "1":`
