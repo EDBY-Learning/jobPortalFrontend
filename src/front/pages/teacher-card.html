@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    @@include('./_head.html', {
+        "path": "..",
+        "path_common": "../..",
+        "title": "EDBY - Teacher Card"
+    })
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    @@include('./_tracking-body.html')
+
+    @@include('./_navigation.html', {
+        "path": "..",
+        "path_common": "../..",
+        "classes": "navbar-dark navbar-theme-primary"
+    })
+    <main>
+
+        @@include('./_preloader.html', {
+            "path": ".."
+        })
+
+        <!-- Hero -->
+        <section class="section-header pb-8 pb-lg-13 mb-4 mb-lg-6 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 text-center">
+                        <h1 id="name" class="display-2 mb-3"></h1>
+                        <p id="description" class="lead"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="pattern bottom"></div>
+        </section>
+        <section class="section section-lg pt-0">
+            <div class="container mt-n7 mt-lg-n13 z-2">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-4">
+                        <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
+                            <div class="card-header text-center pb-0">
+                                <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <h4 class="text-black">Education</h4>
+                                <p>
+                                    Here's my education details                                
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <ul id="education" class="list-group">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
+                            <div class="card-header text-center pb-0">
+                                <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
+                                    <i class="far fa-lightbulb"></i>
+                                </div>
+                                <h4 class="text-black">Experience</h4>
+                                <p>
+                                    Here's detail for my working Experience
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <ul id="experience" class="list-group">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
+                            <div class="card-header text-center pb-0">
+                                <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                <h4 class="text-black">Qualifications</h4>
+                                <p>
+                                    Here are courses and Training I have done                      
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <ul id="qualification" class="list-group">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-lg pt-0 line-bottom-light">
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-6">
+                    <div class="col-12 col-md-8 text-center">
+                        <h1 class="display-3 mb-4">Languages Expertise</h1>
+                        <p class="lead">Here are the languages I am comfortable in reading, writing, and teaching</p>
+                    </div>
+                </div>
+                <div >
+                    <div class="row" id="language" class="timeline timeline-six px-3 px-lg-0">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-7">
+                    <div class="col-12 text-center">
+                        <h1 class="h1 font-weight-bolder mb-4 px-lg-8">I am looking for job</h1>
+                        <p class="lead">This is my preference for job, but I am willing to expand my area of expertise. Contact Me!!</p>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-12 col-lg-12">
+                        <div class="customer-testimonial d-flex mb-5">
+                            <div id="preference" class="bg-soft shadow-soft border border-light rounded position-relative p-4">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col text-center">
+                        <a href="./testimonials.html" class="btn btn-primary"><span class="mr-2"><i class="fas fa-book-open"></i></span> Hire Me</a>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+        
+        <!-- <section class="section">
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-7">
+                    <div class="col-12 text-center">
+                        <h1 class="h1 font-weight-bolder mb-4 px-lg-8">Recommendation by other teachers</h1>
+                        <p class="lead">Here are some recommendation given by other people</p>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-12 col-lg-6">
+                        <div class="customer-testimonial d-flex mb-5">
+                            <img src="../assets/img/team/profile-picture-1.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                                <div class="d-flex mb-4">
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                </div>
+                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
+                                <h6>- James Curran <small class="ml-0 ml-md-2">Designer Apple</small></h6>
+                            </div>
+                        </div>
+                        <div class="customer-testimonial d-flex mb-5">
+                            <img src="../assets/img/team/profile-picture-2.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                                <div class="d-flex mb-4">
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                </div>
+                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
+                                <h6>- Richard Thomas <small class="ml-0 ml-md-2">Engineer Google</small></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 pt-lg-6">
+                        <div class="customer-testimonial d-flex mb-5">
+                            <img src="../assets/img/team/profile-picture-4.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                                <div class="d-flex mb-4">
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                </div>
+                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
+                                <h6>- Jose Evans <small class="ml-0 ml-md-2">Engineer Google</small></h6>
+                            </div>
+                        </div>
+                        <div class="customer-testimonial d-flex mb-lg-5">
+                            <img src="../assets/img/team/profile-picture-6.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                                <div class="d-flex mb-4">
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                                </div>
+                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
+                                <h6>- Charles Moody <small class="ml-0 ml-md-2">Manager IBM</small></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <a href="./testimonials.html" class="btn btn-primary"><span class="mr-2"><i class="fas fa-book-open"></i></span> See all stories</a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        
+        <section class="section section-lg pb-5 bg-soft">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-12 text-center mb-5">
+                        <h2 class="mb-4">Share your profile</h2>
+                        <p class="lead mb-5">Share your <span class="font-weight-bolder">Resume/CV</span> and get hired</p>
+                        <div id="social-sharing">
+
+                        </div>
+                        
+                    </div>
+                    <!-- <div class="col-12 text-center">
+                        <a href="../../dashboard/pages/dashboards/dashboard.html" class="btn btn-secondary animate-up-2"><span class="mr-2"><i class="fas fa-hand-pointer"></i></span>Start 30-days trial</a>
+                    </div> -->
+                </div> 
+            </div>    
+        </section>
+
+        <section class="section section-lg bg-soft">
+            <div class="row">
+                <!-- <div style="padding-bottom: 20px;" class="col-md-6 col-12">
+                    <button onclick="downloadResume()" 
+                    style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                    display: block;margin-left: auto;margin-right: auto;" 
+                    class="button btn btn-success" type="submit">Download Resume</button>
+                </div> -->
+                <div class="col-md-6 col-12">
+                    <button onclick="makeResume()" 
+                    style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                    display: block;margin-left: auto;margin-right: auto;" 
+                    class="button btn btn-danger" type="submit">Make Your Own Resume</button>
+                </div>
+            </div>
+        </section>
+        
+
+        @@include('./_footer.html', {
+            "path": "..",
+            "path_common": "../..",
+            "classes": "bg-primary text-white"
+        })
+
+    </main>
+
+    @@include('./_scripts.html', {
+        "path": "..",
+        "path_common": "../.."
+    })
+    <script src="../../dashboard/assets/js/config.js"></script>
+    <script src="../assets/js/teacher-card.js"></script>
+</body>
+
+</html>

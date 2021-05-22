@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+@@include('./_head.html', {
+  "title": "EDBY - Profile Card",
+  "path": "../..",
+  "path_common": "../../.."
+})
+
+<body>
+  @@include('./_tracking-body.html')
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    @@include('./_nav_bar_profile_dropdown.html', {
+      "path": "..",
+      "path_common": "../..",
+      "classes": "bg-primary text-white"
+    })
+    <section>
+      <div class="container">
+          <div style="padding-top: 50px;">
+              <div class="row justify-content-center">
+                <div class="col-xl-4 order-xl-2">
+                  <div class="card card-profile">
+                    <img src="../../assets/img/theme/img-1-1000x600.jpg" lt="Image placeholder" class="card-img-top">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                          <a href="#">
+                            <img src="../../assets/img/theme/profile.jpg" class="rounded-circle">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                      <div class="d-flex justify-content-between">
+                        <button onclick="goToResume()" class="btn btn-sm btn-danger  mr-4 ">View CV</button>
+                        <button style="display: none;" class="btn btn-sm btn-info float-right">Hire Me</button>
+                      </div>
+                    </div>
+                    <div class="card-body pt-0">
+                      <!-- <div class="row">
+                        <div class="col">
+                          <div class="card-profile-stats d-flex justify-content-center">
+                            <div>
+                              <span class="heading">22</span>
+                              <span class="description">Friends</span>
+                            </div>
+                            <div>
+                              <span class="heading">10</span>
+                              <span class="description">Photos</span>
+                            </div>
+                            <div>
+                              <span class="heading">89</span>
+                              <span class="description">Comments</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      <div class="text-center">
+                        <h5 class="h3">
+                          Jessica Jones<span class="font-weight-light">, 27</span>
+                        </h5>
+                        <div class="h5 font-weight-300">
+                          <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                        </div>
+                        <div class="h5 mt-4">
+                          <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                        </div>
+                        <div>
+                          <i class="ni education_hat mr-2"></i>University of Computer Science
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="../../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="../../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
+  <!-- Demo JS - remove this in your project -->
+  
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/havenotAccess.js"></script>
+  <script src="../../assets/js/profile-card.js"></script>
+</body>
+
+</html>

@@ -79,11 +79,11 @@ $("#recoveryLink").click(function(){
 
     buttonLockUnlock('recoveryLink',true)
     $.ajax({
-        url:BASE_URL+'auth/save_forgot_password_data/',
+        url:BASE_URL+'auth/get_reset_password_token/',
         type:'POST',
         data:{
             'email': email,
-            'mobile' : mobile
+            'username' : mobile
         },
         success: function (result) {
             document.getElementById("mobile").value = ''

@@ -1,6 +1,6 @@
-var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
-var JOB_URL = "https://ppritish5153.pythonanywhere.com/job/v2/"
-var TEACHER_URL = "https://ppritish5153.pythonanywhere.com/teacher/"
+var BASE_URL = "https://e0c1beaf270b.ngrok.io/";
+var JOB_URL = "https://e0c1beaf270b.ngrok.io/job/v2/"
+var TEACHER_URL = "https://e0c1beaf270b.ngrok.io/teacher/"
 
 var LANG_CODE = {
     "1":`
@@ -29,6 +29,15 @@ var LANG_CODE = {
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>`
+}
+
+var APPLICATION_STATUS = {
+    "-1":"Apply on given Contact",
+    "1":"Applied",
+    "2":"Sent Resume To School",
+    "3":"Selected for Interview",
+    "4":"Application Declined",
+    "5":"Closed, No more application"
 }
 
 $("#logoutUser").click(function(){
@@ -110,7 +119,8 @@ function getJobResultContent(result,saveButton){
                     <div class="col">
                     <a class="what-button" type="button" class="btn custom-btn custom-btn-bg custom-btn-link" href=
                     "whatsapp://send?text=A job opening for teaching in ${result.city} for post of ${result.positions},
-                    To view more jobs for teachers visit our site https://jobportal.edbylearning.com?ids=${result.id} and Join our WhatsApp community for live job updates  https://chat.whatsapp.com/EZzx9EFTqA4Ft6uAyWq4ef"
+                    To view more jobs for teachers visit our site https://jobportal.edbylearning.com?ids=${result.id} and 
+                    Join our WhatsApp community for live job updates  https://chat.whatsapp.com/IGTYltls5YL9XrIXgEGP9n"
                             data-action="share/whatsapp/share"
                             target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
@@ -180,3 +190,41 @@ function bookmarkConfirmation(){
         </div>
     </div>`
 }
+
+
+$("#changePasswordWithToken").click(function(){
+    let new_password  = document.getElementById("new_password").value
+    let confirm_password = document.getElementById("confirm_password").value
+    let mobile  = document.getElementById("mobile").value
+    let token = document.getElementById("token").value
+    if(new_password=="" || confirm_password=="" || mobile =="" || token==""){
+        document.getElementById("error-text").innerHTML = "Provide All Info!!"
+        return;
+    }else{
+        document.getElementById("error-text").innerHTML = ''
+    }
+
+    buttonLockUnlock('changePasswordWithToken',true)
+    $.ajax({
+        url:BASE_URL+'auth/reset_password_with_token/',
+        type:'POST',
+        data:{
+            'username':mobile,
+            'new_password': new_password,
+            'token' : token,
+            'confirm_password' :confirm_password
+        },
+        success: function (result) {
+            document.getElementById("new_password").value = ''
+            document.getElementById("token").value = ''
+            document.getElementById("confirm_password").value = ''
+            document.getElementById("success-message").innerHTML = "Password Changed Succesfully"
+        },
+        error: function (error) {
+            document.getElementById("error-text").innerHTML =  error.responseText
+        },
+        complete: function(){
+            buttonLockUnlock('changePasswordWithToken',false)
+        }
+    })
+})

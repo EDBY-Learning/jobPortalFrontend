@@ -1,4 +1,4 @@
-var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
+var BASE_URL = "https://e0c1beaf270b.ngrok.io/";
 
 window.onload = function(){
     if(localStorage.getItem("access")){

@@ -5,6 +5,8 @@ window.onload = function(){
 var educationData = null;
 var experienceData = null;
 var languageData = null;
+var qualificationData = null;
+var profile_url = "https://jobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id="
 
 function updateLocalData(dataType,operation,id,result){
     if(dataType=="education"){
@@ -39,6 +41,17 @@ function updateLocalData(dataType,operation,id,result){
             }
         }else{
             languageData.push(result)
+        }
+    }else if(dataType=="qualification"){
+        if(id){
+            var index = qualificationData.findIndex(item => item.id == id)
+            if(operation=="create"){
+                qualificationData.splice(index, 1, result)
+            }else if(operation=='delete'){
+                qualificationData.splice(index, 1)
+            }
+        }else{
+            qualificationData.push(result)
         }
     }else{
         alert("wrong type")
@@ -76,6 +89,16 @@ function openModal(modalName,id){
         }else{
             fillLanguageDataModal(null)
         }
+    }else if(modalName=='qualificationModal'){
+        if(!id){
+            fillQualificationDataModal(null)
+        }
+        data = qualificationData.find(x => x.id == id)
+        if(data){
+            fillQualificationDataModal(data)
+        }else{
+            fillQualificationDataModal(null)
+        }
     }
  
     $('#'+modalName).modal('show');
@@ -89,6 +112,7 @@ function getPersonalData(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
+            profile_url += result.teacher.id 
             setBasicInfo(result['teacher'])
             educationData = result['education']
             setEducationInfo(result['education'])
@@ -96,6 +120,8 @@ function getPersonalData(){
             setExperience(result['experience'])
             languageData = result['language']
             setLangauge(result['language'])
+            qualificationData = result['qualification']
+            setQualification(result['qualification'])
         },
         error: function (error) {
             if(error.status==401){
@@ -222,7 +248,7 @@ function fillEducationDataModal(data){
         document.getElementById("educationScore").value = data.score
     }
 }
-                
+              
 function getExperienceTemplate(data){
     return `
     <div class="col-12 col-md-6 col-lg-4 mb-5">
@@ -346,6 +372,124 @@ function createExperienceInfo(type){
         }
     })
 }
+
+              
+function setQualificationTemplate(data){
+    return `
+    <div class="col-12 col-md-6 col-lg-4 mb-5">
+        <div class="card shadow-soft border-light">
+            <div class="card-body">
+                <div style="display: none;" class="text-muted font-italic">${data.id}</div>
+                <h3 class="card-title mt-3">Degree: ${data.degree}</h3>
+                
+                
+                <p class="card-text">
+                    (${data.start_date} - ${data.end_date})
+                </p>
+                
+                
+                <ul class="list-group d-flex justify-content-center mb-4">
+                    <li class="d-flex pl-0 pb-1">
+                        <div>Major area/subject of Focus: ${data.major_subject}</div>    
+                    </li>
+                    <li class="d-flex pl-0 pb-1">
+                        <div>Score: ${data.score}</div>    
+                    </li>
+                    
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <button onclick="openModal('qualificationModal',${data.id})" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+}
+
+function setQualification(result){
+    let container = document.getElementById("qualificationArea")
+    container.innerHTML = ''
+    result.forEach(element => {
+        container.innerHTML+=setQualificationTemplate(element)
+    });
+}
+
+function fillQualificationDataModal(data){
+    if(!data){
+        document.getElementById("qualificationID").value = ''
+        document.getElementById("qualificationDegree").value = ''
+        document.getElementById("qualification_subject").value = ''
+        document.getElementById("qualification_start_date").value = ''
+        document.getElementById("qualification_end_date").value = ''
+        document.getElementById("qualification_score").value = ''
+    }else{
+        document.getElementById("qualificationID").value = data.id
+        document.getElementById("qualificationDegree").value = data.degree
+        document.getElementById("qualification_subject").value = data.major_subject
+        document.getElementById("qualification_start_date").value = data.start_date
+        document.getElementById("qualification_end_date").value = data.end_date
+        document.getElementById("qualification_score").value = data.score
+    }
+}
+
+
+function createQualificationInfo(type){
+    let data = {}
+    id = document.getElementById("qualificationID").value
+    method = null
+    url = TEACHER_URL+'qualification/'
+
+    data['degree'] = document.getElementById("qualificationDegree").value
+    data['major_subject'] = document.getElementById("qualification_subject").value
+    data['start_date'] = document.getElementById("qualification_start_date").value
+    data['end_date'] = document.getElementById("qualification_end_date").value
+    data['score'] = document.getElementById("qualification_score").value
+
+    if(type == "create" && id){
+        method = "PUT"
+        url=url+id+'/'
+    }else if(type == "delete" && id){
+        if (confirm("Are you sure you want to delete") == true) {
+            method = "DELETE"
+            url=url+id+'/'
+            data = {}
+        } else {
+            return false;
+        }
+        
+    }else{
+        method = "POST"
+    }
+    
+    buttonLockUnlock('makeQualificationeRequest',true)
+    $.ajax({
+        url:url,
+        type:method,
+        data:data,
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        success: function (result) {
+            console.log(data)
+            fillQualificationDataModal(null)
+            $('#qualificationModal').modal('hide');
+            updateLocalData('qualification',type,id,result)
+            setQualification(qualificationData)
+        },
+        error: function (error) {
+            if(error.status==401){
+                LogoutUserAsFailedAuth()
+            }
+            document.getElementById("qualification-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
+        },
+        complete: function(){
+            buttonLockUnlock('makeQualificationeRequest',false)
+        }
+    })
+}
+
 
 function getLanguageTemplate(data){
     return `
@@ -499,8 +643,7 @@ function saveBasicInfo(){
 }
 
 function viewResume(){
-    let m1 = $(resumePopup())
-    m1.modal("show")
+    window.open(profile_url,"_blank").focus()
 }
 
 function resumePopup(){
