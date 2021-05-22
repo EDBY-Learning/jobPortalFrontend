@@ -1,4 +1,4 @@
-var BASE_URL = " https://b0cf420b56f7.ngrok.io/";
+var BASE_URL = "https://e0c1beaf270b.ngrok.io/";
 
 window.onload = function(){
     if(localStorage.getItem("access")){

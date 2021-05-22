@@ -255,3 +255,6 @@ function makeLoginPopup(){
     </div>`
 }
 
+function makeResume(){
+    window.location.href = "../../dashboard/pages/examples/login.html"
+}

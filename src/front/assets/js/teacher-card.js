@@ -6,7 +6,7 @@ window.onload = function(){
 
 function getTeacherInfo(teacher_id){
     $.ajax({
-        url:TEACHER_URL+'public_profile/'+teacher_id,
+        url:TEACHER_URL+'public_profile/'+teacher_id+'/',
         type:'GET',
         success: function (result) {
             setData(result)
@@ -130,11 +130,9 @@ function setData(data){
     <a target="_blank" class="icon icon-lg text-gray mr-3" href="sms:?body=EDBY%20Job%20Portal%20%3A%20Hi%2C%20I%20am%20${data.teacher.user.first_name}%20and%20am%20very%20passionate%20teacher.%20I%20am%20looking%20for%20changing%20my%20job%20so%20please%20take%20a%20look%20at%20my%20resume%20https%3A%2F%2Fjobportal.edbylearning.com%2Ffront%2Fpages%2Fteacher-card.html%3Fteacher_id%3D${data.teacher.id}">
         <i class="fas fa-sms"></i>
     </a>
-    `
+    `    
+}
 
-
-    
-
-    
-    
+function makeResume(){
+    window.location.href = "../../dashboard/pages/examples/login.html"
 }

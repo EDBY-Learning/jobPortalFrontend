@@ -1,6 +1,6 @@
-var BASE_URL = " https://b0cf420b56f7.ngrok.io/";
-var JOB_URL = " https://b0cf420b56f7.ngrok.io/job/v2/"
-var TEACHER_URL = " https://b0cf420b56f7.ngrok.io/teacher/"
+var BASE_URL = "https://e0c1beaf270b.ngrok.io/";
+var JOB_URL = "https://e0c1beaf270b.ngrok.io/job/v2/"
+var TEACHER_URL = "https://e0c1beaf270b.ngrok.io/teacher/"
 
 var LANG_CODE = {
     "1":`
@@ -29,6 +29,15 @@ var LANG_CODE = {
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>`
+}
+
+var APPLICATION_STATUS = {
+    "-1":"Apply on given Contact",
+    "1":"Applied",
+    "2":"Sent Resume To School",
+    "3":"Selected for Interview",
+    "4":"Application Declined",
+    "5":"Closed, No more application"
 }
 
 $("#logoutUser").click(function(){

@@ -68,10 +68,27 @@
                                     </div>
                                 </div>
                                 <p><em style="color: red;" id="error"></em></p>
-                                <a onclick="routeJob()" 
-                                style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                display: block;margin-left: auto;margin-right: auto;" 
-                                class="button btn btn-primary" type="submit">Search</a>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <button onclick="routeJob('recent')" 
+                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                        display: block;margin-left: auto;margin-right: auto;" 
+                                        class="button btn btn-success" type="submit">Recent Jobs</button>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <button onclick="routeJob('search')" 
+                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                        display: block;margin-left: auto;margin-right: auto;" 
+                                        class="button btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+                                        <button onclick="makeResume()" 
+                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                        display: block;margin-left: auto;margin-right: auto;" 
+                                        class="button btn btn-danger" type="submit">Make Resume</button>
+                                    </div>
+                                </div>
+                                
                             </form>
                           </div>
                       </div>
@@ -265,19 +282,27 @@
                 
             }
         } 
-        function routeJob(){
-            let location = document.getElementById("location").value.trim()
-            if(location){
-                let position = document.getElementById("positionSearch").value.trim()
-                let subject  = document.getElementById("subject").value.trim()
-                let temp = 'location='+location+'&subject='+subject+'&position='+position
-                //console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "./front/pages/index.html?"+temp;
+        function routeJob(val){
+            if(val=='recent'){
+                window.location.href = "./front/pages/index.html";
+                return;
             }else{
-                console.log("here")
-                document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
+                let location = document.getElementById("location").value.trim()
+                if(location){
+                    let position = document.getElementById("positionSearch").value.trim()
+                    let subject  = document.getElementById("subject").value.trim()
+                    let temp = 'location='+location+'&subject='+subject+'&position='+position
+                    //console.log("/front/pages/index.html/?"+temp)
+                    window.location.href = "./front/pages/index.html?"+temp;
+                }else{
+                    // console.log("here")
+                    document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
+                }
             }
-            
+        }
+
+        function makeResume(){
+            window.location.href = "./dashboard/pages/examples/login.html";
         }
     </script>
     
