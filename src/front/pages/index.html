@@ -61,7 +61,23 @@
                     
                     <div class="col-12 col-md-12">
                           <h2 class="mb-3" style=" text-align: center;">Search for teaching jobs in school and online</h2>
-                          <p class="lead"></p>
+                          <p class="lead" style="text-align: center;">You can also build resume here, click below link
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <u> <a onclick="makeResume()" 
+                                    style="color: rgb(6, 80, 241);font-weight: bolder; 
+                                    display: block;margin-left: auto;margin-right: auto;" 
+                                    class="button btn" type="submit">Make Resume</a></u> 
+                                </div>
+                                <div  class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <u> <a onclick="getRecentJob()" 
+                                    style="color: rgb(6, 80, 241);font-weight: bolder;
+                                    display: block;margin-left: auto;margin-right: auto;" 
+                                    class="button btn" type="submit">Recent Jobs</a></u> 
+                                </div>
+                            </div>
+                            
+                        </p>
                           <div class="mt-4">
                         
                             <div class="d-flex flex-column mb-5 mb-lg-0">
@@ -81,10 +97,7 @@
                                 
                                 <div class="row">
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
-                                        <button onclick="getRecentJob()" 
-                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn btn-success" type="submit">Recent Jobs</button>
+                                        
                                     </div>
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
                                         <button id="searchJobButton" style="color: whitesmoke;font-weight: bolder;width: 60%; 
@@ -92,10 +105,7 @@
                                         class="btn btn-primary" type="button">Search</button>
                                     </div>
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
-                                        <button onclick="makeResume()" 
-                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn btn-danger" type="submit">Make Resume</button>
+                                        
                                     </div>
                                 </div>
                             </div>

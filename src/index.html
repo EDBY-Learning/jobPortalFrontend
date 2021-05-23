@@ -53,6 +53,23 @@
                           <p class="lead">Edby teacher job portal helps you find teaching job in your preferred location and subject.
                             We have international and national job posting for teachers.
                             Jobs postings are credible and freely available.</p>
+                            <p class="lead">You can also build resume here, click below link
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <u> <a onclick="makeResume()" 
+                                        style="color: rgb(6, 80, 241);font-weight: bolder; 
+                                        display: block;margin-left: auto;margin-right: auto;" 
+                                        class="button btn" type="submit">Make Resume</a></u> 
+                                    </div>
+                                    <div  class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <u> <a onclick="routeJob('recent')" 
+                                        style="color: rgb(6, 80, 241);font-weight: bolder;
+                                        display: block;margin-left: auto;margin-right: auto;" 
+                                        class="button btn" type="submit">Recent Jobs</a></u> 
+                                    </div>
+                                </div>
+                                
+                            </p>
                           <div class="mt-4">
                             <form class="d-flex flex-column mb-5 mb-lg-0">
                                 <div class="row" style="margin-bottom: 30px;">
@@ -70,10 +87,7 @@
                                 <p><em style="color: red;" id="error"></em></p>
                                 <div class="row">
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
-                                        <button onclick="routeJob('recent')" 
-                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn btn-success" type="submit">Recent Jobs</button>
+                                       
                                     </div>
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
                                         <button onclick="routeJob('search')" 
@@ -82,10 +96,7 @@
                                         class="button btn btn-primary" type="submit">Search</button>
                                     </div>
                                     <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-8">
-                                        <button onclick="makeResume()" 
-                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn btn-danger" type="submit">Make Resume</button>
+                                        
                                     </div>
                                 </div>
                                 

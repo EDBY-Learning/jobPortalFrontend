@@ -106,6 +106,7 @@ function getRecentJob(){
             console.log(error)
         }
     })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function getJobByIds(id){
@@ -132,6 +133,7 @@ function getJobByIds(id){
             console.log(error)
         }
     })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function searchForJobs(){
