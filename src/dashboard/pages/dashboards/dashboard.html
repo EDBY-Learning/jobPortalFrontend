@@ -34,6 +34,13 @@
     "path_common": "../..",
     "classes": "bg-primary text-white"
     })
+
+    @@include('./_bottom_nav_bar_dashboard.html', {
+      "home":"mobile-bottom-nav__item--active",
+      "resume":"",
+      "preference":"",
+      "apply":""
+    })
     <!-- Header -->
     <!-- Header -->
     <div class="header  pb-6">
@@ -41,67 +48,8 @@
         <div class="header-body">
           
           <!-- Card stats -->
-          <div style="color: white !important;font-weight: bolder; margin-top: 10px;" class="row">
-            <div class="col-xl-3 col-md-6 col-6">
-              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
-                <!-- Card body -->
-                <a href="../examples/profile.html">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Create/Edit</h5>
-                        <span class="h2 font-weight-bold mb-0">Resume</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-6">
-              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
-                <!-- Card body -->
-                <a target="_blank" href="../../../front/pages/index.html">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Search</h5>
-                        <span class="h2 font-weight-bold mb-0">Jobs</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-6">
-              <div style="background-color: rgb(117, 219, 226);" class="card card-stats">
-                <!-- Card body -->
-                <a  href="../examples/preference.html">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Job Notifications</h5>
-                        <span class="h2 font-weight-bold mb-0">Preference</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-6">
-              <div style="background-color: rgb(89, 168, 233);" class="card card-stats">
-                <!-- Card body -->
-                <a  href="../examples/admin-jobs.html">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Apply Now</h5>
-                        <span class="h2 font-weight-bold mb-0">Urgent Hiring</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
+          <div style="font-weight: bolder; margin-top: 30px;" class="row">
+            
           </div>
 
         </div>
@@ -115,15 +63,25 @@
     
     <div id="toTheTop" class="row" style="margin-bottom: 10px;">
       <div class="col">
+        <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="blogButton"
+          class="btn btn-danger" type="button" onclick="changeJobType('blogs',1)">Blog and Information</button>
+      </div>
+      <div class="col">
         <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="preferredButton"
           class="btn btn-success" type="button" onclick="changeJobType('preferred',1)">Preferred Jobs</button>
       </div>
       <div class="col">
         <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" id="bookmarkedButton"
-          class="btn btn-warning" type="button" onclick="changeJobType('bookmarked',1)">View Saved Jobs</button>
+          class="btn btn-warning" type="button" onclick="changeJobType('bookmarked',1)">Saved Jobs</button>
       </div>
     </div>
-    <div class="row align-items-center" style="margin-bottom: 25px;">
+    
+    <div  style="margin-top: 35px;" id="dashboardArea" class="row">
+
+    </div>
+    
+    <div class="row">
+      <div class="row align-items-center" style="margin-bottom: 25px;">
         <div class="col-4">
           <button class="btn btn-primary" type="button" onclick="prevPage()" id="btn_prev">Prev</button>
         </div>
@@ -133,11 +91,9 @@
         <div class="col-4">
           <button class="btn btn-primary" type="button" onclick="nextPage()" id="btn_next">Next</button>
         </div>
+      </div>
     </div>
-    <div id="dashboardArea" class="row">
-
-    </div>
-    <div class="row" style="margin-bottom: 50px;">
+    <div class="row" style="margin-bottom: 120px;">
       <div class="col">
         <button style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
           type="button" onclick="toTop()" id="btn_top">To Top</button>
@@ -145,20 +101,14 @@
     </div>
   </div>
   <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="../../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="../../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Optional JS -->
-  <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
-  <!-- Argon JS -->
-  <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
+  @@include('./_scripts.html', {
+    "path": "..",
+    "path_common": "../.."
+  })
   <!-- Demo JS - remove this in your project -->
 
   <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/firebase-message-handler.js"></script>
   <script src="../../assets/js/havenotAccess.js"></script>
   <script src="../../assets/js/userDashboard.js"></script>
 </body>

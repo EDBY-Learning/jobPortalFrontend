@@ -34,7 +34,9 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 text-center">
-                        <h1 id="name" class="display-2 mb-3"></h1>
+                        <h1 id="name" class="display-2 mb-3">
+                            Wrong Profile!! Or Account Deleted
+                        </h1>
                         <p id="description" class="lead"></p>
                     </div>
                 </div>
@@ -244,12 +246,12 @@
                     display: block;margin-left: auto;margin-right: auto;" 
                     class="button btn btn-success" type="submit">Download Resume</button>
                 </div> -->
-                <div class="col-md-6 col-12">
+                
                     <button onclick="makeResume()" 
                     style="color: whitesmoke;font-weight: bolder;width: 60%; 
                     display: block;margin-left: auto;margin-right: auto;" 
                     class="button btn btn-danger" type="submit">Make Your Own Resume</button>
-                </div>
+                
             </div>
         </section>
         
@@ -267,6 +269,7 @@
         "path_common": "../.."
     })
     <script src="../../dashboard/assets/js/config.js"></script>
+    <script src="../../dashboard/assets/js/firebase-message-handler.js"></script>
     <script src="../assets/js/teacher-card.js"></script>
 </body>
 

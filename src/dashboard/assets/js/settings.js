@@ -93,7 +93,7 @@ $("#recoveryLink").click(function(){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("error-text").innerHTML =  error.responseText
         },

@@ -1,14 +1,15 @@
 const dashboardArea = document.getElementById("dashboardArea")
 var jobData = null;
-var preferredJob = null;
-var bookMarkedJob = null;
+var preferredJob = [];
+var bookMarkedJob = [];
+var blogData = [];
+var likesData = [];
 
 var current_page = 1;
 var records_per_page = 12;
 
-window.onload = function(){
-    getDashboardData()
-}
+window.addEventListener('load', getDashboardData)
+window.addEventListener('load',getJobBlog)
 
 function prevPage()
 {
@@ -40,11 +41,16 @@ function changePage(page)
     dashboardArea.innerHTML = "";
 
     for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < jobData.length; i++) {
-        if(document.getElementById("preferredButton").disabled){
-            card = getJobResultContent(jobData[i],"block")
+        if('school' in jobData[i]){
+            if(document.getElementById("preferredButton").disabled){
+                card = getJobResultContent(jobData[i],"block")
+            }else{
+                card = getJobResultContent(jobData[i],"none")
+            }
         }else{
-            card = getJobResultContent(jobData[i],"none")
+            card = getBlogContent(jobData[i],'')
         }
+        
         dashboardArea.innerHTML+=card
     }
     page_span.innerHTML = page + "/" + numPages();
@@ -77,12 +83,20 @@ function changeJobType(type,page){
     if(type=='preferred'){
         jobData = preferredJob
         document.getElementById("preferredButton").disabled = true
+        document.getElementById("blogButton").disabled = false
         document.getElementById("bookmarkedButton").disabled = false
         changePage(page);
-    }else{
+    }else if(type=="bookmarked"){
         jobData = bookMarkedJob
         document.getElementById("preferredButton").disabled = false
+        document.getElementById("blogButton").disabled = false
         document.getElementById("bookmarkedButton").disabled = true 
+        changePage(page);
+    }else{
+        jobData = blogData;
+        document.getElementById("preferredButton").disabled = false
+        document.getElementById("blogButton").disabled = true
+        document.getElementById("bookmarkedButton").disabled = false
         changePage(page);
     }
     
@@ -99,16 +113,39 @@ function getDashboardData(){
         success: function (result) {
             preferredJob = result['all_jobs']
             bookMarkedJob = result['bookmarked_jobs']
-            changeJobType("preferred",1);
+            // changeJobType("preferred",1);
         },
         error: function (error) {
             console.log(error)
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         }
     })
 }
+
+function getJobBlog(){
+    
+    $.ajax({
+        url:BLOG_URL+'all_blogs/',
+        type:'GET',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        success: function (result) {
+            blogData = result['blogs']
+            likesData = result['likes']
+            changeJobType("blogs",1);
+        },
+        error: function (error) {
+            console.log(error)
+            if(error.status==401){
+                refreshTokenAsAuthFailed()
+            }
+        }
+    })
+}
+
 
 function openSwal(id){
     data = jobData.find(x => x.id == id)
@@ -150,7 +187,7 @@ function saveJob(id,method){
             },
             error: function (error) {
                 if(error.status==401){
-                    LogoutUserAsFailedAuth()
+                    refreshTokenAsAuthFailed()
                 }
             },
             complete:function(){
@@ -160,4 +197,43 @@ function saveJob(id,method){
     }else{
         
     }
+}
+
+function fetchLiked(id){
+    var index = likesData.findIndex(item => item.blogId == id)
+    if(index!=-1 && likesData[index]['like']=="True"){
+        return `<a id="like_${id}" href="javascript:void(0)" class="card-link"> <i class="fas fa-thumbs-up"></i> Liked</a>`
+    }else{
+        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link"> <i class="far fa-thumbs-up"></i> Like</a>`
+    } 
+}
+
+function likePost(blogId,like){
+    $.ajax({
+        url:BLOG_URL+'like_blog/',
+        type:'POST',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        data:{
+            like:like,
+            blogId:blogId
+        },  
+        success: function (result) {
+            let temp  = document.getElementById('like_'+blogId)
+            if(+like==1){
+                temp.innerHTML = `<i class="fas fa-thumbs-up"></i> Liked`
+                temp.href = `javascript:void(0)`//javascript:likePost('${blogId}','0')
+            }else{
+                temp.innerHTML  =`<i class="far fa-thumbs-up"></i> Like`
+                temp.href = `javascript:likePost('${blogId}','1')`
+            }
+        },
+        error: function (error) {
+            console.log(error)
+            if(error.status==401){
+                refreshTokenAsAuthFailed()
+            }
+        }
+    })
 }

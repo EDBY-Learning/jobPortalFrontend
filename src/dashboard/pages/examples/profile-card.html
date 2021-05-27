@@ -10,7 +10,7 @@
 <body>
   @@include('./_tracking-body.html')
   <!-- Main content -->
-  <div class="main-content" id="panel">
+  <div style="margin-bottom: 120px;" class="main-content" id="panel">
     <!-- Topnav -->
     @@include('./_nav_bar_profile_dropdown.html', {
       "path": "..",
@@ -40,36 +40,19 @@
                       </div>
                     </div>
                     <div class="card-body pt-0">
-                      <!-- <div class="row">
-                        <div class="col">
-                          <div class="card-profile-stats d-flex justify-content-center">
-                            <div>
-                              <span class="heading">22</span>
-                              <span class="description">Friends</span>
-                            </div>
-                            <div>
-                              <span class="heading">10</span>
-                              <span class="description">Photos</span>
-                            </div>
-                            <div>
-                              <span class="heading">89</span>
-                              <span class="description">Comments</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
                       <div class="text-center">
-                        <h5 class="h3">
-                          Jessica Jones<span class="font-weight-light">, 27</span>
+                        <h5 id="name" class="h3">
+                          Wrong Profile!! Or Account Deleted
                         </h5>
-                        <div class="h5 font-weight-300">
-                          <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                        <div id="country" class="h5 font-weight-300">
+                          
                         </div>
-                        <div class="h5 mt-4">
-                          <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                        
+                        <div id="email" class="h5 mt-4">
+                          
                         </div>
-                        <div>
-                          <i class="ni education_hat mr-2"></i>University of Computer Science
+                        <div id="detail">
+                         
                         </div>
                       </div>
                     </div>
@@ -78,20 +61,49 @@
               </div>
           </div>
       </div>
+    </section>
+    <section class="section section-lg pb-5 bg-soft">
+      <div class="container">
+          <div class="row"> 
+              <div class="col-12 text-center mb-5">
+                  <h2 class="mb-4">Share your profile</h2>
+                  <p class="lead mb-5">Share your <span class="font-weight-bolder">Resume/CV</span> and get hired</p>
+                  <div id="social-sharing">
+
+                  </div>
+                  
+              </div>
+              <!-- <div class="col-12 text-center">
+                  <a href="../../dashboard/pages/dashboards/dashboard.html" class="btn btn-secondary animate-up-2"><span class="mr-2"><i class="fas fa-hand-pointer"></i></span>Start 30-days trial</a>
+              </div> -->
+          </div> 
+      </div>    
   </section>
+  <section class="section section-lg bg-soft">
+    <div class="row">
+        <!-- <div style="padding-bottom: 20px;" class="col-md-6 col-12">
+            <button onclick="downloadResume()" 
+            style="color: whitesmoke;font-weight: bolder;width: 60%; 
+            display: block;margin-left: auto;margin-right: auto;" 
+            class="button btn btn-success" type="submit">Download Resume</button>
+        </div> -->
+        
+            <button onclick="makeResume()" 
+            style="color: whitesmoke;font-weight: bolder;width: 60%; 
+            display: block;margin-left: auto;margin-right: auto;" 
+            class="button btn btn-danger" type="submit">Make Your Own Resume</button>
+        
+    </div>
+</section>
   </div>
   <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="../../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="../../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Argon JS -->
-  <script src="../../assets/js/dashboard.js?v=1.2.0"></script>
-  <!-- Demo JS - remove this in your project -->
+  @@include('./_scripts.html', {
+    "path": "..",
+    "path_common": "../.."
+  })
   
   <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/firebase-message-handler.js"></script>
   <script src="../../assets/js/havenotAccess.js"></script>
   <script src="../../assets/js/profile-card.js"></script>
 </body>

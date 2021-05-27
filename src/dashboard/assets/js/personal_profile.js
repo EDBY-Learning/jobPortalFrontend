@@ -6,7 +6,7 @@ var educationData = null;
 var experienceData = null;
 var languageData = null;
 var qualificationData = null;
-var profile_url = "https://jobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id="
+var profile_url = "/dashboard/pages/examples/profile-card.html?teacher_id="
 
 function updateLocalData(dataType,operation,id,result){
     if(dataType=="education"){
@@ -125,7 +125,7 @@ function getPersonalData(){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         }
     })
@@ -221,7 +221,7 @@ function createEducationInfo(type){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("education-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
@@ -363,7 +363,7 @@ function createExperienceInfo(type){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("experience-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
@@ -480,7 +480,7 @@ function createQualificationInfo(type){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("qualification-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
@@ -585,7 +585,7 @@ function createLanguageInfo(type){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("language-error-text").innerHTML = "All fields are required and year should be only 4 digit(like 1998) !!"
         },
@@ -633,7 +633,7 @@ function saveBasicInfo(){
         error: function (error) {
             console.log(error)
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         },
         complete: function(){
