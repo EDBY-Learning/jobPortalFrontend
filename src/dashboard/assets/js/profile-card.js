@@ -13,7 +13,7 @@ function getTeacherInfo(){
             setData(result)
         },
         error: function (error) {
-            
+            document.getElementById("name").innerHTML = 'Wrong Profile!! Or Account Deleted'
         }
     })
 }

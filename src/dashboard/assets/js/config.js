@@ -260,9 +260,13 @@ $("#changePasswordWithToken").click(function(){
 })
 
 function getBlogContent(data,show_comment){
+    let target = "_blank"
+    if(show_comment == 'openInSamePage'){
+        target = ""
+    }
     return `
-    <div style="width: 90%; display: block;margin-left: auto;margin-right: auto;" class="col-12 col-md-8 card gedf-card shadow-soft border-light">
-        <div  class="card-header">
+    <div style="padding:10px;width: 90%; display: block;margin-left: auto;margin-right: auto;" class="col-12 col-md-8 card gedf-card shadow-soft border-light">
+        <div style="background-color:lightgrey;" class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="mr-2">
@@ -270,7 +274,7 @@ function getBlogContent(data,show_comment){
                     </div>
                     <div class="ml-2">
                         <div class="h5 m-0">@edby</div>
-                        <div class="h7 text-muted">EDBY Admin</div>
+                        <div class="h7 text-muted">${data.user.first_name}</div>
                     </div>
                 </div>
             </div>
@@ -291,9 +295,9 @@ function getBlogContent(data,show_comment){
             </p>
             
         </div>
-        <div class="card-footer">
-            ${fetchLiked(data.id)}
-            <a target="_blank" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-comment"></i>Discussion</a>
+        <div style="border-top: 2px solid;" class="card-footer">
+            ${fetchLiked(data.id,data.total_like)}
+            <a target="${target}" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-comment"></i>Discussion</a>
             <a target="_blank" href="whatsapp://send?text=${data.title}  Read full blog https://jobportal.edbylearning.com/dashboard/pages/examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-share"></i> Share</a>
         </div>
     </div>

@@ -29,7 +29,7 @@ function removeQueryParam(){
             likesData = result['likes']
             blogArea.innerHTML = "";
             blogData.forEach((element)=>{
-                card = getBlogContent(element,'')
+                card = getBlogContent(element,'openInSamePage')
                 blogArea.innerHTML+=card
             })
         },
@@ -63,7 +63,6 @@ function getBlog(){
                 likesData = [result.userLike]
                 blogArea.innerHTML = "";
                 card = getBlogContent(result.blog,'none')
-                
                 blogArea.innerHTML+=card
                 blogComments = result.comment
                 makeComments(blogComments)
@@ -82,9 +81,9 @@ function getBlog(){
     }
 }
 
-function fetchLiked(id){
+function fetchLiked(id,total_like){
     if(likesData.length==0 || !likesData[0]){
-        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link"> <i class="far fa-thumbs-up"></i> Like</a>`
+        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link">${total_like} <i class="far fa-thumbs-up"></i> Like</a>`
     }
     let index;
     if('blogId' in likesData[0]){
@@ -94,10 +93,10 @@ function fetchLiked(id){
     }
     
    
-    if(index!=-1 && (likesData[index]['like']=="True" || likesData[index]['like'])){
-        return `<a id="like_${id}" href="javascript:void(0)" class="card-link"> <i class="fas fa-thumbs-up"></i> Liked</a>`
+    if(index!=-1 && (likesData[index]['like']=="True" || (likesData[index]['like'] && likesData[index]['like']!='False'))){
+        return `<a id="like_${id}" href="javascript:void(0)" class="card-link">${total_like} <i class="fas fa-thumbs-up"></i> Liked</a>`
     }else{
-        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link"> <i class="far fa-thumbs-up"></i> Like</a>`
+        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link">${total_like} <i class="far fa-thumbs-up"></i> Like</a>`
     } 
 }
 
@@ -119,10 +118,10 @@ function likePost(blogId,like){
         success: function (result) {
             let temp  = document.getElementById('like_'+blogId)
             if(+like==1){
-                temp.innerHTML = `<i class="fas fa-thumbs-up"></i> Liked`
+                temp.innerHTML = `${result.total_like} <i class="fas fa-thumbs-up"></i> Liked`
                 temp.href = `javascript:void(0)`//javascript:likePost('${blogId}','0')
             }else{
-                temp.innerHTML  =`<i class="far fa-thumbs-up"></i> Like`
+                temp.innerHTML  =`${result.total_like} <i class="far fa-thumbs-up"></i> Like`
                 temp.href = `javascript:likePost('${blogId}','1')`
             }
         },

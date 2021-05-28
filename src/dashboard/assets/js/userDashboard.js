@@ -199,12 +199,12 @@ function saveJob(id,method){
     }
 }
 
-function fetchLiked(id){
+function fetchLiked(id,total_like){
     var index = likesData.findIndex(item => item.blogId == id)
     if(index!=-1 && likesData[index]['like']=="True"){
-        return `<a id="like_${id}" href="javascript:void(0)" class="card-link"> <i class="fas fa-thumbs-up"></i> Liked</a>`
+        return `<a id="like_${id}" href="javascript:void(0)" class="card-link">${total_like} <i class="fas fa-thumbs-up"></i> Liked</a>`
     }else{
-        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link"> <i class="far fa-thumbs-up"></i> Like</a>`
+        return `<a id="like_${id}" href="javascript:likePost('${id}','1')" class="card-link">${total_like} <i class="far fa-thumbs-up"></i> Like</a>`
     } 
 }
 
@@ -222,10 +222,10 @@ function likePost(blogId,like){
         success: function (result) {
             let temp  = document.getElementById('like_'+blogId)
             if(+like==1){
-                temp.innerHTML = `<i class="fas fa-thumbs-up"></i> Liked`
+                temp.innerHTML = `${result.total_like} <i class="fas fa-thumbs-up"></i> Liked`
                 temp.href = `javascript:void(0)`//javascript:likePost('${blogId}','0')
             }else{
-                temp.innerHTML  =`<i class="far fa-thumbs-up"></i> Like`
+                temp.innerHTML  =`${result.total_like} <i class="far fa-thumbs-up"></i> Like`
                 temp.href = `javascript:likePost('${blogId}','1')`
             }
         },
