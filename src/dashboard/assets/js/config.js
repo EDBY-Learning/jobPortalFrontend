@@ -291,7 +291,7 @@ function getBlogContent(data,show_comment){
                 ${data.body}
             </p>
             <p class="card-text">
-                ${getReferncelink(data.link)}
+               <a href="#" onClick="window.open('//${getReferncelink(data.link)}', '_blank')" > ${getReferncelink(data.link)} </a>
             </p>
             
         </div>
@@ -309,7 +309,7 @@ function getReferncelink(link){
         link = link.trim()
     }
     if(link !="None" && link!='' && link){
-        return `Reference Link: ${link}`
+        return `${link}`
     }
     return ''
 }

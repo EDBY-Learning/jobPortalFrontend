@@ -1,19 +1,43 @@
 {
-    "name": "edby-job-portal",
-    "short_name": "EDBY",
+    "name": "Edby Job Portal",
+    "short_name": "edby",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
+            "src": "/dashboard/assets/img/favicon/edby-logo.png",
+            "sizes": "72x72 96x96 128x128 192x192",
+            "type": "image/png",
+            "purpose": "maskable"
         },
         {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
+            "src": "/dashboard/assets/img/favicon/edby-logo.jpg",
+            "sizes": "72x72 96x96 128x128 256x256 512x512",
+            "type": "image/jpg",
+            "purpose": "any"
         }
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "orientation":"portrait-primary",
+    "start_url":"/index.html?launcher=pwa",
+    "scope":"/",
+    "shortcuts": [
+        {
+          "name": "Dashboard",
+          "description": "View your dashboard",
+          "url": "/dashboard/pages/dashboards/dashboard.html?launcher=pwa",
+          "icons": [
+            {
+                "src": "/dashboard/assets/img/favicon/edby-logo.png",
+                "sizes": "72x72 96x96 128x128 192x192",
+                "type": "image/png"
+            }
+          ]
+        },
+        {
+          "name": "Search Jobs",
+          "description": "Search and view latest job",
+          "url": "/front/pages/index.html?launcher=pwa"
+        }
+    ]
 }
