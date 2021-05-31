@@ -38,14 +38,13 @@ function requestPermission() {
     if(Notification.permission=='granted'){
         getToken()
     }else if(Notification.permission=='default'){
-        Notification.requestPermission(function (permission) {
-            // If the user accepts, let's create a notification
-            if (permission === "granted") {
-                getToken()
-            }
-        });
+        if(confirm("Do you want to recieve job updates, It increses your chance as you can apply earlier than others")){
+            getToken()
+        }else{
+            
+        }
     }else if(Notification.permission=='denied'){
-        alert("Allow Notification so that we can send you job updates!!")
+        // alert("Allow Notification so that we can send you job updates!!")
     }
 }
 
@@ -75,8 +74,8 @@ function saveToken(token){
     let tokenSaved = localStorage.getItem('tokenSaved');
     let accessToken = localStorage.getItem("access")
     
-    
-    if(authTokenSaved==token){
+    let random = Math.floor((Math.random() * 100) + 1);
+    if(authTokenSaved==token && random >40){
         return;
     }
     // console.log('No auth token found',tokenSaved)
