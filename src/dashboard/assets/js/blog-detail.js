@@ -29,7 +29,7 @@ function removeQueryParam(){
             likesData = result['likes']
             blogArea.innerHTML = "";
             blogData.forEach((element)=>{
-                card = getBlogContent(element,'openInSamePage')
+                card = getBlogContent(element,'openInSamePage',false)
                 blogArea.innerHTML+=card
             })
         },
@@ -62,7 +62,7 @@ function getBlog(){
             success: function (result) {
                 likesData = [result.userLike]
                 blogArea.innerHTML = "";
-                card = getBlogContent(result.blog,'none')
+                card = getBlogContent(result.blog,'none',false)
                 blogArea.innerHTML+=card
                 blogComments = result.comment
                 makeComments(blogComments)

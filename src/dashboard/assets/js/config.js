@@ -48,7 +48,7 @@ $("#logoutUser").click(function(){
         logoutAsFailed()
     }else{
         localStorage.clear()
-        window.location.href = "../examples/login.html"
+        window.location.href = "../examples/logout-home.html"
     }
 })
 
@@ -63,45 +63,46 @@ function logoutAsFailed(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
-            localStorage.clear()
-            window.location.href = "../examples/login.html"
+            // localStorage.clear()
+            // window.location.href = "../examples/logout-home.html"
         },
         error: function (error) {
      
         },
         complete:function(){
             localStorage.clear()
-            window.location.href = "../examples/login.html"
+            window.location.href = "../examples/logout-home.html"
         }
     })
 }
 
 function refreshTokenAsAuthFailed(){
-    if(localStorage.getItem("refresh")){
-        $.ajax({
-            url:BASE_URL+'auth/login/refresh/',
-            type:'POST',
-            data:{
-                'refresh':localStorage.getItem("refresh")
-            },
-            headers:{
-                'Authorization': 'Bearer '+localStorage.getItem("refresh"),
-            },
-            success: function (result) {
-                localStorage.setItem("access",result['access'])
-                window.location = window.location
-                // localStorage.setItem("refresh",result['refresh'])
-            },
-            error: function (error) {
-                logoutAsFailed()
-            },
-            complete:function(){
+    // if(localStorage.getItem("refresh")){
+    //     $.ajax({
+    //         url:BASE_URL+'auth/login/refresh/',
+    //         type:'POST',
+    //         data:{
+    //             'refresh':localStorage.getItem("refresh")
+    //         },
+    //         headers:{
+    //             'Authorization': 'Bearer '+localStorage.getItem("refresh"),
+    //         },
+    //         success: function (result) {
+    //             localStorage.setItem("access",result['access'])
+    //             window.location = window.location
+    //             // localStorage.setItem("refresh",result['refresh'])
+    //         },
+    //         error: function (error) {
+    //             logoutAsFailed()
+    //         },
+    //         complete:function(){
                 
-            }
-        })
-    }else{
-        logoutAsFailed()
-    }
+    //         }
+    //     })
+    // }else{
+    //     logoutAsFailed()
+    // }
+    logoutAsFailed()
 }
 
 function buttonLockUnlock(id,val){
@@ -147,7 +148,7 @@ function getJobResultContent(result,saveButton){
                         <button style="display:${deleteButton}" onclick="saveJob(${result.id},'DELETE')" class="btn btn-danger">Delete</button>
                     </div>
                     <div class="col">
-                    <a class="what-button" type="button" class="btn custom-btn custom-btn-bg custom-btn-link" href=
+                    <a class="what-button" type="button" onclick="updateAnalytics('job_shared_via_whatsapp','Job Shared via whatsapp','${result.id}')" class="btn custom-btn custom-btn-bg custom-btn-link" href=
                     "whatsapp://send?text=A job opening for teaching in ${result.city} for post of ${result.positions},
                     To view more jobs for teachers visit our site https://jobportal.edbylearning.com?ids=${result.id} and 
                     Join our WhatsApp community for live job updates  https://chat.whatsapp.com/IGTYltls5YL9XrIXgEGP9n"
@@ -159,6 +160,13 @@ function getJobResultContent(result,saveButton){
         </div>
     </div>
     `
+}
+
+function updateAnalytics(action,event,category){
+    gtag('event', action, {
+        'event_category' : category,
+        'event_label' : event,
+      });
 }
 
 function makeJobPostModal(result){
@@ -259,10 +267,14 @@ $("#changePasswordWithToken").click(function(){
     })
 })
 
-function getBlogContent(data,show_comment){
+function getBlogContent(data,show_comment,dashboard){
     let target = "_blank"
     if(show_comment == 'openInSamePage'){
         target = ""
+    }
+    let discussionLink = `<a target="${target}" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-comment"></i>Discussion</a>`;
+    if(dashboard==true){
+        discussionLink = `<a href="javascript:openCommentForm('${data.id}')" class="card-link"><i class="fas fa-comment"></i>Discussion</a>`
     }
     return `
     <div style="padding:10px;width: 90%; display: block;margin-left: auto;margin-right: auto;" class="col-12 col-md-8 card gedf-card shadow-soft border-light">
@@ -297,7 +309,7 @@ function getBlogContent(data,show_comment){
         </div>
         <div style="border-top: 2px solid;" class="card-footer">
             ${fetchLiked(data.id,data.total_like)}
-            <a target="${target}" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-comment"></i>Discussion</a>
+            ${discussionLink}
             <a target="_blank" href="whatsapp://send?text=${data.title}  Read full blog https://jobportal.edbylearning.com/dashboard/pages/examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-share"></i> Share</a>
         </div>
     </div>

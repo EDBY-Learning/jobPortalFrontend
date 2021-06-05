@@ -1,5 +1,5 @@
 const dataArea = document.getElementById("dataArea")
-
+const info = document.getElementById("preferenceInfo") 
 window.onload = function(){
     getAdminJob()
 }
@@ -15,6 +15,11 @@ function getAdminJob(){
         success: function (result) {
             setData(result)
             changeStatus()
+            info.innerHTML = ''
+            info.innerHTML+= `
+            Verified and Urgent Hiring Jobs from <strong style="font-weight:bolder;font-size:24px;color:black;">${result.country}</strong>
+            as it is set in your prefernce, go to prefernce page and change country where you are looking for Job
+            `
         },
         error: function (error) {
             if(error.status==401){

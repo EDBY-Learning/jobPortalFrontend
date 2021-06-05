@@ -1,0 +1,132 @@
+<div style="margin-bottom: 120px;" class="modal fade" id="commentFormModal" tabindex="-1" role="dialog"
+    aria-labelledby="commentFormModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Discussions and Comments</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form id="commentForm">
+                            <div class="form-group">
+                                <label for="comment">Your Comment(500 Character)</label>
+                                <textarea maxlength="500" name="comment" id="userCommentBox" class="form-control"
+                                    rows="6"></textarea>
+                            </div>
+                            <div class="text-muted font-italic"><small id="error-text" style="color: red;"></small>
+                            </div>
+                            <button type="button" onclick="commentOnPost()" class="btn btn-default">Send</button>
+                        </form>
+                        <div style="margin-top: 35px;" id="commentArea" class="row">
+                            Loading ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <!-- <a href="javascript:void(0)" id="logoutUser">Logout</a> -->
+                <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" type="button"
+                    class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const commentArea = document.getElementById("commentArea")
+    var blogComments = [];
+    var blog_id = null;
+
+    function openCommentForm(id) {
+        blog_id = id;
+
+        $('#commentFormModal').modal('show');
+        $.ajax({
+            url: BLOG_URL + 'blog_comments/' + id + '/',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("access"),
+            },
+            success: function (result) {
+                blogComments = result.comment
+                makeComments(blogComments)
+            },
+            error: function (error) {
+                commentArea.innerHTML = "";
+                commentArea.innerHTML = `
+                    <h1>404 Not found or Post has been deleted!!</h1>
+                
+                `
+            }
+        })
+        $('#commentFormModal').on('hidden.bs.modal', function () {
+            blog_id = null;
+            blogComments = []
+            // console.log('modal closed')
+        })
+    }
+
+    function makeComments(data) {
+        commentArea.innerHTML = ''
+        data.forEach(element => {
+            let card = getBlogCommentContent(element)
+            commentArea.innerHTML += card
+        });
+    }
+
+    function getBlogCommentContent(data) {
+        return `
+        <div style="width: 90%; display: block;margin-left: auto;margin-right: auto;" class="col-12 col-md-12 card gedf-card shadow-soft border-light">
+            <div style="background-color:#daeaeb;" class="card-header">
+                
+                <div class="panel-body">
+                    <header class="text-left">
+                    <div class="comment-user" style="color:darkgreen;"><i class="fas fa-user"></i> ${data.user.first_name}</div>
+                    <i class="fa fa-clock-o"></i> <span style="color:black;">${timeDifference(data.entry_time.toString())}</span>
+                    </header>
+                    <p style="font-size:16px; color:blue;" class="card-text">
+                        ${data.comment}
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+        `
+    }
+
+    function commentOnPost() {
+        document.getElementById("error-text").innerHTML = ''
+        if (document.getElementById("userCommentBox").value.trim() == "") {
+            return;
+        }
+        if (localStorage.getItem("access")) {
+            $.ajax({
+                url: BLOG_URL + 'add_job_blog_comment/',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("access"),
+                },
+                data: {
+                    blogId: blog_id,
+                    comment: document.getElementById("userCommentBox").value
+                },
+                success: function (result) {
+                    blogComments.unshift(result)
+                    makeComments(blogComments)
+                    document.getElementById("userCommentBox").value = ""
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        }
+
+    }
+
+
+
+</script>

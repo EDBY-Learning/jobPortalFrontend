@@ -48,7 +48,7 @@ function changePage(page)
                 card = getJobResultContent(jobData[i],"none")
             }
         }else{
-            card = getBlogContent(jobData[i],'')
+            card = getBlogContent(jobData[i],'',true)
         }
         
         dashboardArea.innerHTML+=card

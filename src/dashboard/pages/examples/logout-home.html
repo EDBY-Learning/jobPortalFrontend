@@ -2,7 +2,7 @@
 <html>
 
 @@include('./_head.html', {
-  "title": "Impact Dashboard - Login",
+  "title": "Edby - Logout Home",
   "path": "../..",
   "path_common": "../../.."
 })
@@ -64,8 +64,8 @@
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">Forgot Password!</h1>
-              <p class="text-lead text-white">Please fill detail, we will get back to you ASAP</p>
+              <h1 class="text-white">Logged Out!</h1>
+              <p class="text-lead text-white">We will be waiting for your return!! Hoped you liked our service.</p>
             </div>
           </div>
         </div>
@@ -75,42 +75,15 @@
     <div class="container mt--9 pb-5 text-gray">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
-          <div class="card bg-secondary border border-soft mb-0">
+          <div class="card bg-secondary border border-dark mb-0">
             <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center mb-4">
-                <small>Forgot Password</small>
-              </div>
-              <form role="form">
-                <div class="form-group mb-3">
-                  <div class="input-group input-group-merge input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
-                    </div>
-                    <input id="mobile" class="form-control" maxlength="15" type="tel" placeholder="Mobile Number">
-                  </div>
-                </div>
-                <!-- <div class="form-group">
-                    <div class="input-group input-group-merge input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                      </div>
-                      <input id="email" class="form-control" placeholder="Email" type="email">
-                    </div>
-                  </div> -->
-                  <div class="text-muted font-italic"><small id="error-text" style="color: red;"></small></div>
-                  <div class="text-muted font-italic"><small id="success-message" style="color: darkgreen;"></small></div>
-                <div class="text-center">
-                  <button id="recoveryLink" type="button" class="btn btn-primary my-4">Get Recovery Link</button>
-                </div>
-              </form>
+            <div class="text-center">
+                <a href="../../pages/examples/login.html" class="nav-link">
+                    <button id="loginAgain" type="button" class="btn btn-primary my-4">
+                        Login Again!
+                    </button>
+                </a>
             </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-6">
-                <a href="./publicchangepassword.html" class="text-gray"><small  style="color: green;font-weight: bolder;">Change Password with Token</small></a>
-              </div>
-            <div class="col-6  text-right">
-              <a href="./register.html" class="text-gray"><small  style="color: red;font-weight: bolder;">Create New Account</small></a>
             </div>
           </div>
         </div>
@@ -128,9 +101,7 @@
   <!-- Demo JS - remove this in your project -->
   
   <script src="../../assets/js/config.js"></script>
-  <script src="../../assets/js/haveAccess.js"></script>
   <script src="../../assets/js/firebase-message-handler.js"></script>
-  <script src="../../assets/js/settings.js"></script>
 </body>
 
 </html>

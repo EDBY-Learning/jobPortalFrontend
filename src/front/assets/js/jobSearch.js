@@ -15,7 +15,7 @@ window.onload = function(){
     
     if(id){
         getJobByIds(id);
-        document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+        // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }else if(location){
         document.getElementById("locationSearch").value = location;
         document.getElementById("positionSearch").value = position;
@@ -148,7 +148,7 @@ function searchForJobs(){
     sub = document.getElementById("subjectSearch").value.trim();
     // console.log(location)
     url = JOB_URL+'search/?location='+loc+"&position="+pos+"&subject="+sub
-    console.log(url)
+    // console.log(url)
     $.ajax({
         url:url,
         type:'GET',

@@ -104,6 +104,11 @@
                     <input class="form-control" id="city"  placeholder="Address/City" type="text">
                   </div>
                 </div>
+                @@include('./_country.html', {
+                  "path": "..",
+                  "path_common": "../..",
+                  "classes": "bg-primary text-white"
+                })
                 <div class="form-group">
                     <div class="input-group input-group-merge input-group-alternative">
                       <input class="form-control" id="subjects"  placeholder="Subjects teacher will teach" type="text">
@@ -161,12 +166,20 @@
         contact :document.getElementById("contact").value,
         email :document.getElementById("email").value,
         city :document.getElementById("city").value,
+        country: document.getElementById("country").value,
         subjects :document.getElementById("subjects").value,
         positions :document.getElementById("positions").value,
         message :document.getElementById("message").value
       }
       buttonLockUnlock('postJobOutsider',true)
       $.post(JOB_URL +'post_job_outsider/',req_data,function(data,status){
+        document.getElementById("school").value = ''
+        document.getElementById("contact").value = ''
+        document.getElementById("email").value = ''
+        document.getElementById("city").value = ''
+        document.getElementById("subjects").value = ''
+        document.getElementById("positions").value = ''
+        document.getElementById("message").value = ''     
         document.getElementById("success-text").innerHTML = "Your post has been sent for approval!"
       }).fail(function(data){
         obj = data.responseJSON
@@ -174,6 +187,8 @@
           document.getElementById("error-text").innerHTML = "School " + obj.school
         }else if ('city' in obj){
           document.getElementById("error-text").innerHTML = "Address " + obj.city
+        }else if ('country' in obj){
+          document.getElementById("error-text").innerHTML = "Country " + obj.city
         }else if ('email' in obj){
           document.getElementById("error-text").innerHTML = "Email " + obj.email
         }else if ('contact' in obj){
@@ -186,13 +201,7 @@
           document.getElementById("error-text").innerHTML = data.responseText
         }
       }).always(function(){
-        document.getElementById("school").value = ''
-        document.getElementById("contact").value = ''
-        document.getElementById("email").value = ''
-        document.getElementById("city").value = ''
-        document.getElementById("subjects").value = ''
-        document.getElementById("positions").value = ''
-        document.getElementById("message").value = ''        
+           
         buttonLockUnlock('postJobOutsider',false)
       })
     })

@@ -47,20 +47,20 @@ const appShellFiles = [
   // "./vendor/@fortawesome/fontawesome-free/css/all.min.css",
   // "./dashboard/assets/vendor/nucleo/css/nucleo.css",
   // "./vendor/prismjs/themes/prism.css",
-  "./dashboard/assets/js/config.js",
+  // "./dashboard/assets/js/config.js",
   // "./dashboard/assets/js/dashboard.js",
   // "./front/assets/js/jobSearch.js",
   // "./dashboard/assets/js/userDashboard.js",
   // "./dashboard/assets/js/profile-card.js",
   // "./front/assets/js/teacher-card.js",
-  // "./dashboard/pages/dashboards/dashboard.html",
-  // "./dashboard/pages/examples/login.html",
-  // "./dashboard/pages/examples/register.html",
-  // "./dashboard/pages/examples/admin-jobs.html",
-  // "./dashboard/pages/examples/blog-detail.html",
+  "./dashboard/pages/dashboards/dashboard.html",
+  "./dashboard/pages/examples/login.html",
+  "./dashboard/pages/examples/register.html",
+  "./dashboard/pages/examples/admin-jobs.html",
+  "./dashboard/pages/examples/blog-detail.html",
   // "./dashboard/pages/examples/forgotpassword.html",
-  // "./dashboard/pages/examples/postJob.html",
-  // "./dashboard/pages/examples/preference.html",
+  "./dashboard/pages/examples/postJob.html",
+  "./dashboard/pages/examples/preference.html",
   // "./dashboard/pages/examples/profile-card.html",
 
 ];
@@ -100,13 +100,31 @@ self.addEventListener('fetch', function(event) {
         }else{
           // console.log('Made Request',event.request.url)
           return fetch(event.request).then(function(new_response) {
-            cache.put(event.request, new_response.clone());
+            if(event.request.method=="GET"){
+              cache.put(event.request, new_response.clone());
+            }
             return new_response;
           }).catch((e)=>{
             return response;
           })  
         }
       });
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          // Return true if you want to remove this cache,
+          // but remember that caches are shared across
+          // the whole origin
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
     })
   );
 });

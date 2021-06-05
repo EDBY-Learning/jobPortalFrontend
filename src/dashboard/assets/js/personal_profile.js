@@ -6,7 +6,7 @@ var educationData = null;
 var experienceData = null;
 var languageData = null;
 var qualificationData = null;
-var profile_url = "/dashboard/pages/examples/profile-card.html?teacher_id="
+var profile_url = "/dashboard/pages/examples/view-internal-resume.html"
 
 function updateLocalData(dataType,operation,id,result){
     if(dataType=="education"){
@@ -112,7 +112,7 @@ function getPersonalData(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
-            profile_url += result.teacher.id 
+            // profile_url += result.teacher.id 
             setBasicInfo(result['teacher'])
             educationData = result['education']
             setEducationInfo(result['education'])
@@ -643,7 +643,7 @@ function saveBasicInfo(){
 }
 
 function viewResume(){
-    window.open(profile_url,"_blank").focus()
+    window.location.href= profile_url
 }
 
 function resumePopup(){

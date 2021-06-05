@@ -1,13 +1,12 @@
-window.onload = function(){
-    const urlParams = new URLSearchParams(window.location.search);
-    let teacher_id = urlParams.get("teacher_id");
-    getTeacherInfo(teacher_id)
-}
+window.addEventListener('load',getTeacherInfo)
 
-function getTeacherInfo(teacher_id){
+function getTeacherInfo(){
     $.ajax({
-        url:TEACHER_URL+'public_profile/'+teacher_id+'/',
+        url:TEACHER_URL+'profile/1/',
         type:'GET',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
         success: function (result) {
             setData(result)
         },
@@ -27,7 +26,7 @@ function setData(data){
     education.innerHTML = ''
     data.education.forEach(element => {
         education.innerHTML+=`
-        <li class="list-group-item d-flex px-0 pt-0 pb-2">
+        <li class=" d-flex px-0 pt-0 pb-2">
             <div class="icon icon-sm icon-success mr-4">
                 <i class="far fa-check-circle"></i>
             </div>
@@ -40,7 +39,7 @@ function setData(data){
     data.experience.forEach(element => {
         if(element.ongoing){
             experience.innerHTML+=`
-            <li class="list-group-item d-flex px-0 pt-0 pb-2">
+            <li class=" d-flex px-0 pt-0 pb-2">
                 <div class="icon icon-sm icon-success mr-4">
                     <i class="far fa-check-circle"></i>
                 </div>
@@ -49,7 +48,7 @@ function setData(data){
             `
         }else{
             experience.innerHTML+=`
-            <li class="list-group-item d-flex px-0 pt-0 pb-2">
+            <li class=" d-flex px-0 pt-0 pb-2">
                 <div class="icon icon-sm icon-success mr-4">
                     <i class="far fa-check-circle"></i>
                 </div>
@@ -62,7 +61,7 @@ function setData(data){
     qualification.innerHTML = ''
     data.qualification.forEach(element => {
         qualification.innerHTML+=`
-        <li class="list-group-item d-flex px-0 pt-0 pb-2">
+        <li class=" d-flex px-0 pt-0 pb-2">
             <div class="icon icon-sm icon-success mr-4">
                 <i class="far fa-check-circle"></i>
             </div>

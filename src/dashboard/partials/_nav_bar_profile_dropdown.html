@@ -13,7 +13,7 @@
       </ul>
       <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
         <li class="nav-item dropdown">
-          <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link pr-0"  href="javascript:openbasicProfileModal()" role="button">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="../../assets/img/theme/profile.jpg">
@@ -23,26 +23,114 @@
               </div>
             </div>
           </a>
-          <div class="dropdown-menu  dropdown-menu-right ">
-            <div class="dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
-            </div>
-            <a href="../examples/profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
-            </a>
-            <a href="../examples/settings.html" class="dropdown-item">
-              <i class="ni ni-settings-gear-65"></i>
-              <span>Settings</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a id="logoutUser" class="dropdown-item">
-              <i class="ni ni-user-run"></i>
-              <span>Logout</span>
-            </a>
-        </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<div style="margin-bottom: 120px;" class="modal fade" id="basicProfileModal" tabindex="-1" role="dialog" aria-labelledby="basicProfileModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-body">
+        <div style="padding-top: 50px;">
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="card card-profile">
+                  <img src="../../assets/img/theme/img-1-1000x600.jpg" lt="Image placeholder" class="card-img-top">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                      <div class="card-profile-image">
+                        <a href="#">
+                          <img src="../../assets/img/theme/profile.jpg" class="rounded-circle">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="d-flex justify-content-between">
+                      <button style="display: block;" id="logoutUser" class="btn btn-sm btn-info float-right">Logout</button>
+                      <button onclick="goToResumeFromBasicProfile()" class="btn btn-sm btn-danger  mr-4 ">View CV</button>
+                    </div>
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="text-center">
+                      <h5 id="profile_name" class="h3">
+                        Loading ...
+                      </h5>
+                      <div id="profile_country" class="h5 font-weight-300">
+                        
+                      </div>
+                      
+                      <div id="profile_email" class="h5 mt-4">
+                        
+                      </div>
+                      <div id="profile_mobile">
+                       
+                      </div>
+                      <a href="../../dashboard/pages/examples/settings.html">Change Password</a>
+                    </div>
+                  </div>
+                  <div class="card-footer text-muted">
+                    <!-- <a href="javascript:void(0)" id="logoutUser">Logout</a> -->
+                    <button style="width: 100%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  window.addEventListener('load',getbasicProfileDataModal)
+  var teacher_id;
+  function getbasicProfileDataModal(){
+    if(localStorage.getItem("profile")){
+      setProfileData()
+    }else{
+      $.ajax({
+            url:TEACHER_URL+'basic_profile/1/',
+            type:'GET',
+            headers:{
+              'Authorization': 'Bearer '+localStorage.getItem("access")
+            },
+            success: function (result) {
+              localStorage.setItem('profile',JSON.stringify(result))  
+              setProfileData()
+            },
+            error: function (error) {
+              let error_tag = document.getElementById("profile_name")
+              error_tag.innerHTML = "";
+              error_tag.innerHTML = `
+                    <h1>404 Not found, Logout and then login again!!</h1>
+                `
+                
+            }
+    })
+    }
+  }
+
+  function setProfileData(){
+    data = JSON.parse(localStorage.getItem("profile"))
+    teacher_id = data.teacher.id
+    document.getElementById("profile_name").innerHTML = data.teacher.user.first_name
+    document.getElementById("profile_country").innerHTML = data.teacher.country 
+    document.getElementById("profile_email").innerHTML = data.teacher.email 
+    document.getElementById("profile_mobile").innerHTML = data.teacher.mobile 
+  }
+
+  function goToResumeFromBasicProfile(){
+    window.location.href = "../../../front/pages/teacher-card.html?teacher_id="+teacher_id
+  }
+
+  function openbasicProfileModal(){
+    // console.log('here')
+    $('#basicProfileModal').modal('show');
+  }
+  
+</script>
