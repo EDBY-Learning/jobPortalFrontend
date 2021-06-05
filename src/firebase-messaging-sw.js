@@ -27,7 +27,7 @@ messaging.onBackgroundMessage((payload) => {
     //   notificationOptions);
 });
 
-const cacheName = 'edby-job-poratl-vc4u2654ck-v1';
+const cacheName = 'edby-job-poratl-vc4u2654ck-v2';
 
 const appShellFiles = [
   "./index.html",
