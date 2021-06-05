@@ -15,7 +15,7 @@ function getPrefernce(){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         }
     })
@@ -96,7 +96,7 @@ $("#savePrefernece").click(function(){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         },
         complete: function(){

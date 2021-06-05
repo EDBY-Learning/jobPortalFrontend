@@ -1,0 +1,150 @@
+<!--
+
+=========================================================
+* Impact Design System - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/impact-design-system
+* Copyright 2010 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/impact-design-system/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+-->
+<!DOCTYPE html>
+<html>
+
+@@include('./_head.html', {
+"title": "EDBY- Internal Search",
+"path": "../..",
+"path_common": "../../.."
+})
+
+<body>
+    @@include('./_tracking-body.html')
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+        <!-- Topnav -->
+        @@include('./_nav_bar_profile_dropdown.html', {
+        "path": "..",
+        "path_common": "../..",
+        "classes": "bg-primary text-white"
+        })
+
+        @@include('./_bottom_nav_bar_dashboard.html', {
+        "home":"",
+        "resume":"",
+        "preference":"",
+        "apply":"",
+        "search":"mobile-bottom-nav__item--active"
+        })
+        <!-- Header -->
+        <!-- Header -->
+        <div class="header  pb-6">
+            
+        </div>
+    </div>
+    <div class="container-fluid mt--6">
+        <div class="row justify-content-between align-items-center">
+
+            <div class="col-12 col-md-12">
+                <h2 class="mb-3" style=" text-align: center;">Search Jobs</h2>
+                <p class="lead" style="text-align: center;">Jobs from across verified social media and other platforms
+                </p>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                        <a onclick="getRecentJob()" style="border: 2px solid;font-size: 18px;color: rgb(6, 80, 241);font-weight: bolder;
+                                display: block;margin-left: auto;margin-right: auto;" class="button btn"
+                            type="submit">See Recent Jobs</a>
+                    </div>
+                </div>
+
+                </p>
+                <div class="mt-4">
+
+                    <div class="d-flex flex-column mb-5 mb-lg-0">
+                        <div class="row" style="margin-bottom: 30px;">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                @@include('../../front/partials/_position_dropdown.html')
+                                <!-- <input class="form-control my-3" type="text" id="positionSearch" name="position" placeholder="Teacher or Principal"> -->
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                <input class="form-control my-3" type="text" id="locationSearch" name="location"
+                                    placeholder="City or Country" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                <input class="form-control my-3" type="text" id="subjectSearch" name="subject"
+                                    placeholder="Subject(Optional)">
+                            </div>
+                        </div>
+                        <p><em style="color: red;" id="error"></em></p>
+
+                        <div class="row">
+                            <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
+
+                            </div>
+                            <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                <button id="searchJobButton" style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+                                    type="button">Search</button>
+                            </div>
+                            <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 120px;" class="container">
+        <div class="row justify-content-center mb-5 mb-md-7">
+            <div class="col-12 col-md-8 text-center">
+                <h2 id="heading" class="h1 font-weight-bolder mb-4"></h2>
+                <p id="info" class="lead"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <a class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
+            </div>
+            <div class="col-4">
+                <h2 id="headingAreaDashboard">Page: <span id="page"></span></h2>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
+            </div>
+        </div>
+        <div id="jobPostArea" class="row">
+        </div>
+        <div class="row">
+            <div class="col">
+                <a style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+                    type="button" href="javascript:toTop()" id="btn_top">To Top</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <!-- Argon Scripts -->
+    @@include('./_scripts.html', {
+    "path": "..",
+    "path_common": "../.."
+    })
+    <!-- Demo JS - remove this in your project -->
+
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/firebase-message-handler.js"></script>
+    <script src="../../assets/js/havenotAccess.js"></script>
+    <script src="../../../front/assets/js/jobSearch.js"></script>
+</body>
+
+</html>

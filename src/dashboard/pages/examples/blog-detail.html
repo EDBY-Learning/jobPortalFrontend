@@ -1,0 +1,143 @@
+<!--
+
+=========================================================
+* Impact Design System - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/impact-design-system
+* Copyright 2010 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/impact-design-system/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+-->
+<!DOCTYPE html>
+<html>
+
+@@include('./_head.html', {
+"title": "EDBY- Job Blog Detail",
+"path": "../..",
+"path_common": "../../.."
+})
+
+<body >
+  @@include('./_tracking-body.html')
+  <!-- @@include('./_preloader.html', {
+        "path": "../.."
+    }) -->
+  <!-- Main content -->
+  <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-light navbar-theme-primary">
+    <div class="container">
+      <a class="navbar-brand" href="../../../index.html">
+        <img src="../../assets/img/brand/dark.svg" height="35" alt="Logo EDBY">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="../../../index.html">
+                <img src="../../assets/img/brand/dark.svg" height="40">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        @@include('./_nav_bar_login.html', {
+          "path": "..",
+          "path_common": "../..",
+          "classes": "bg-primary text-white"
+        })
+        <hr class="d-lg-none" />
+        
+      </div>
+    </div>
+  </nav>
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    
+
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header  pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          
+          <!-- Card stats -->
+            <div id="blogHome" style="font-weight: bolder; margin-top: 30px;" class="row">
+                <button onclick="removeQueryParam()" style="display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary" type="button" >Top 20 Recent Teaching Updates and Information</button>
+                <p id="loginInfo" style="display: block;margin-left: auto;margin-right: auto;" >Login to view all information about teaching Jobs</p>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <!-- Dark table -->
+    
+    
+    
+    <div  style="margin-top: 35px;" id="blogArea" class="row">
+
+    </div>
+    <div class="text-muted font-italic"><small id="error-text" style="color: red;"></small></div>
+    <form id="commentForm">
+        <h2>Discussions and Updates</h2>
+        <div class="form-group">
+          <label for="comment">Your Comment(500 Character)</label>
+          <textarea maxlength="500" name="comment" id="commentBox" class="form-control" rows="6"></textarea>
+        </div>
+        
+        <button type="button" onclick="commentOnPost()" class="btn btn-default">Send</button>
+    </form>
+    <div  style="margin-top: 35px;" id="blogCommentArea" class="row">
+
+    </div>
+    
+    <div id="changePageId" class="row">
+      <div class="row align-items-center" style="margin-bottom: 25px;">
+        <div class="col-4">
+          <button class="btn btn-primary" type="button" onclick="prevPage()" id="btn_prev">Prev</button>
+        </div>
+        <div class="col-4">
+          <h2 id="headingAreaDashboard">Page Num: <span id="page"></span></h2>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-primary" type="button" onclick="nextPage()" id="btn_next">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 120px;">
+      <div class="col">
+        <button style="width: 60%; display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+          type="button" onclick="toTop()" id="btn_top">To Top</button>
+      </div>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  @@include('./_scripts.html', {
+    "path": "..",
+    "path_common": "../.."
+  })
+  <!-- Demo JS - remove this in your project -->
+
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/firebase-message-handler.js"></script>
+  <script src="../../assets/js/blog-detail.js"></script>
+</body>
+
+</html>

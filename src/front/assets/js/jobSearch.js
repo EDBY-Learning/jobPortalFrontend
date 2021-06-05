@@ -15,7 +15,7 @@ window.onload = function(){
     
     if(id){
         getJobByIds(id);
-        document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+        // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }else if(location){
         document.getElementById("locationSearch").value = location;
         document.getElementById("positionSearch").value = position;
@@ -106,6 +106,7 @@ function getRecentJob(){
             console.log(error)
         }
     })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function getJobByIds(id){
@@ -132,6 +133,7 @@ function getJobByIds(id){
             console.log(error)
         }
     })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function searchForJobs(){
@@ -146,7 +148,7 @@ function searchForJobs(){
     sub = document.getElementById("subjectSearch").value.trim();
     // console.log(location)
     url = JOB_URL+'search/?location='+loc+"&position="+pos+"&subject="+sub
-    console.log(url)
+    // console.log(url)
     $.ajax({
         url:url,
         type:'GET',

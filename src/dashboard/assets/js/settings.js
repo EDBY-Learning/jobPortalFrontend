@@ -62,7 +62,7 @@ $("#changePassword").click(function(){
 
 $("#recoveryLink").click(function(){
     let mobile  = document.getElementById("mobile").value
-    let email = document.getElementById("email").value
+    // let email = document.getElementById("email").value
 
     if(mobile==""){
         document.getElementById("error-text").innerHTML = "Provide Mobile Number used for registration!!"
@@ -70,30 +70,30 @@ $("#recoveryLink").click(function(){
     }else{
         document.getElementById("error-text").innerHTML = ''
     }
-    if(email==""){
-        document.getElementById("error-text").innerHTML = "Provide email used for registration!!"
-        return;
-    }else{
-        document.getElementById("error-text").innerHTML = ''
-    }
+    // if(email==""){
+    //     document.getElementById("error-text").innerHTML = "Provide email used for registration!!"
+    //     return;
+    // }else{
+    //     document.getElementById("error-text").innerHTML = ''
+    // }
 
     buttonLockUnlock('recoveryLink',true)
     $.ajax({
         url:BASE_URL+'auth/get_reset_password_token/',
         type:'POST',
         data:{
-            'email': email,
+            // 'email': email,
             'username' : mobile
         },
         success: function (result) {
             document.getElementById("mobile").value = ''
-            document.getElementById("email").value = ''
+            // document.getElementById("email").value = ''
             document.getElementById("success-message").innerHTML = "Succesfully data sent to admin,"+ 
             "please have patience we will respond soon"
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             document.getElementById("error-text").innerHTML =  error.responseText
         },

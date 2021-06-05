@@ -1,5 +1,5 @@
 const dataArea = document.getElementById("dataArea")
-
+const info = document.getElementById("preferenceInfo") 
 window.onload = function(){
     getAdminJob()
 }
@@ -15,10 +15,15 @@ function getAdminJob(){
         success: function (result) {
             setData(result)
             changeStatus()
+            info.innerHTML = ''
+            info.innerHTML+= `
+            Verified and Urgent Hiring Jobs from <strong style="font-weight:bolder;font-size:24px;color:black;">${result.country}</strong>
+            as it is set in your prefernce, go to prefernce page and change country where you are looking for Job
+            `
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         }
     })
@@ -50,7 +55,7 @@ function setData(data){
                 </p>
                 </div>
             </div>
-            <div style="display:${showContact}" class="col-md-6">
+            <!--<div style="display:${showContact}" class="col-md-6">
                 <div >
                 <p style="font-size:18px;">
                     Email Resume at <strong style="color: black;font-size:17px;font-weight:bold;"> ${element.email}</strong> 
@@ -59,13 +64,13 @@ function setData(data){
                     Contact the person at <strong style="color: black;font-size:17px;font-weight:bold;"> ${element.contact}</strong>
                 </p>
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <div class="row">
             <div class="col">
-                <button id="Jobid_${element.id}" style="display:${showApply}" onclick="applyForAdminJob(${element.id})" class="btn btn-danger">Apply</button>
-                <button style="display:${showContact}" class="btn btn-info" disabled="true">Apply on given contact</button>
+                <button id="Jobid_${element.id}"  onclick="applyForAdminJob(${element.id})" class="btn btn-danger">Apply</button>
+                <!--<button style="display:${showContact}" class="btn btn-info" disabled="true">Apply on given contact</button>-->
             </div>
         </div>
 
@@ -89,7 +94,7 @@ function applyForAdminJob(id){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
             buttonLockUnlock("Jobid_"+id,true)
         }
@@ -118,7 +123,7 @@ function changeStatus(){
         },
         error: function (error) {
             if(error.status==401){
-                LogoutUserAsFailedAuth()
+                refreshTokenAsAuthFailed()
             }
         }
     })

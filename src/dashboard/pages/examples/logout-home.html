@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+@@include('./_head.html', {
+  "title": "Edby - Logout Home",
+  "path": "../..",
+  "path_common": "../../.."
+})
+
+<body class="bg-white">
+  @@include('./_tracking-body.html')
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="../../../index.html">
+        <img src="../../assets/img/brand/light.svg" height="30">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="../../../index.html">
+                <img src="../../assets/img/brand/dark.svg" height="40">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="../../../front/pages/index.html" class="nav-link">
+              <span class="nav-link-inner--text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/examples/login.html" class="nav-link">
+              <span class="nav-link-inner--text">Login</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/examples/register.html" class="nav-link">
+              <span class="nav-link-inner--text">Register</span>
+            </a>
+          </li>
+        </ul>
+        <hr class="d-lg-none" />
+        
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-primary  py-6 py-lg-5 pt-lg-7">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <h1 class="text-white">Logged Out!</h1>
+              <p class="text-lead text-white">We will be waiting for your return!! Hoped you liked our service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--9 pb-5 text-gray">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary border border-dark mb-0">
+            <div class="card-body px-lg-5 py-lg-5">
+            <div class="text-center">
+                <a href="../../pages/examples/login.html" class="nav-link">
+                    <button id="loginAgain" type="button" class="btn btn-primary my-4">
+                        Login Again!
+                    </button>
+                </a>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  @@include('./_scripts.html', {
+    "path": "..",
+    "path_common": "../.."
+  })
+  <!-- Demo JS - remove this in your project -->
+  
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/firebase-message-handler.js"></script>
+</body>
+
+</html>
