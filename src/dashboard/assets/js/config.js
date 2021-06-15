@@ -42,12 +42,18 @@ var APPLICATION_STATUS = {
     "5":"Closed, No more application"
 }
 
+function clear_localstorage(){
+    localStorage.removeItem("access")
+    localStorage.removeItem("refresh")
+    localStorage.removeItem("profile")
+}
+
 $("#logoutUser").click(function(){
     console.log("here")
     if(localStorage.getItem("access")){
         logoutAsFailed()
     }else{
-        localStorage.clear()
+        clear_localstorage()
         window.location.href = "../examples/logout-home.html"
     }
 })
@@ -70,7 +76,7 @@ function logoutAsFailed(){
      
         },
         complete:function(){
-            localStorage.clear()
+            clear_localstorage()
             window.location.href = "../examples/logout-home.html"
         }
     })
@@ -162,11 +168,31 @@ function getJobResultContent(result,saveButton){
     `
 }
 
+/*
+TODO: Make a global object for events details
+
+    events = {
+        'job_shared_via_whatsapp':{
+            "action":"job_shared_via_whatsapp",
+            "event":"Job Shared via whatsapp",
+            "category":".."
+        },
+
+    }
+*/     
 function updateAnalytics(action,event,category){
     gtag('event', action, {
         'event_category' : category,
         'event_label' : event,
       });
+}
+
+function urlBuilder(urlParams){
+    launcher = urlParams.get('launcher')
+    social = urlParams.get('social')
+    fcm = urlParams.get('track_key')
+    urlParams.get('from_page')
+    from_page = document.title
 }
 
 function makeJobPostModal(result){

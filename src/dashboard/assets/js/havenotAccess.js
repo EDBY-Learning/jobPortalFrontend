@@ -12,7 +12,7 @@ function verification_have_not_access(){
                 console.log('have not access')
                 localStorage.setItem('lastVerfiyCall',new Date().toString()) 
             }).fail(function(data){
-                localStorage.clear();
+                clear_localstorage()
                 window.location.href = "../examples/login.html"
                 localStorage.removeItem("lastVerfiyCall")
             }).always(function(){
@@ -22,7 +22,7 @@ function verification_have_not_access(){
             
         }
     }else{
-        localStorage.clear();
+        clear_localstorage()
         window.location.href = "../examples/login.html"
     }
      

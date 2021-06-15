@@ -8,7 +8,7 @@ var likesData = [];
 var current_page = 1;
 var records_per_page = 12;
 
-window.addEventListener('load', getDashboardData)
+// window.addEventListener('load', getDashboardData)
 window.addEventListener('load',getJobBlog)
 
 function prevPage()
@@ -103,7 +103,12 @@ function changeJobType(type,page){
 }
 
 function getDashboardData(){
-    
+    if(!localStorage.getItem("access")){
+        return;
+    }else{
+        document.getElementById("unauth-panel").style.display = "none"
+        document.getElementById("auth-panel").style.display = "none"
+    }
     $.ajax({
         url:JOB_URL+'dashboard_data/',
         type:'GET',
@@ -125,13 +130,13 @@ function getDashboardData(){
 }
 
 function getJobBlog(){
-    
+    if(localStorage.getItem("access")){
+        document.getElementById("unauth-panel").style.display = 'none'
+        document.getElementById("auth-panel").style.display = 'block'
+    }
     $.ajax({
         url:BLOG_URL+'all_blogs/',
         type:'GET',
-        headers:{
-            'Authorization': 'Bearer '+localStorage.getItem("access"),
-        },
         success: function (result) {
             blogData = result['blogs']
             likesData = result['likes']
@@ -204,9 +209,9 @@ function getBlogContentDash(data,show_comment,dashboard){
     if(show_comment == 'openInSamePage'){
         target = ""
     }
-    let discussionLink = `<a target="${target}" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-comment"></i>Discussion</a>`;
+    let discussionLink = `<a target="${target}" style="display:${show_comment};" href="../examples/blog-detail.html?blog_id=${data.id}" class="card-link">${data.total_comment} <i class="fas fa-comment"></i>Discussion</a>`;
     if(dashboard==true){
-        discussionLink = `<a href="javascript:openCommentForm('${data.id}')" class="card-link"><i class="fas fa-comment"></i>Discussion</a>`
+        discussionLink = `<a href="javascript:openCommentForm('${data.id}')" class="card-link">${data.total_comment} <i class="fas fa-comment"></i>Discussion</a>`
     }
     return `
     <div style="padding:10px;width: 90%; display: block;margin-left: auto;margin-right: auto;" class="col-12 col-md-8 card gedf-card shadow-soft border-light">

@@ -84,10 +84,9 @@ function saveToken(token){
             authTokenSaveServer(token)
         }
         return;
+    }else{
+        normalTokenSave(token)
     }
-    normalTokenSave(token)
-    
-    
 }
 
 

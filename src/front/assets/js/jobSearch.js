@@ -24,8 +24,8 @@ window.onload = function(){
         searchForJobs()
         
     }else{
-        getRecentJob()
-        document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+        // getRecentJob()
+        // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }
 }
 
@@ -80,7 +80,14 @@ function changePage(page)
 
 function numPages()
 {
-    return Math.ceil(jobData.length / records_per_page);
+    let pagesCount = Math.ceil(jobData.length / records_per_page)
+    let pageNumber = document.getElementById("pageNumber");
+    if(pagesCount <= 1){
+        pageNumber.style.visibility = "hidden";
+    }else{
+        pageNumber.style.visibility = "visible";
+    }
+    return pagesCount;
 }
 
 function toTop(){
@@ -106,7 +113,7 @@ function getRecentJob(){
             console.log(error)
         }
     })
-    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+    // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function getJobByIds(id){

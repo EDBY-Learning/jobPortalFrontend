@@ -1,9 +1,10 @@
-window.onload = function(){
-    getPrefernce()
-}
+window.addEventListener('load',getPrefernce)
 
 function getPrefernce(){
-    
+    if(!localStorage.getItem("access")){
+        refreshTokenAsAuthFailed()
+        return;
+    }
     $.ajax({
         url:TEACHER_URL+'preference/1/',
         type:'GET',

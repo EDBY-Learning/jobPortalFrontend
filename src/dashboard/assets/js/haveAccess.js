@@ -7,12 +7,12 @@ function verification_have_access(){
             console.log("have access")
             window.location.href = "../dashboards/dashboard.html"
         }).fail(function(data){
-            localStorage.clear();
+            clear_localstorage()
         }).always(function(){
             
         })
     }else{
-        localStorage.removeItem('access');
+        clear_localstorage()
     }
     
 }

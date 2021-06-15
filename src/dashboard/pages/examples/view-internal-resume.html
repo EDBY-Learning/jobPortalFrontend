@@ -9,20 +9,68 @@
 
 <body>
   @@include('./_tracking-body.html')
+  
+    @@include('./_bottom_nav_bar_dashboard.html', {
+      "path_common": "../../..",
+      "home":"",
+      "resume":"mobile-bottom-nav__item--active",
+      "skill":"",
+      "apply":""
+    })
+  <div style="display: block; margin-bottom: 120px;" class="unauth-user main-content" id="unauth-panel">
+    @@include('./_nav_bar_login.html', {
+      "path_common": "../../..",
+      "classes": "bg-primary text-white",
+      "bgColorClass":"customLightBrown"
+    })
+    <div class="header pb-6 d-flex align-items-center" style="background-position: center top;">
+      <!-- Mask -->
+      <span style="background-color: #c0a633;" class="mask opacity-8"></span>
+      <!-- Header container -->
+      <div class="container align-items-center">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 text-center">
+            <h1 id="unauth-header" class="display-2 mb-3">
+              Loading ...
+            </h1>
+            <p class="lead"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="section section-lg pb-5 bg-soft">
+      <div class="container mt--6">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-6">
+            <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
+              <div class="card-header text-center pb-0">
+                <div class="icon icon-shape icon-shape-primary rounded-circle mb-3">
+                  <i class="fas fa-bullhorn"></i>
+                </div>
+                <h2 class="text-black">Resume</h2>
+                <p>
+                  Build Professional Resume!! 
+                </p>
+              </div>
+              <div class="card-body">
+                <a href="../examples/login.html">
+                  <button style="margin: 7px; display: block;margin-left: auto;margin-right: auto;" class="btn btn-danger">Create Resume</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
   <!-- Main content -->
-  <div style="margin-bottom: 120px;" class="main-content" id="panel">
+  <div style="display: none; margin-bottom: 120px;" class="auth-user main-content" id="panel">
     <!-- Topnav -->
     @@include('./_nav_bar_profile_dropdown.html', {
-    "path": "..",
-    "path_common": "../..",
-    "classes": "bg-primary text-white"
+      "path_common": "../../..",
+      "classes": "bg-primary text-white"
     })
-    @@include('./_bottom_nav_bar_dashboard.html', {
-    "home":"",
-    "resume":"mobile-bottom-nav__item--active",
-    "preference":"",
-    "apply":""
-    })
+    
     <!-- Header -->
     <!-- Header -->
     <div class="header pb-6 d-flex align-items-center" style="background-position: center top;">
@@ -143,7 +191,7 @@
         <div class="row">
           <div class="col-12 text-center mb-5">
             <h2 class="mb-4">Share your profile</h2>
-            <p class="lead mb-5">Share your <span class="font-weight-bolder">Resume/CV</span> and get hired</p>
+            <p class="lead mb-5">Share your <span class="font-weight-bolder">Resume/CV</span> with others</p>
             <div id="social-sharing">
 
             </div>
@@ -159,13 +207,13 @@
 
   <!-- Argon Scripts -->
   @@include('./_scripts.html', {
-  "path": "..",
-  "path_common": "../.."
+    "path": "../..",
+    "path_common": "../../.."
   })
 
   <script src="../../assets/js/config.js"></script>
   <script src="../../assets/js/firebase-message-handler.js"></script>
-  <script src="../../assets/js/havenotAccess.js"></script>
+  <!-- <script src="../../assets/js/havenotAccess.js"></script> -->
   <script src="../../assets/js/view-internal-resume.js"></script>
 </body>
 

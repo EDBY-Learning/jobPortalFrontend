@@ -7,7 +7,16 @@
   "path_common": "../../.."
 })
 
-<body class="bg-white">
+@@include('./_bottom_nav_bar_dashboard.html', {
+  "path_common": "../../..",
+  "home":"",
+  "resume":"",
+  "skill":"",
+  "apply":"",
+  "search":""
+})
+
+<body style="margin-bottom: 120px;" class="bg-white">
   @@include('./_tracking-body.html')
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
@@ -36,7 +45,7 @@
         </div>
         @@include('./_nav_bar_login.html', {
           "path": "..",
-          "path_common": "../..",
+          "path_common": "../../..",
           "classes": "bg-primary text-white"
         })
         <hr class="d-lg-none" />
@@ -124,8 +133,8 @@
   <!-- Argon Scripts -->
   <!-- Core -->
   @@include('./_scripts.html', {
-    "path": "..",
-    "path_common": "../.."
+    "path": "../..",
+    "path_common": "../../.."
   })
   <!-- Demo JS - remove this in your project -->
   
