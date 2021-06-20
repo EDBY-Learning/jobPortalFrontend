@@ -1,11 +1,12 @@
 const dataArea = document.getElementById("dataArea")
 const info = document.getElementById("preferenceInfo") 
-window.onload = function(){
-    getAdminJob()
-}
+window.addEventListener('load',getAdminJob)
 
 function getAdminJob(){
-    
+    if(!localStorage.getItem("access")){
+        document.getElementById("unauth-header").innerHTML = "Login to Apply"
+        return;
+    }
     $.ajax({
         url:JOB_URL+'admin_job_for_teacher/',
         type:'GET',
@@ -13,18 +14,22 @@ function getAdminJob(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
+            document.getElementById("unauth-panel").style.display = 'none'
+            document.getElementById("panel").style.display = 'block'
             setData(result)
             changeStatus()
             info.innerHTML = ''
             info.innerHTML+= `
             Verified and Urgent Hiring Jobs from <strong style="font-weight:bolder;font-size:24px;color:black;">${result.country}</strong>
-            as it is set in your prefernce, go to prefernce page and change country where you are looking for Job
+            as it is set in your prefernce, change country where you are looking for Job 
             `
         },
         error: function (error) {
             if(error.status==401){
                 refreshTokenAsAuthFailed()
+                return;
             }
+            document.getElementById("unauth-header").innerHTML = "Failed to log you in! "+error.responseText
         }
     })
 }

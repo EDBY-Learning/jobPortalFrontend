@@ -14,13 +14,14 @@
     <!-- Topnav -->
     @@include('./_nav_bar_profile_dropdown.html', {
       "path": "..",
-      "path_common": "../..",
+      "path_common": "../../..",
       "classes": "bg-primary text-white"
     })
     @@include('./_bottom_nav_bar_dashboard.html', {
+      "path_common": "../../..",
       "home":"",
       "resume":"",
-      "preference":"",
+      "skill":"",
       "apply":""
     })
     <!-- Header -->
@@ -94,8 +95,8 @@
   <!-- Argon Scripts -->
   <!-- Core -->
   @@include('./_scripts.html', {
-    "path": "..",
-    "path_common": "../.."
+    "path": "../..",
+    "path_common": "../../.."
   })
   
   <script src="../../assets/js/config.js"></script>

@@ -18,313 +18,247 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> 
+<head>
     @@include('./_head.html', {
         "path": "./front",
         "path_common": ".",
         "title": "Edby- Job Portal Home Page"
     })
+    <style>
+        .what-button {
+            width: 40px;
+            height: 40px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+        }
+        
+    </style>
 </head>
 
 <body>
 
     @@include('./_tracking-body.html')
-
-    @@include('./_navigation.html', {
-        "path": "./front",
-        "cta_button_classes": "d-lg-none",
+    
+    @@include('../../dashboard/partials/_bottom_nav_bar_dashboard.html', {
         "path_common": ".",
-        "classes": "navbar-light navbar-theme-primary"
+        "home":"",
+        "resume":"",
+        "skill":"",
+        "apply":"",
+        "search":"mobile-bottom-nav__item--active"
     })
 
+    <div style="display: block;" id="unauth-panel">
+        @@include('./_navigation.html', {
+            "path": "./front",
+            "cta_button_classes": "d-lg-none",
+            "path_common": ".",
+            "classes": "navbar-light navbar-theme-primary"
+        })
+    </div>
+
+    <div style="display: none;" id="auth-panel">
+        @@include('./_navigation_auth.html', {
+            "path": "./front",
+            "cta_button_classes": "d-lg-none",
+            "path_common": ".",
+            "classes": "navbar-light navbar-theme-primary"
+        })
+    </div>
+
     <main>
+        <div style="display: block;" id="searchDashboard">
 
-        <!-- @@include('./_preloader.html', {
-            "path": "./front"
-        }) -->
-
-        <!-- Hero -->
-        <section class="section-header pb-7 pb-lg-11 bg-soft">
-            <div class="container">
+            <section style="padding-top: 90px ; padding-bottom: 10px !important;" class="pb-7 pb-lg-11 bg-soft">
+            
                 <div class="row justify-content-between align-items-center">
-                    
-                    <div style="text-align: center;" class="col-12 col-md-12">
-                          <h1 class="display-2 mb-3">Are you finding tough to find teaching job</h1>
-                          <p class="lead">Edby teacher job portal helps you find teaching job in your preferred location and subject.
-                            We have international and national job posting for teachers.
-                            Jobs postings are credible and freely available.</p>
-                            <p class="lead">You can also build resume here, click below link
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-                                        <u> <a onclick="makeResume()" 
-                                        style="font-size: 18px;color: rgb(6, 80, 241);font-weight: bolder; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn" type="submit">Make Resume</a></u> 
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-                                        <u> <a href="dashboard/pages/examples/blog-detail.html" 
-                                        style="font-size: 18px;color: rgb(6, 80, 241);font-weight: bolder; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn" type="submit">Teaching Information</a></u> 
-                                    </div>
-                                    <div  class="col-lg-4 col-md-4 col-sm-4 col-4">
-                                        <u> <a onclick="routeJob('recent')" 
-                                        style="font-size: 18px;color: rgb(6, 80, 241);font-weight: bolder;
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn" type="submit">Recent Jobs</a></u> 
-                                    </div>
-                                </div>
-                                
-                            </p>
-                          <div class="mt-4">
-                            <form class="d-flex flex-column mb-5 mb-lg-0">
-                                <div class="row" style="margin-bottom: 30px;">
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        @@include('./_position_dropdown.html')
-                                        <!-- <input class="form-control my-3" type="text" id="position" name="position" placeholder="Teacher or Principal"> -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <input class="form-control my-3" type="text" id="location" name="location" placeholder="City or Country" required>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <input class="form-control my-3" type="text" id="subject" name="subject" placeholder="Subject(Optional)">
-                                    </div>
-                                </div>
-                                <p><em style="color: red;" id="error"></em></p>
-                                <div class="row">
-                                    <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                       
-                                    </div>
-                                    <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <button onclick="routeJob('search')" 
-                                        style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                        display: block;margin-left: auto;margin-right: auto;" 
-                                        class="button btn btn-primary" type="submit">Search</button>
-                                    </div>
-                                    <div style="padding: 10px;" class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        
-                                    </div>
-                                </div>
-                                
-                            </form>
-                          </div>
-                      </div>
-                </div>
-            </div>
-            <div class="pattern bottom"></div>
-        </section>
-        <section class="section section-lg pt-6">
-            <div class="container">
-                <div class="row justify-content-center mb-5 mb-md-7">
-                    <div class="col-12 col-md-8 text-center">
-                        <h2 class="h1 font-weight-bolder mb-4">EDBY Job Platform for Teachers</h2>
-                        <p class="lead">
-                            Build your resume to share with world and get teaching job anywhere you want  
+
+                    <div class="col-12 col-md-12">
+                        <h2 class="mb-3" style=" text-align: center;">Search Jobs</h2>
+                        <p class="lead" style=" text-align: center;">
+                            Jobs postings freely available.
                         </p>
-                    </div>
-                </div>
-                <div class="row row-grid align-items-center mb-5 mb-md-7">
-                    <div class="col-12 col-md-5 order-md-2">
-                        <h2 class="font-weight-bolder mb-4">Need help in resume building!!</h2>
-                        <p>Have a Resume/CV of 5 pages!! Get help from experts on how to build your Resume/CV!</p>
-                        <a href="./dashboard/pages/examples/register.html" class="btn btn-primary mt-3 animate-up-2">
-                            Get Help
-                            <span class="icon icon-xs ml-2">
-                                <i class="fas fa-external-link-alt"></i>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-6 mr-lg-auto">
-                        <img src="./front/assets/img/illustrations/feature-illustration-2.svg" alt="">
-                    </div>
-                </div>
-                <div class="row row-grid align-items-center mb-5 mb-md-7">
-                    <div class="col-12 col-md-5">
-                        <h2 class="font-weight-bolder mb-4">WhatsApp Community</h2>
-                        <p class="lead">
-                            Join our teachers WhatsApp Community for live job notification and help from other teachers from across world!!
+                        <p class="lead" style=" text-align: center;">
+                            <div class="mt-4"> 
+                                <a href="?search=search" onclick="updateAnalytics('see_all_clicked','Gone to Search page','search')">
+                                    <button style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                    display: block;margin-left: auto;margin-right: auto;" class="btn btn-secondary">
+                                        Search Jobs
+                                    </button>
+                                </a>
+                            </div>
                         </p>
-                        <a style="background-color: #25D366;color: white;font-size: x-large;" type="button" href="https://chat.whatsapp.com/IGTYltls5YL9XrIXgEGP9n" class="btn mt-3 animate-up-2 what-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
                         
                     </div>
-                    <div class="col-12 col-md-6 ml-md-auto">
-                        <img src="./front/assets/img/illustrations/feature-illustration.svg" alt="">
+                </div>
+            </section>
+            
+            <section style="padding-bottom: 10px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Recent Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=recent" onclick="updateAnalytics('see_all_clicked','See All Recent','recent')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="recentJobs" class="row scrollmenu">
+                </div>
+            </section>
+
+            <section style="padding-bottom: 10px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Prefered Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=prefer" onclick="updateAnalytics('see_all_clicked','See All Preferred','prefer')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="preferedJobs" class="row scrollmenu">
+                </div>
+            </section>
+        
+
+            <section style="padding-bottom: 40px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Saved Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=bookmark" onclick="updateAnalytics('see_all_clicked','See All Bookmark','bookmark')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="savedJobs" class="row scrollmenu">
+                </div>
+            </section>
+
+            
+            
+        </div>
+        <!-- Hero -->
+        <div style="display: none;" id="searchArea">
+            <section style="padding-top: 90px ;padding-bottom: 40px !important;"
+                class="section-header pb-7 pb-lg-11 bg-soft">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+
+                        <div class="col-12 col-md-12">
+                            <h2 class="mb-3" style=" text-align: center;">Are you finding tough to find teaching job</h2>
+                            <p class="lead" style=" text-align: center;">
+                                Jobs postings are credible and freely available.
+                            </p>
+                            <p class="lead" style="text-align: center;" >
+                                <a  href="?search=">
+                                    <u>Back To Home</u>
+                                </a>
+                            </p>
+                            
+                            <div class="mt-4">
+
+                                <div class="d-flex flex-column mb-5 mb-lg-0">
+                                    <div class="row" style="margin-bottom: 30px;">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            @@include('./_position_dropdown.html')
+                                            <!-- <input class="form-control my-3" type="text" id="positionSearch" name="position" placeholder="Teacher or Principal"> -->
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <input class="form-control my-3" type="text" id="locationSearch" name="location"
+                                                placeholder="City or Country" required>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            @@include('./_subject_dropdown.html')
+                                        </div>
+                                    </div>
+                                    <p><em style="color: red;" id="error"></em></p>
+
+                                    <div class="row">
+                                        <button id="searchJobButton" style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                        display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+                                            type="button">Search</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            <section style="padding-top: 50px !important;" class="section section-lg bg-soft">
+                <div class="container">
+                    <div class="row justify-content-center mb-5 mb-md-7">
+                        <div class="col-12 col-md-8 text-center">
+                            <h2 id="heading" class="h1 font-weight-bolder mb-4"></h2>
+                            <p id="info" class="lead"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <h2 style="visibility: hidden;" id="pageNumber">Page: <span id="page">0</span></h2>
+                        </div>
+                        <div class="col-4"></div>
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card border-light p-4">
-                            <div class="card-body">
-                                <h2 class="display-2 mb-2">1256</h2>
-                                <span>Teachers are registered and has build professional Resume/CV!!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card border-light p-4">
-                            <div class="card-body">
-                                <h2 class="display-2 mb-2">3152</h2>
-                                <span> Jobs has been bookmarked by teachers!!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card border-light p-4">
-                            <div class="card-body">
-                                <h2 class="display-2 mb-2">550</h2>
-                                <span>Teacher has joined our WhatsApp Community!!</span>
-                            </div>
-                        </div>
-                    </div>
+                <div id="jobPostArea" class="row">
                 </div>
-            </div>
-        </section>
+                <div class="row">
+                    
+                    <div class="col-4">
+                        <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" type="button" href="javascript:toTop()" id="btn_top">To Top</a>
+                    </div>
+                    <div class="col-4">
+                        <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
+                    </div>
+            
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h2 style="visibility: hidden;" id="pageNumber2">Page: <span id="page2">0</span></h2>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                </div>
+            </section>
+        </div>
         
-        <!-- <section class="section section-lg">
-            <div class="container">
-                <div class="row justify-content-center mb-5 mb-lg-7">
-                    <div class="col-12 col-md-8 text-center">
-                        <h1 class="h1 font-weight-bolder mb-4">Recommended by leading experts in marketing and SEO</h1>
-                        <p class="lead">Our products are loved by users worldwide</p>
-                    </div>
-                </div>
-                <div class="row mb-lg-5">
-                    <div class="col-12 col-lg-6">
-                        <div class="customer-testimonial d-flex mb-5">
-                            <img src="./front/assets/img/team/profile-picture-1.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
-                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
-                                <div class="d-flex mb-4">
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                </div>
-                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
-                                <span class="h6">- James Curran <small class="ml-0 ml-md-2">General Manager Spotify</small></span>
-                            </div>
-                        </div>
-                        <div class="customer-testimonial d-flex mb-5">
-                            <img src="./front/assets/img/team/profile-picture-2.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
-                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
-                                <div class="d-flex mb-4">
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                </div>
-                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
-                                <span class="h6">- Richard Thomas <small class="ml-0 ml-md-2">Front-end developer Oracle</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 pt-lg-6">
-                        <div class="customer-testimonial d-flex mb-5">
-                            <img src="./front/assets/img/team/profile-picture-4.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
-                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
-                                <div class="d-flex mb-4">
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                </div>
-                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
-                                <span class="h6">- Jose Evans <small class="ml-0 ml-md-2">Chief Engineer Apple</small></span>
-                            </div>
-                        </div>
-                        <div class="customer-testimonial d-flex mb-5">
-                            <img src="./front/assets/img/team/profile-picture-6.jpg" class="image image-sm mr-3 rounded-circle shadow" alt="">
-                            <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
-                                <div class="d-flex mb-4">
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
-                                </div>
-                                <p class="mt-2">"We use Impact mainly for its site explorer, and it’s immensely improved how we find link targets. We use it both for getting quick analysis of a site, as well as utilizing its extensive index when we want to dive deep."</p>
-                                <span class="h6">- Richard Thomas <small class="ml-0 ml-md-2">Manager IBM</small></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <a href="#" class="btn btn-primary animate-up-2"><span class="mr-2"><i class="fas fa-book-open"></i></span> See all stories</a>
-                    </div>
-                </div>
-            </div>
-        </section> -->
 
         @@include('./_footer.html', {
-            "path": "./front",
-            "path_common": ".",
-            "classes": "bg-primary text-white"
+        "path": "./front",
+        "path_common": ".",
+        "classes": "bg-primary text-white"
         })
 
     </main>
 
     @@include('./_scripts.html', {
-        "path": "./front",
-        "path_common": "."
+    "path": "./front",
+    "path_common": "."
     })
     <script src="./dashboard/assets/js/config.js"></script>
     <script src="./dashboard/assets/js/firebase-message-handler.js"></script>
-    <script>
-        window.onload = function(){
-            const urlParams = new URLSearchParams(window.location.search);
-            let ids = urlParams.get("ids");
-            let id = urlParams.get("id");
-            let location = urlParams.get("location")
-            let position = urlParams.get("positionSearch")
-            let subject = urlParams.get("subject")
-            
-            if(id){
-                let temp = 'ids='+id
-                //console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "./front/pages/index.html?"+temp;
-            }if(ids){
-                let temp = 'ids='+ids
-                //console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "./front/pages/index.html?"+temp;
-            }else if(location){
-                let position = document.getElementById("positionSearch").value.trim()
-                let subject  = document.getElementById("subject").value.trim()
-                let temp = 'location='+location+'&subject='+subject+'&position='+position
-                //console.log("/front/pages/index.html/?"+temp)
-                window.location.href = "./front/pages/index.html?"+temp;
-                
-            }
-        } 
-        function routeJob(val){
-            if(val=='recent'){
-                window.location.href = "./front/pages/index.html";
-                return;
-            }else{
-                let location = document.getElementById("location").value.trim()
-                if(location){
-                    let position = document.getElementById("positionSearch").value.trim()
-                    let subject  = document.getElementById("subject").value.trim()
-                    let temp = 'location='+location+'&subject='+subject+'&position='+position
-                    //console.log("/front/pages/index.html/?"+temp)
-                    window.location.href = "./front/pages/index.html?"+temp;
-                }else{
-                    // console.log("here")
-                    document.getElementById("error").innerHTML = "Location is required e.g Delhi or Bengal or UAE"
-                }
-            }
-        }
-
-        function makeResume(){
-            window.location.href = "./dashboard/pages/examples/login.html";
-        }
-    </script>
-    
+    <script src="./front/assets/js/jobSearch.js"></script>
 </body>
 
 </html>

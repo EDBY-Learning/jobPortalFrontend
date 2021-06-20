@@ -16,7 +16,7 @@
           <a class="nav-link pr-0"  href="javascript:openbasicProfileModal()" role="button">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="../../assets/img/theme/profile.jpg">
+                <img alt="Image placeholder" src="@@path_common/dashboard/assets/img/theme/profile.jpg">
               </span>
               <div class="media-body  ml-2  d-none d-lg-block">
                 
@@ -37,12 +37,12 @@
             <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card card-profile">
-                  <img src="../../assets/img/theme/img-1-1000x600.jpg" lt="Image placeholder" class="card-img-top">
+                  <img src="@@path_common/dashboard/assets/img/theme/img-1-1000x600.jpg" lt="Image placeholder" class="card-img-top">
                   <div class="row justify-content-center">
                     <div class="col-lg-3 order-lg-2">
                       <div class="card-profile-image">
                         <a href="#">
-                          <img src="../../assets/img/theme/profile.jpg" class="rounded-circle">
+                          <img src="@@path_common/dashboard/assets/img/theme/profile.jpg" class="rounded-circle">
                         </a>
                       </div>
                     </div>
@@ -68,7 +68,7 @@
                       <div id="profile_mobile">
                        
                       </div>
-                      <a href="../../pages/examples/settings.html">Change Password</a>
+                      <a href="@@path_common/dashboard/pages/examples/settings.html">Change Password</a>
                     </div>
                   </div>
                   <div class="card-footer text-muted">
@@ -90,6 +90,9 @@
   window.addEventListener('load',getbasicProfileDataModal)
   var teacher_id;
   function getbasicProfileDataModal(){
+    if(!localStorage.getItem("access")){
+      return;
+    }
     if(localStorage.getItem("profile")){
       setProfileData()
     }else{

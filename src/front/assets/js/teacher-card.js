@@ -102,13 +102,11 @@ function setData(data){
 
     let preference = document.getElementById("preference")
     preference.innerHTML = ''
-    data.preference.forEach(element => {
-        preference.innerHTML+=`
-            <small style="font-size:14px;">I am looking for the role of <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.position.split(",").join(" , ")}</strong></small>
-            <small style="font-size:14px;">in <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.location.split(",").join(" , ")}</strong></small>
-            <small style="font-size:14px;">and I am interested to teach <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.subject.split(",").join(" , ")}</strong></small>
-        `
-    }); 
+    preference.innerHTML+=`
+            <small style="font-size:14px;">I am looking for the role of <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.position.split(",").join(" , ")}</strong></small>
+            <small style="font-size:14px;">in <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.location.split(",").join(" , ")}</strong></small>
+            <small style="font-size:14px;">and I am interested to teach <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.subject.split(",").join(" , ")}</strong></small>
+    ` 
     
     let social = document.getElementById("social-sharing")
     social.innerHTML = ''

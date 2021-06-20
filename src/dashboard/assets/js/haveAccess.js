@@ -1,4 +1,4 @@
-var BASE_URL = "http://127.0.0.1:8000/";
+var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
 
 function verification_have_access(){
     // console.log('check')
@@ -7,12 +7,12 @@ function verification_have_access(){
             console.log("have access")
             window.location.href = "../dashboards/dashboard.html"
         }).fail(function(data){
-            localStorage.clear();
+            clear_localstorage()
         }).always(function(){
             
         })
     }else{
-        localStorage.removeItem('access');
+        clear_localstorage()
     }
     
 }

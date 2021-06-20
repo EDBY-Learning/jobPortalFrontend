@@ -1,8 +1,9 @@
-var BASE_URL = "http://127.0.0.1:8000/";
-var JOB_URL = "http://127.0.0.1:8000/job/v2/"
-var TEACHER_URL = "http://127.0.0.1:8000/teacher/"
-var CRM_URL = "http://127.0.0.1:8000/crm/"
-var BLOG_URL= "http://127.0.0.1:8000/edby/blogs/"
+var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
+var JOB_URL = "https://ppritish5153.pythonanywhere.com/job/v2/"
+var TEACHER_URL = "https://ppritish5153.pythonanywhere.com/teacher/"
+var CRM_URL = "https://ppritish5153.pythonanywhere.com/crm/"
+var BLOG_URL= "https://ppritish5153.pythonanywhere.com/edby/blogs/"
+var SKILL_URL = "https://ppritish5153.pythonanywhere.com/skill_development/"
 
 var LANG_CODE = {
     "1":`
@@ -42,12 +43,18 @@ var APPLICATION_STATUS = {
     "5":"Closed, No more application"
 }
 
+function clear_localstorage(){
+    localStorage.removeItem("access")
+    localStorage.removeItem("refresh")
+    localStorage.removeItem("profile")
+}
+
 $("#logoutUser").click(function(){
     console.log("here")
     if(localStorage.getItem("access")){
         logoutAsFailed()
     }else{
-        localStorage.clear()
+        clear_localstorage()
         window.location.href = "../examples/logout-home.html"
     }
 })
@@ -70,7 +77,7 @@ function logoutAsFailed(){
      
         },
         complete:function(){
-            localStorage.clear()
+            clear_localstorage()
             window.location.href = "../examples/logout-home.html"
         }
     })
@@ -121,7 +128,7 @@ function getJobResultContent(result,saveButton){
                 <h3 class="card-title mt-3">${result.school}</h3>
                 <div class="text-muted font-italic"><small style="color: darkgreen;">${result.entry_time.toString().slice(0, 10)}</small></div>
                 <p class="card-text">
-                    ${result.message}
+                    <!--${result.message}-->
                 </p>
                 <ul class="list-group d-flex justify-content-center mb-4">
                     <li class=" d-flex pl-0 pb-1">
@@ -139,13 +146,13 @@ function getJobResultContent(result,saveButton){
                 </ul>
                 <div class="row">
                     <div class="col">
-                        <button onclick="openSwal(${result.id})" class="btn btn-primary">Apply</button>
+                        <button onclick="openSwal(${result.id})" class="btn btn-primary">Details</button>
                     </div>
-                    <div class="col">
-                        <button style="display:${saveButton}" onclick="saveJob(${result.id},'GET')" class="btn btn-secondary">Save</button>
+                    <div style="display:${saveButton}" class="col">
+                        <button  onclick="saveJob(${result.id},'GET')" class="btn btn-outline">Save</button>
                     </div>
-                    <div class="col">
-                        <button style="display:${deleteButton}" onclick="saveJob(${result.id},'DELETE')" class="btn btn-danger">Delete</button>
+                    <div style="display:${deleteButton}" class="col">
+                        <button  onclick="saveJob(${result.id},'DELETE')" class="btn btn-outline">Delete</button>
                     </div>
                     <div class="col">
                     <a class="what-button" type="button" onclick="updateAnalytics('job_shared_via_whatsapp','Job Shared via whatsapp','${result.id}')" class="btn custom-btn custom-btn-bg custom-btn-link" href=
@@ -162,11 +169,31 @@ function getJobResultContent(result,saveButton){
     `
 }
 
+/*
+TODO: Make a global object for events details
+
+    events = {
+        'job_shared_via_whatsapp':{
+            "action":"job_shared_via_whatsapp",
+            "event":"Job Shared via whatsapp",
+            "category":".."
+        },
+
+    }
+*/     
 function updateAnalytics(action,event,category){
     gtag('event', action, {
         'event_category' : category,
         'event_label' : event,
       });
+}
+
+function urlBuilder(urlParams){
+    launcher = urlParams.get('launcher')
+    social = urlParams.get('social')
+    fcm = urlParams.get('track_key')
+    urlParams.get('from_page')
+    from_page = document.title
 }
 
 function makeJobPostModal(result){
@@ -175,6 +202,7 @@ function makeJobPostModal(result){
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+            <h3>Job Detail, look for contact in image</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -310,7 +338,7 @@ function getBlogContent(data,show_comment,dashboard){
         <div style="border-top: 2px solid;" class="card-footer">
             ${fetchLiked(data.id,data.total_like)}
             ${discussionLink}
-            <a target="_blank" href="whatsapp://send?text=${data.title}  Read full blog https://jobportal.edbylearning.com/dashboard/pages/examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-share"></i> Share</a>
+            <a target="_blank" onclick="updateAnalytics('share_blog','Blog Shared','${data.id}')" href="whatsapp://send?text=${data.title}  Read full blog https://jobportal.edbylearning.com/dashboard/pages/examples/blog-detail.html?blog_id=${data.id}" class="card-link"><i class="fas fa-share"></i> Share</a>
         </div>
     </div>
     `
@@ -371,3 +399,102 @@ function timeDifference(previous_datetime) {
         return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
+
+function makeLoginPopup(path_common){
+    return `
+    <div class="modal fade" id="makeLoginPopup" tabindex="-1" role="dialog" aria-labelledby="makeLoginPopupLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login Required</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p>You need to create an account for this action!!</p>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <form role="form">
+                            <div class="form-group mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                                </div>
+                                <input class="form-control" id="mobile" placeholder="10 Digit Mobile Number" maxlength="10" type="tel" pattern="[1-9]{1}[0-9]{9}" />
+                            </div>
+                            </div>
+                            <div class="form-group">
+                            <div class="input-group input-group-merge input-group-alternative">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                </div>
+                                <input class="form-control" id="password" minlength="8" autocomplete="off" placeholder="Password" type="password" />
+                            </div>
+                            </div>
+                            
+                            <div class="custom-control custom-control-alternative custom-checkbox">
+                            <input  onclick="togglePassword()" type="checkbox" />
+                            <label  for=" customCheckLogin">
+                                <span>Show Password</span>
+                            </label>
+                            </div>
+                            <div class="text-muted font-italic"><small id="error-text" style="color: red;"></small></div>
+                            <div class="text-center">
+                                <button id="loginUser" onclick="loginUserModal()" type="button" class="btn btn-primary my-4">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex">
+                        <a class="btn btn-link" type="button" href="${path_common}/dashboard/pages/examples/register.html">Register</a>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        </div>
+    </div>`
+}
+
+
+function loginUserModal(){
+    document.getElementById("error-text").innerHTML = ""
+    req_data = {
+        "username": document.getElementById("mobile").value,
+        "password": document.getElementById("password").value,
+    }
+    $.post(BASE_URL+'auth/login/',req_data,function(data,status){
+      localStorage.setItem('access',data['access'])
+      localStorage.setItem('refresh',data['refresh'])
+      $('#makeLoginPopup').modal("hide")
+      swal({
+        title: 'Logged In',
+        text: 'Successfully Logged In',
+        type: 'success',
+        timer: 1500
+    })  
+    }).fail(function(data){
+      obj = data.responseJSON
+      console.log(obj)
+      if ('username' in obj){
+        document.getElementById("error-text").innerHTML = "Mobile " + obj.username
+      }else if ('password' in obj){
+        document.getElementById("error-text").innerHTML = "Password " + obj.password
+      }else if ('detail' in obj){
+        document.getElementById("error-text").innerHTML = obj.detail
+      }
+    })
+  }
+
+  function togglePassword(){
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

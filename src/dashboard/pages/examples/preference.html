@@ -13,15 +13,15 @@
   <div style="margin-bottom: 120px;" class="main-content" id="panel">
     <!-- Topnav -->
     @@include('./_nav_bar_profile_dropdown.html', {
-      "path": "..",
-      "path_common": "../..",
+      "path_common": "../../..",
       "classes": "bg-primary text-white"
     })
     @@include('./_bottom_nav_bar_dashboard.html', {
+      "path_common": "../../..",
       "home":"",
       "resume":"",
-      "preference":"mobile-bottom-nav__item--active",
-      "apply":""
+      "skill":"",
+      "apply":"mobile-bottom-nav__item--active"
     })
     <!-- Header -->
     <!-- Header -->
@@ -36,6 +36,10 @@
             <p class="text-white mt-0 mb-5">
               Set preference for job you are looking for, we will notify you when the job is available
             </p>
+            <div class="row">
+              <a style="margin: 7px;" href="../examples/admin-jobs.html" class="btn btn-danger">Back to Premium Jobs</a>
+              <a style="margin: 7px;" href="../examples/view-internal-resume.html" class="btn btn-secondary">View Resume</a>
+            </div>
           </div>
         </div>
       </div>
@@ -61,8 +65,8 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-username">Country where you are looking for Job</label>
                         @@include('./_country.html', {
-                          "path": "..",
-                          "path_common": "../..",
+                          "path": "../..",
+                          "path_common": "../../..",
                           "classes": "bg-primary text-white"
                         })
                         <div class="text-muted font-italic"><small id="country-error-text" style="color: red;"></small></div>
@@ -123,8 +127,8 @@
   </div>
   <!-- Argon Scripts -->
   @@include('./_scripts.html', {
-    "path": "..",
-    "path_common": "../.."
+    "path": "../..",
+    "path_common": "../../.."
   })
   
   <script src="../../assets/js/config.js"></script>

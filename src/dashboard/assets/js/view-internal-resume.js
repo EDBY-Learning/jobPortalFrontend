@@ -1,6 +1,10 @@
 window.addEventListener('load',getTeacherInfo)
 
 function getTeacherInfo(){
+    if(!localStorage.getItem("access")){
+        document.getElementById("unauth-header").innerHTML = "Login to create Resume"
+        return;
+    }
     $.ajax({
         url:TEACHER_URL+'profile/1/',
         type:'GET',
@@ -8,15 +12,24 @@ function getTeacherInfo(){
             'Authorization': 'Bearer '+localStorage.getItem("access"),
         },
         success: function (result) {
+            document.getElementById("unauth-panel").style.display = 'none'
+            document.getElementById("panel").style.display = 'block'
             setData(result)
         },
         error: function (error) {
-            
+            if(error.status==401){
+                refreshTokenAsAuthFailed()
+                return;
+            }
+            document.getElementById("unauth-header").innerHTML = "Failed to log you in! "+error.responseText
         }
     })
 }
 
 function setData(data){
+    // document.querySelectorAll(".unauth-user").forEach(el=>{
+    //     el.style.
+    // })
     document.getElementById("name").innerHTML = data.teacher.user.first_name+`
     <br><small style="font-size:14px;"><strong>${data.teacher.email}</strong></small>
     <br><small style="font-size:14px;"><strong>${data.teacher.mobile}</strong></small>
@@ -101,28 +114,26 @@ function setData(data){
 
     let preference = document.getElementById("preference")
     preference.innerHTML = ''
-    data.preference.forEach(element => {
-        preference.innerHTML+=`
-            <small style="font-size:14px;">I am looking for the role of <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.position.split(",").join(" , ")}</strong></small>
-            <small style="font-size:14px;">in <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.location.split(",").join(" , ")}</strong></small>
-            <small style="font-size:14px;">and I am interested to teach <strong style="font-size:20px;" class="ml-0 ml-md-2">${element.subject.split(",").join(" , ")}</strong></small>
+    preference.innerHTML+=`
+            <small style="font-size:14px;">I am looking for the role of <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.position.split(",").join(" , ")}</strong></small>
+            <small style="font-size:14px;">in <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.location.split(",").join(" , ")}</strong></small>
+            <small style="font-size:14px;">and I am interested to teach <strong style="font-size:20px;" class="ml-0 ml-md-2">${data.preference.subject.split(",").join(" , ")}</strong></small>
         `
-    }); 
     
     let social = document.getElementById("social-sharing")
     social.innerHTML = ''
     social.innerHTML+=`
 
-    <a target="_blank" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fjobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id=${data.teacher.id}" class="icon icon-lg text-gray mr-3">
+    <a target="_blank" onclick="updateAnalytics('share_resume','Resume Shared on Facebook','${data.teacher.id}')" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fjobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id=${data.teacher.id}" class="icon icon-lg text-gray mr-3">
         <i class="fab fa-facebook-f"></i>
     </a>
-    <a target="_blank" href="whatsapp://send?text=Hi, I am ${data.teacher.user.first_name} and am very passionate teacher. I am looking for changing my job so please take a look at my resume https://jobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id=${data.teacher.id}" class="icon icon-lg text-gray mr-3">
+    <a target="_blank" onclick="updateAnalytics('share_resume','Resume Shared on Whatsapp','${data.teacher.id}')" href="whatsapp://send?text=Hi, I am ${data.teacher.user.first_name} and am very passionate teacher. I am looking for changing my job so please take a look at my resume https://jobportal.edbylearning.com/front/pages/teacher-card.html?teacher_id=${data.teacher.id}" class="icon icon-lg text-gray mr-3">
         <i class="fab fa-whatsapp"></i>
     </a>
-    <a target="_blank" class="icon icon-lg text-gray mr-3" href="mailto:?subject=EDBY%20Job%20Portal&body=Hi%2C%20I%20am%20${data.teacher.user.first_name}%20and%20am%20very%20passionate%20teacher.%20I%20am%20looking%20for%20changing%20my%20job%20so%20please%20take%20a%20look%20at%20my%20resume%20https%3A%2F%2Fjobportal.edbylearning.com%2Ffront%2Fpages%2Fteacher-card.html%3Fteacher_id%3D${data.teacher.id}">
+    <a target="_blank" onclick="updateAnalytics('share_resume','Resume Shared on Mail','${data.teacher.id}')" class="icon icon-lg text-gray mr-3" href="mailto:?subject=EDBY%20Job%20Portal&body=Hi%2C%20I%20am%20${data.teacher.user.first_name}%20and%20am%20very%20passionate%20teacher.%20I%20am%20looking%20for%20changing%20my%20job%20so%20please%20take%20a%20look%20at%20my%20resume%20https%3A%2F%2Fjobportal.edbylearning.com%2Ffront%2Fpages%2Fteacher-card.html%3Fteacher_id%3D${data.teacher.id}">
         <i  class="fas fa-envelope"></i>
     </a>
-    <a target="_blank" class="icon icon-lg text-gray mr-3" href="sms:?body=EDBY%20Job%20Portal%20%3A%20Hi%2C%20I%20am%20${data.teacher.user.first_name}%20and%20am%20very%20passionate%20teacher.%20I%20am%20looking%20for%20changing%20my%20job%20so%20please%20take%20a%20look%20at%20my%20resume%20https%3A%2F%2Fjobportal.edbylearning.com%2Ffront%2Fpages%2Fteacher-card.html%3Fteacher_id%3D${data.teacher.id}">
+    <a target="_blank" onclick="updateAnalytics('share_resume','Resume Shared on SMS','${data.teacher.id}')" class="icon icon-lg text-gray mr-3" href="sms:?body=EDBY%20Job%20Portal%20%3A%20Hi%2C%20I%20am%20${data.teacher.user.first_name}%20and%20am%20very%20passionate%20teacher.%20I%20am%20looking%20for%20changing%20my%20job%20so%20please%20take%20a%20look%20at%20my%20resume%20https%3A%2F%2Fjobportal.edbylearning.com%2Ffront%2Fpages%2Fteacher-card.html%3Fteacher_id%3D${data.teacher.id}">
         <i class="fas fa-sms"></i>
     </a>
     `    
