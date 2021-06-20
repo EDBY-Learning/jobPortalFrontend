@@ -55,12 +55,12 @@ const appShellFiles = [
   // "./front/assets/js/teacher-card.js",
   "./dashboard/pages/dashboards/dashboard.html",
   "./dashboard/pages/examples/login.html",
-  "./dashboard/pages/examples/register.html",
-  "./dashboard/pages/examples/admin-jobs.html",
-  "./dashboard/pages/examples/blog-detail.html",
+  // "./dashboard/pages/examples/register.html",
+  // "./dashboard/pages/examples/admin-jobs.html",
+  // "./dashboard/pages/examples/blog-detail.html",
   // "./dashboard/pages/examples/forgotpassword.html",
-  "./dashboard/pages/examples/postJob.html",
-  "./dashboard/pages/examples/preference.html",
+  // "./dashboard/pages/examples/postJob.html",
+  // "./dashboard/pages/examples/preference.html",
   // "./dashboard/pages/examples/profile-card.html",
 
 ];

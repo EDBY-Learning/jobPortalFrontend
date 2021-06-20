@@ -1,32 +1,229 @@
 const heading = document.getElementById("heading")
 const info = document.getElementById("info")
 const jobPostArea = document.getElementById("jobPostArea")
-var jobData = null;
+var jobData = [];
+var preferredJob = []
+var bookMarkedJob = []
+var recentJob = []
 
 var current_page = 1;
 var records_per_page = 12;
+const urlParams = new URLSearchParams(window.location.search);
 
-window.onload = function(){
-    const urlParams = new URLSearchParams(window.location.search);
+var path_common = "../.."
+
+window.addEventListener('load',setup)
+// window.addEventListener('load',searchDashboard)
+
+function setup(){
+    if(localStorage.getItem("access")){
+        document.getElementById("unauth-panel").style.display = 'none'
+        document.getElementById("auth-panel").style.display = 'block' 
+    }
+    
     let id = urlParams.get("ids");
     let location = urlParams.get("location")
     let position = urlParams.get("position")
     let subject = urlParams.get("subject")
+    let search = urlParams.get("search")
     
     if(id){
+        document.getElementById("searchDashboard").style.display = "none"
+        document.getElementById("searchArea").style.display = "block"
         getJobByIds(id);
         // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
     }else if(location){
+        document.getElementById("searchDashboard").style.display = "none"
+        document.getElementById("searchArea").style.display = "block"
         document.getElementById("locationSearch").value = location;
-        document.getElementById("positionSearch").value = position;
-        document.getElementById("subjectSearch").value = subject;
-        console.log("here")
+        document.getElementById("positionSearch").value = position?position:"";
+        document.getElementById("subjectSearch").value = subject?subject:"";
+        // console.log("here")
         searchForJobs()
         
-    }else{
-        // getRecentJob()
-        // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+    }else if(search){
+        document.getElementById("searchDashboard").style.display = "none"
+        document.getElementById("searchArea").style.display = "block"
+        if(search=="recent"){
+            getRecentJob()
+        }else if(search=="bookmark"){
+            getBookmarkedPreferredData("bookmark")
+        }else if(search == "prefer"){
+            getBookmarkedPreferredData("prefer")
+        }else{
+
+        }
     }
+    else{
+        document.getElementById("searchDashboard").style.display = "block"
+        document.getElementById("searchArea").style.display = "none"
+        searchDashboard()
+    }
+}
+
+
+function searchDashboard(){
+    let headers = {}
+    if(localStorage.getItem("access")){
+        headers = {
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        }
+    }
+    $.ajax({
+        url:JOB_URL+'search_dashboard/',
+        type:'GET',
+        headers:headers,
+        success: function (result) {
+            setSearchDashboard(result)
+        },
+        error: function (error) {
+            if(error.status==401){
+                refreshTokenAsAuthFailed()
+                return;
+            }
+        }
+    })
+}
+
+
+function getBookmarkedPreferredData(type){
+    if(!localStorage.getItem("access")){
+        heading.innerHTML = "Login"
+        info.innerHTML = "Please login to view preferred jobs!!"
+        return;
+    }
+    $.ajax({
+        url:JOB_URL+'dashboard_data/',
+        type:'GET',
+        headers:{
+            'Authorization': 'Bearer '+localStorage.getItem("access"),
+        },
+        success: function (result) {
+            preferredJob = result['all_jobs']
+            bookMarkedJob = result['bookmarked_jobs']
+            if(type=="prefer"){
+                heading.innerHTML = "Here are  your preferred Jobs"
+                info.innerHTML = ""
+                jobData = preferredJob
+            }else{
+                heading.innerHTML = "Your bookmarked jobs"
+                info.innerHTML = ""
+                jobData = bookMarkedJob
+            }
+            changePage(1);
+        },
+        error: function (error) {
+            console.log(error)
+            if(error.status==401){
+                heading.innerHTML = "Login"
+                info.innerHTML = "Please login to view preferred jobs!!"
+            }
+        }
+    })
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+}
+
+function setSearchDashboard(data){
+    let recent_job_panel = document.getElementById("recentJobs")
+    recentJob = data.recent_jobs
+    recent_job_panel.innerHTML = ""
+    data.recent_jobs.forEach(element => {
+        recent_job_panel.innerHTML+=smallCard(element,'recent')
+    });
+
+    let prefered_job_panel = document.getElementById("preferedJobs")
+    preferredJob = data.prefered_jobs
+    prefered_job_panel.innerHTML = ""
+    data.prefered_jobs.forEach(element => {
+        prefered_job_panel.innerHTML+=smallCard(element,'prefer')
+    });
+
+    let saved_job_panel = document.getElementById("savedJobs")
+    bookMarkedJob = data.bookmarked_jobs
+    saved_job_panel.innerHTML = ""
+    data.bookmarked_jobs.forEach(element => {
+        saved_job_panel.innerHTML+=smallCard(element,'bookmark')
+    })
+}
+
+function smallCard(data,type){
+    let visibility = 'visible'
+    if(type== 'bookmark'){
+        visibility='hidden'
+    }
+    return `
+        <div style="padding:5px; margin:10px;" class="card">
+            <div class="card-body">
+                <h5 class="card-title">${data.positions.slice(0, 15) + "..."}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${data.city.slice(0, 15) + "..."}</h6>
+                <p>${data.entry_time.toString().slice(0, 10)}</p>
+                <a type="button btn" class="btn btn-primary" href="javascript:openJobPostModal(${data.id},'${type}')" class="card-link">Detail</a>
+                <a style="visibility:${visibility}" type="button btn" class="btn btn-link" href="javascript:saveJobPost(${data.id},'${type}')" class="card-link">Save</a>
+            </div>
+        </div>
+    `
+}
+
+
+function getCorrectData(id,type){
+    if(type == 'recent'){
+        data = recentJob.find(x => x.id == id)
+    }else if(type == 'prefer'){
+        data = preferredJob.find(x => x.id == id)
+    }else if(type == 'bookmark'){
+        data = bookMarkedJob.find(x => x.id == id)
+    }else{
+        data = jobData.find(x => x.id == id)
+    }
+    return data
+}
+
+function openJobPostModal(id,type){
+    data = getCorrectData(id,type)
+    // console.log(data)
+    if(data){
+        let m1 = $(makeJobPostModal(data))
+        m1.modal("show")
+    }else{
+        
+    }
+}
+
+function saveJobPost(id,type){
+    if(localStorage.getItem("access")){
+        data = getCorrectData(id,type)
+        url = TEACHER_URL+"bookmark/?jobID="+id
+        if(data){
+            $.ajax({
+                url:url,
+                type:"GET",
+                headers:{
+                    'Authorization': 'Bearer '+localStorage.getItem("access"),
+                },
+                success: function (result) {
+                    swal({
+                        title: 'Saved',
+                        text: 'Successfully Saved',
+                        type: 'success',
+                        timer: 800
+                    })  
+                },
+                error: function (error) {
+                    if(error.status==401){
+                        let m1 = $(makeLoginPopup(path_common))
+                        m1.modal("show")
+                    }
+                },
+                complete:function(){
+                    
+                }
+            })
+        }
+    }else{
+        let m1 = $(makeLoginPopup(path_common))
+        m1.modal("show")
+    }
+    
 }
 
 
@@ -52,18 +249,25 @@ function changePage(page)
     var btn_prev = document.getElementById("btn_prev");
     
     var page_span = document.getElementById("page");
+    var page_span2 = document.getElementById("page2");
  
     // Validate page
     if (page < 1) page = 1;
     if (page > numPages()) page = numPages();
 
     jobPostArea.innerHTML = "";
-
+    
+    let searchType = urlParams.get("search")
+    let showSave = ""
+    if (searchType=="bookmark"){
+        showSave = "none"
+    }
     for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < jobData.length; i++) {
-        const card = getJobResultContent(jobData[i],"block")
+        const card = getJobResultContent(jobData[i],showSave)
         jobPostArea.innerHTML+=card
     }
     page_span.innerHTML = page + "/" + numPages();
+    page_span2.innerHTML = page + "/" + numPages();
 
     if (page == 1) {
         btn_prev.style.visibility = "hidden";
@@ -82,10 +286,13 @@ function numPages()
 {
     let pagesCount = Math.ceil(jobData.length / records_per_page)
     let pageNumber = document.getElementById("pageNumber");
+    let pageNumber2 = document.getElementById("pageNumber2");
     if(pagesCount <= 1){
         pageNumber.style.visibility = "hidden";
+        pageNumber2.style.visibility = "hidden";
     }else{
         pageNumber.style.visibility = "visible";
+        pageNumber2.style.visibility = "visible";
     }
     return pagesCount;
 }
@@ -113,7 +320,7 @@ function getRecentJob(){
             console.log(error)
         }
     })
-    // document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
+    document.getElementById("searchJobButton").scrollIntoView({behavior: 'smooth'});
 }
 
 function getJobByIds(id){
@@ -160,7 +367,7 @@ function searchForJobs(){
         url:url,
         type:'GET',
         success: function (result) {
-            heading.innerHTML = "Here are jobs you searched for"
+            heading.innerHTML = `Location: ${loc}, Position: ${pos}, Subject: ${sub}`
             info.innerHTML = "You can now bookmark and save job post!!"
             jobPostArea.innerHTML = ""
             jobData = result
@@ -198,24 +405,45 @@ function openSwal(id){
     }
 }
 
-function saveJob(id){
+function saveJob(id,method){
+    
     if(localStorage.getItem("access")){
         data = jobData.find(x => x.id == id)
+        url = TEACHER_URL+"bookmark/?jobID="+id
+        if(method=='DELETE'){
+            url = TEACHER_URL+"bookmark/"+id+"/"
+            updateAnalytics('remove_saved_job',"Saved Job Removed",id)
+        }else{
+            updateAnalytics('save_job',"Saved Job",id)
+        }
         if(data){
             $.ajax({
-                url:TEACHER_URL+"bookmark/?jobID="+id,
-                type:'GET',
+                url:url,
+                type:method,
                 headers:{
                     'Authorization': 'Bearer '+localStorage.getItem("access"),
                 },
                 success: function (result) {
-                    let m1 = $(bookmarkConfirmation())
-                    m1.modal("show")
-                    //setTimeout(function() {$('#bookmarkConfirmation').modal('hide');}, 1000);
+                    index = jobData.findIndex(item => item.id === result.id)
+                    if(index!=-1){
+                        if(method=='DELETE'){
+                            jobData.splice(index, 1)
+                            changePage(+document.getElementById('page').innerHTML.split("/")[0]);
+                        }
+                    }else{
+                        bookMarkedJob.unshift(result)
+                    }
+                    
+                    swal({
+                        title: 'Action Success',
+                        text: 'Successfully',
+                        type: 'success',
+                        timer: 800
+                    })                    
                 },
                 error: function (error) {
                     if(error.status==401){
-                        let m1 = $(makeLoginPopup())
+                        let m1 = $(makeLoginPopup(path_common))
                         m1.modal("show")
                     }
                 },
@@ -227,41 +455,9 @@ function saveJob(id){
             
         }
     }else{
-        let m1 = $(makeLoginPopup())
+        let m1 = $(makeLoginPopup(path_common))
         m1.modal("show")
     }
-}
-
-function makeLoginPopup(){
-    return `
-    <div class="modal fade" id="makeLoginPopup" tabindex="-1" role="dialog" aria-labelledby="makeLoginPopupLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Login to bookmark</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <p>You need to create an account so we can bookmark your preferred jobs!!</p>
-                </div>
-                <div class="row">
-                    <div class="col-6 d-flex">
-                        <a class="btn btn-primary" type="button" href="../../dashboard/pages/examples/login.html">Login</a>
-                    </div>
-                    <div class="col-6 d-flex">
-                        <a class="btn btn-primary" type="button" href="../../dashboard/pages/examples/register.html">Register</a>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button style="width: 40%; display: block;margin-left: auto;margin-right: auto;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
-            </div>
-        </div>
-        </div>
-    </div>`
 }
 
 function makeResume(){

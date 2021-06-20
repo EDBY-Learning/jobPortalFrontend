@@ -36,20 +36,14 @@
             box-shadow: 2px 2px 3px #999;
             z-index: 100;
         }
+        
     </style>
 </head>
 
 <body>
 
     @@include('./_tracking-body.html')
-
-    @@include('./_navigation.html', {
-        "path": "./front",
-        "cta_button_classes": "d-lg-none",
-        "path_common": ".",
-        "classes": "navbar-light navbar-theme-primary"
-    })
-
+    
     @@include('../../dashboard/partials/_bottom_nav_bar_dashboard.html', {
         "path_common": ".",
         "home":"",
@@ -59,90 +53,208 @@
         "search":"mobile-bottom-nav__item--active"
     })
 
+    <div style="display: block;" id="unauth-panel">
+        @@include('./_navigation.html', {
+            "path": "./front",
+            "cta_button_classes": "d-lg-none",
+            "path_common": ".",
+            "classes": "navbar-light navbar-theme-primary"
+        })
+    </div>
+
+    <div style="display: none;" id="auth-panel">
+        @@include('./_navigation_auth.html', {
+            "path": "./front",
+            "cta_button_classes": "d-lg-none",
+            "path_common": ".",
+            "classes": "navbar-light navbar-theme-primary"
+        })
+    </div>
+
     <main>
+        <div style="display: block;" id="searchDashboard">
 
-        <!-- @@include('./_preloader.html', {
-            "path": ".."
-        }) -->
-
-        <!-- Hero -->
-        <section style="padding-top: 90px ;padding-bottom: 40px !important;"
-            class="section-header pb-7 pb-lg-11 bg-soft">
-            <div class="container">
+            <section style="padding-top: 90px ; padding-bottom: 10px !important;" class="pb-7 pb-lg-11 bg-soft">
+            
                 <div class="row justify-content-between align-items-center">
 
                     <div class="col-12 col-md-12">
-                        <h2 class="mb-3" style=" text-align: center;">Are you finding tough to find teaching job</h2>
+                        <h2 class="mb-3" style=" text-align: center;">Job List</h2>
                         <p class="lead" style=" text-align: center;">
-                            Jobs postings are credible and freely available.
+                            Jobs postings freely available.
+                        </p>                        
+                    </div>
+                </div>
+            </section>
+            
+            <section style="padding-bottom: 10px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Recent Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=recent" onclick="updateAnalytics('see_all_clicked','See All Recent','recent')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="recentJobs" class="row scrollmenu">
+                </div>
+            </section>
+
+            <section style="padding-bottom: 10px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Prefered Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=prefer" onclick="updateAnalytics('see_all_clicked','See All Preferred','prefer')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="preferedJobs" class="row scrollmenu">
+                </div>
+            </section>
+        
+
+            <section style="padding-bottom: 10px !important;"
+                class="pb-7 pb-lg-11 bg-soft">
+                <div class="row">
+                    <div class="col" style="font-size: larger; font-weight: bolder; margin: 12px; text-align: left;">
+                        Saved Jobs
+                    </div>
+                    <div class="col" style="color: blue; margin: 12px; text-align: right;">
+                        <a href="?search=bookmark" onclick="updateAnalytics('see_all_clicked','See All Bookmark','bookmark')">
+                            <u>See All</u>
+                        </a>
+                    </div>
+                </div>
+                <div id="savedJobs" class="row scrollmenu">
+                </div>
+            </section>
+
+            <section style="padding-bottom: 40px !important;" class="pb-7 pb-lg-11 bg-soft">
+            
+                <div class="row justify-content-between align-items-center">
+
+                    <div class="col-12 col-md-12">
+                        <h2 class="mb-3" style=" text-align: center;">OR</h2>
+                        <h2 class="mb-3" style=" text-align: center;">Search Jobs</h2>
+                        <p class="lead" style=" text-align: center;">
+                            Jobs postings freely available.
                         </p>
-                        <div class="mt-4">
-
-                            <div class="d-flex flex-column mb-5 mb-lg-0">
-                                <div class="row" style="margin-bottom: 30px;">
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        @@include('./_position_dropdown.html')
-                                        <!-- <input class="form-control my-3" type="text" id="positionSearch" name="position" placeholder="Teacher or Principal"> -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <input class="form-control my-3" type="text" id="locationSearch" name="location"
-                                            placeholder="City or Country" required>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                                        <input class="form-control my-3" type="text" id="subjectSearch" name="subject"
-                                            placeholder="Subject(Optional)">
-                                    </div>
-                                </div>
-                                <p><em style="color: red;" id="error"></em></p>
-
-                                <div class="row">
-                                    <button id="searchJobButton" style="color: whitesmoke;font-weight: bolder;width: 60%; 
-                                    display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
-                                        type="button">Search</button>
-                                </div>
+                        <p class="lead" style=" text-align: center;">
+                            <div class="mt-4"> 
+                                <a href="?search=search" onclick="updateAnalytics('see_all_clicked','Gone to Search page','search')">
+                                    <button style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                    display: block;margin-left: auto;margin-right: auto;" class="btn btn-secondary">
+                                        Search Jobs
+                                    </button>
+                                </a>
                             </div>
+                        </p>
+                        
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+        <!-- Hero -->
+        <div style="display: none;" id="searchArea">
+            <section style="padding-top: 90px ;padding-bottom: 40px !important;"
+                class="section-header pb-7 pb-lg-11 bg-soft">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
 
+                        <div class="col-12 col-md-12">
+                            <h2 class="mb-3" style=" text-align: center;">Are you finding tough to find teaching job</h2>
+                            <p class="lead" style=" text-align: center;">
+                                Jobs postings are credible and freely available.
+                            </p>
+                            <p class="lead" style="text-align: center;" >
+                                <a  href="?search=">
+                                    <u>Back To Home</u>
+                                </a>
+                            </p>
+                            
+                            <div class="mt-4">
+
+                                <div class="d-flex flex-column mb-5 mb-lg-0">
+                                    <div class="row" style="margin-bottom: 30px;">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            @@include('./_position_dropdown.html')
+                                            <!-- <input class="form-control my-3" type="text" id="positionSearch" name="position" placeholder="Teacher or Principal"> -->
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <input class="form-control my-3" type="text" id="locationSearch" name="location"
+                                                placeholder="City or Country" required>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                            @@include('./_subject_dropdown.html')
+                                        </div>
+                                    </div>
+                                    <p><em style="color: red;" id="error"></em></p>
+
+                                    <div class="row">
+                                        <button id="searchJobButton" style="color: whitesmoke;font-weight: bolder;width: 60%; 
+                                        display: block;margin-left: auto;margin-right: auto;" class="btn btn-primary"
+                                            type="button">Search</button>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section style="padding-top: 50px !important;" class="section section-lg bg-soft">
-            <div class="container">
-                <div class="row justify-content-center mb-5 mb-md-7">
-                    <div class="col-12 col-md-8 text-center">
-                        <h2 id="heading" class="h1 font-weight-bolder mb-4"></h2>
-                        <p id="info" class="lead"></p>
+            </section>
+            <section style="padding-top: 50px !important;" class="section section-lg bg-soft">
+                <div class="container">
+                    <div class="row justify-content-center mb-5 mb-md-7">
+                        <div class="col-12 col-md-8 text-center">
+                            <h2 id="heading" class="h1 font-weight-bolder mb-4"></h2>
+                            <p id="info" class="lead"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <h2 style="visibility: hidden;" id="pageNumber">Page: <span id="page">0</span></h2>
+                        </div>
+                        <div class="col-4"></div>
                     </div>
                 </div>
+                
+                <div id="jobPostArea" class="row">
+                </div>
                 <div class="row">
-
+                    
+                    <div class="col-4">
+                        <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" type="button" href="javascript:toTop()" id="btn_top">To Top</a>
+                    </div>
+                    <div class="col-4">
+                        <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
+                    </div>
+            
                 </div>
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <h2 style="visibility: hidden;" id="pageNumber">Page: <span id="page">0</span></h2>
+                        <h2 style="visibility: hidden;" id="pageNumber2">Page: <span id="page2">0</span></h2>
                     </div>
                     <div class="col-4"></div>
                 </div>
-            </div>
-            <div id="jobPostArea" class="row">
-            </div>
-            <div class="row">
-                
-                <div class="col-4">
-                    <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:prevPage()" id="btn_prev">Prev</a>
                 </div>
-                <div class="col-4">
-                    <a class="btn btn-primary" type="button" href="javascript:toTop()" id="btn_top">To Top</a>
-                </div>
-                <div class="col-4">
-                    <a style="visibility: hidden;" class="btn btn-primary" type="button" href="javascript:nextPage()" id="btn_next">Next</a>
-                </div>
+            </section>
+        </div>
         
-            </div>
-            </div>
-        </section>
 
         @@include('./_footer.html', {
         "path": "./front",

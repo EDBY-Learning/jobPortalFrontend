@@ -75,7 +75,7 @@ function saveToken(token){
     let accessToken = localStorage.getItem("access")
     
     let random = Math.floor((Math.random() * 100) + 1);
-    if(authTokenSaved==token && random >40){
+    if(authTokenSaved==token && random >10){
         return;
     }
     // console.log('No auth token found',tokenSaved)
