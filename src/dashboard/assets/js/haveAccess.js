@@ -1,4 +1,4 @@
-var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
+var BASE_URL = "http://127.0.0.1:8000/";
 
 function verification_have_access(){
     // console.log('check')

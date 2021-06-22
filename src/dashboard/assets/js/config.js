@@ -1,9 +1,9 @@
-var BASE_URL = "https://ppritish5153.pythonanywhere.com/";
-var JOB_URL = "https://ppritish5153.pythonanywhere.com/job/v2/"
-var TEACHER_URL = "https://ppritish5153.pythonanywhere.com/teacher/"
-var CRM_URL = "https://ppritish5153.pythonanywhere.com/crm/"
-var BLOG_URL= "https://ppritish5153.pythonanywhere.com/edby/blogs/"
-var SKILL_URL = "https://ppritish5153.pythonanywhere.com/skill_development/"
+var BASE_URL = "http://127.0.0.1:8000/";
+var JOB_URL = "http://127.0.0.1:8000/job/v2/"
+var TEACHER_URL = "http://127.0.0.1:8000/teacher/"
+var CRM_URL = "http://127.0.0.1:8000/crm/"
+var BLOG_URL= "http://127.0.0.1:8000/edby/blogs/"
+var SKILL_URL = "http://127.0.0.1:8000/skill_development/"
 
 var LANG_CODE = {
     "1":`

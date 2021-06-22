@@ -38,10 +38,13 @@ function requestPermission() {
     if(Notification.permission=='granted'){
         getToken()
     }else if(Notification.permission=='default'){
-        if(confirm("Do you want to recieve job updates, It increses your chance as you can apply earlier than others")){
-            getToken()
-        }else{
-            
+        let random = Math.floor((Math.random() * 100) + 1);
+        if(random<10){
+            if(confirm("Do you want to recieve job updates, It increses your chance as you can apply earlier than others")){
+                getToken()
+            }else{
+                localStorage.setItem("notification","denied")
+            }
         }
     }else if(Notification.permission=='denied'){
         // alert("Allow Notification so that we can send you job updates!!")
